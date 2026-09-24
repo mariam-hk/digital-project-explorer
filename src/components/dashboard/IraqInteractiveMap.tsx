@@ -30,25 +30,25 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
 }) => {
   const isAr = lang === "ar";
   const [hoveredGovId, setHoveredGovId] = useState<string | null>(null);
-  const [selectedGovId, setSelectedGovId] = useState<string | null>(null);
+  const [selectedGovId, setSelectedGovId] = useState<string>(governorates[0]?.id || "baghdad");
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
 
-  // If scope switches to federal and selected was in Kurdistan, reset selection
+  // If scope switches to federal and selected was in Kurdistan, reset selection to Baghdad
   useEffect(() => {
     if (scope === "federal" && selectedGovId && KURDISTAN_IDS.includes(selectedGovId)) {
-      setSelectedGovId(null);
+      setSelectedGovId("baghdad");
     }
   }, [scope, selectedGovId]);
 
-  // Hovered gov data
+  // Hovered gov data for floating tooltip
   const hoveredGov = hoveredGovId
     ? governorates.find((g) => g.id === hoveredGovId)
     : null;
 
-  // Active gov data for the side card (falls back to selected, then to first federal gov like Baghdad)
+  // Active gov data for the side card (preserves last selected/hovered gov)
   const activeGov =
-    hoveredGov ||
-    (selectedGovId ? governorates.find((g) => g.id === selectedGovId) : null) ||
+    governorates.find((g) => g.id === (hoveredGovId || selectedGovId)) ||
+    governorates.find((g) => g.id === selectedGovId) ||
     governorates.find((g) => g.id === "baghdad") ||
     governorates[0];
 
@@ -194,6 +194,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                     onMouseEnter={() => {
                       if (!isExcluded) {
                         setHoveredGovId(region.id);
+                        setSelectedGovId(region.id);
                       }
                     }}
                     onMouseLeave={() => {

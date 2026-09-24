@@ -54,7 +54,8 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
     TOPIC_BREAKDOWNS[selectedTopic.id] || TOPIC_BREAKDOWNS["smartphones"];
   const govDetails = breakdownConfig.getGovBreakdown(
     selectedGov.id,
-    isAr ? selectedGov.nameAr : selectedGov.nameEn
+    selectedGov.nameAr,
+    lang
   );
 
   // 6 Indicators for this governorate (Overview)
