@@ -40,12 +40,13 @@ export const NeonHeader: React.FC<NeonHeaderProps> = ({
                 : "Official COSIT Survey 2022 & Telecom 2024 Reports"}
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-            <span>TechLocation <span className="text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]">AI</span></span>
-            <span className="text-xs font-normal text-slate-400 border-l border-white/20 pl-3">
-              {isAr ? "ذكاء السوق وسلوك المجتمع الرقمي" : "Digital Behavior Intelligence"}
-            </span>
-          </h1>
+          <div className="flex items-center gap-3">
+            <img
+              src="/techlocation_header_logo.png"
+              alt="TechLocation Iraq - Digital Market Explorer"
+              className="h-12 sm:h-14 w-auto object-contain"
+            />
+          </div>
           <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
             {isAr
               ? "استكشف مؤشرات السلوك الرقمي للمحافظات العراقية (عدا إقليم كردستان) لمساعدة رواد الأعمال في تحديد الموقع ونموذج العمل الأنسب."

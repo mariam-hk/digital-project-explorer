@@ -258,15 +258,15 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
         lang={lang}
       />
 
-      {/* 4. AI Strategic Interpretation for this Sector */}
+      {/* 4. Strategic Market Interpretation for this Sector */}
       <div className="rounded-2xl bg-gradient-to-br from-[#10182D] via-[#0D1220] to-[#0A0E18] border border-cyan-500/30 p-6 shadow-[0_0_25px_rgba(6,182,212,0.1)] space-y-4">
         <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-cyan-400 animate-pulse" />
             <h3 className="text-base font-bold text-white">
               {isAr
-                ? `تحليل الذكاء الاصطناعي لقطاع: (${selectedTopic.titleAr})`
-                : `AI Strategic Intelligence: (${selectedTopic.titleEn})`}
+                ? `التحليل الاستراتيجي لقطاع: (${selectedTopic.titleAr})`
+                : `Strategic Market Intelligence: (${selectedTopic.titleEn})`}
             </h3>
           </div>
           <span className="text-[11px] text-cyan-400 font-mono">

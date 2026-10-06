@@ -83,22 +83,21 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
     <div className="relative w-full overflow-hidden rounded-2xl bg-[#080D1A] border border-white/10 p-4 sm:p-6 shadow-2xl">
       {/* Chart Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/5">
-        <div className="flex items-center gap-3">
-          <span className="w-3 h-3 rounded-full animate-ping" style={{ backgroundColor: neonColor }}></span>
+        <div className="flex items-center gap-2">
           <span className="text-xs sm:text-sm font-bold text-white tracking-wide">
             {isAr
               ? "مخطط الأعمدة والمنحنى التوافقي (Combo Bar + Spline Trend)"
-              : "Governorate Distribution with Spline Benchmark Curve"}
+              : "Governorate Distribution (Combo Bar + Spline Trend)"}
           </span>
         </div>
         <div className="flex items-center gap-4 text-xs font-mono">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded" style={{ backgroundColor: neonColor }}></span>
-            <span className="text-slate-300">{isAr ? "قيمة المؤشر" : "Metric Column"}</span>
+            <span className="w-3.5 h-3.5 rounded-sm" style={{ backgroundColor: neonColor }}></span>
+            <span className="text-slate-300">{isAr ? "قيمة المؤشر" : "Metric Value"}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-4 h-0.5 bg-cyan-400"></span>
-            <span className="text-cyan-300">{isAr ? "منحنى السلوك الرقمي" : "Behavioral Spline"}</span>
+            <span className="w-5 h-0.5 bg-cyan-400"></span>
+            <span className="text-cyan-300">{isAr ? "منحنى السلوك الرقمي" : "Digital Behavior Trend"}</span>
           </div>
         </div>
       </div>
@@ -221,7 +220,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={pt.x}
                   y={pt.y - 8}
                   textAnchor="middle"
-                  fill={isHovered ? "#FFFFFF" : neonColor}
+                  fill={isHovered ? "#FFFFFF" : "#38BDF8"}
                   fontSize={isHovered ? "12" : "11"}
                   fontWeight="bold"
                   fontFamily="monospace"

@@ -41,10 +41,10 @@ export const TopOpportunitiesPanel: React.FC<TopOpportunitiesPanelProps> = ({ la
       <div className="flex items-start justify-between border-b border-white/5 pb-3">
         <div>
           <h3 className="text-sm font-bold text-white tracking-tight">
-            {isAr ? "أهم مجالات الفرص (AI)" : "Top Opportunity Areas"}
+            {isAr ? "أهم مجالات الفرص الاستثمارية" : "Top Opportunity Areas"}
           </h3>
           <p className="text-[11px] text-slate-400">
-            {isAr ? "فرص النمو المدفوعة بتحليل الذكاء الاصطناعي" : "AI-driven opportunities for growth"}
+            {isAr ? "فرص النمو المدفوعة بتحليل البيانات الرسمية" : "Data-driven opportunities for growth"}
           </p>
         </div>
         <button className="text-slate-500 hover:text-slate-300 p-1">

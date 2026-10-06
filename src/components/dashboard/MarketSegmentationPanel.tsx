@@ -18,7 +18,7 @@ export const MarketSegmentationPanel: React.FC<MarketSegmentationPanelProps> = (
       <div className="flex items-start justify-between border-b border-white/5 pb-3">
         <div>
           <h3 className="text-sm font-bold text-white tracking-tight">
-            {isAr ? "تقسيم السوق بالذكاء الاصطناعي (AI)" : "Market Segmentation (AI)"}
+            {isAr ? "تقسيم السوق والشرائح الرقمية" : "Digital Market Segmentation"}
           </h3>
           <p className="text-[11px] text-slate-400">
             {isAr ? "شرائح المستهلكين بحسب السلوك الرقمي" : "Customer segments based on digital behavior"}

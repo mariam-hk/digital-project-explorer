@@ -408,11 +408,11 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
               </div>
             </div>
 
-            {/* AI Strategic Intelligence Box */}
+            {/* Strategic Intelligence Box */}
             <div className="p-3.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-xs text-slate-200 leading-relaxed space-y-1.5">
               <div className="flex items-center gap-1.5 text-cyan-400 font-bold text-xs">
                 <Sparkles className="w-4 h-4" />
-                <span>{isAr ? "رؤية الذكاء الاصطناعي الاستثمارية:" : "AI Strategic Takeaway:"}</span>
+                <span>{isAr ? "الرؤية والتحليل الاستثماري:" : "Strategic Investment Analysis:"}</span>
               </div>
               <p className="text-[11px] text-slate-300">
                 {activeGov.aiSummary}

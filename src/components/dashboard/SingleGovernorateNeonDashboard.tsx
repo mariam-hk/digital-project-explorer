@@ -72,23 +72,23 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
     },
     {
       key: "smartphones",
-      nameAr: "اعتماد الهواتف الذكية",
-      nameEn: "Smartphone Adoption",
+      nameAr: "استخدام الهاتف المحمول",
+      nameEn: "Mobile Phone Usage",
       val: selectedGov.smartphoneUsagePct,
       natAvg: NATIONAL_AVERAGE_METRICS.smartphoneUsagePct,
       color: "#10B981",
       icon: "📱",
-      source: "مسح تكنولوجيا المعلومات (جدول 1-4)",
+      source: "مسح تكنولوجيا المعلومات (جدول 1-4، ص 44)",
     },
     {
       key: "internet",
-      nameAr: "استخدام الإنترنت النشط",
-      nameEn: "Internet Usage",
+      nameAr: "الهواتف الذكية (Smartphones)",
+      nameEn: "Smartphone Share",
       val: selectedGov.internetPenetrationPct,
       natAvg: NATIONAL_AVERAGE_METRICS.internetPenetrationPct,
       color: "#3B82F6",
       icon: "🌐",
-      source: "مسح تكنولوجيا المعلومات (جدول 1-5)",
+      source: "مسح تكنولوجيا المعلومات (جدول 1-5، ص 46)",
     },
     {
       key: "computers",
@@ -98,7 +98,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
       natAvg: NATIONAL_AVERAGE_METRICS.computerUsagePct,
       color: "#F59E0B",
       icon: "💻",
-      source: "مسح تكنولوجيا المعلومات (جدول 1-10)",
+      source: "مسح تكنولوجيا المعلومات (جدول 1-10، ص 54)",
     },
     {
       key: "shopping",
@@ -108,7 +108,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
       natAvg: NATIONAL_AVERAGE_METRICS.onlineShoppingPct,
       color: "#EC4899",
       icon: "🛒",
-      source: "مسح تكنولوجيا المعلومات (جدول 1-18)",
+      source: "مسح تكنولوجيا المعلومات (جدول 1-18، ص 87)",
     },
     {
       key: "skills",
@@ -118,7 +118,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
       natAvg: NATIONAL_AVERAGE_METRICS.digitalSkillsPct,
       color: "#A855F7",
       icon: "🎓",
-      source: "مسح تكنولوجيا المعلومات (جدول 1-17)",
+      source: "مسح تكنولوجيا المعلومات (جدول 1-17، ص 78)",
     },
   ];
 
@@ -493,17 +493,17 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
         </div>
       </div>
 
-      {/* 6. AI Deep Insights for this Governorate: "What does this mean?" */}
+      {/* 6. Strategic Deep Insights for this Governorate: "What does this mean?" */}
       <div className="rounded-2xl bg-gradient-to-br from-[#10182D] via-[#0D1220] to-[#0A0E18] border border-purple-500/30 p-6 shadow-[0_0_25px_rgba(168,85,247,0.15)] space-y-4">
         <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-purple-400 animate-pulse" />
             <h3 className="text-base font-bold text-white">
-              {selectedGov.aiTitle || (isAr ? `ماذا تعني هذه البيانات لمشروعك في ${selectedGov.nameAr}؟` : `AI Market Analysis`)}
+              {selectedGov.aiTitle || (isAr ? `ماذا تعني هذه البيانات لمشروعك في ${selectedGov.nameAr}؟` : `Market Strategic Analysis`)}
             </h3>
           </div>
           <span className="text-[11px] text-purple-300 font-mono px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/30">
-            {isAr ? "تحليل الذكاء الاصطناعي للمشروع" : "AI Strategic Synthesis"}
+            {isAr ? "التحليل الاستراتيجي للمشروع" : "Strategic Synthesis"}
           </span>
         </div>
 
