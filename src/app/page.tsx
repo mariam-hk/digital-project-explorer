@@ -23,6 +23,7 @@ import {
 export default function App() {
   const [currentMode, setCurrentMode] = useState<"all_governorates" | "single_governorate">("all_governorates");
   const [allGovViewType, setAllGovViewType] = useState<"map" | "chart">("map");
+  const [activeSection, setActiveSection] = useState<"hero" | "map" | "chart" | "insights" | "sources">("hero");
   const [selectedTopic, setSelectedTopic] = useState<TopicConfig>(TOPICS[0]); // Default to "الدفع الإلكتروني والتحول المالي"
   const [selectedGov, setSelectedGov] = useState<GovernorateMetric>(FEDERAL_GOVERNORATES[0]); // Default to Baghdad
   const [lang, setLang] = useState<"ar" | "en">("ar"); // Arabic by default
@@ -39,15 +40,49 @@ export default function App() {
     const handleHash = () => {
       if (window.location.hash === "#charts") {
         setAllGovViewType("chart");
+        setActiveSection("chart");
         setCurrentMode("all_governorates");
       } else if (window.location.hash === "#map" || window.location.hash === "#dashboard") {
         setAllGovViewType("map");
+        setActiveSection("map");
+      } else if (window.location.hash === "#insights") {
+        setActiveSection("insights");
+      } else if (window.location.hash === "#sources") {
+        setActiveSection("sources");
+      } else if (window.location.hash === "#hero") {
+        setActiveSection("hero");
       }
     };
     handleHash();
     window.addEventListener("hashchange", handleHash);
     return () => window.removeEventListener("hashchange", handleHash);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const dashEl = document.getElementById("dashboard");
+      const insightsEl = document.getElementById("insights");
+      const sourcesEl = document.getElementById("sources");
+
+      const dashTop = dashEl ? dashEl.offsetTop - 150 : 800;
+      const insightsTop = insightsEl ? insightsEl.offsetTop - 150 : 2000;
+      const sourcesTop = sourcesEl ? sourcesEl.offsetTop - 150 : 3000;
+
+      if (scrollY >= sourcesTop) {
+        setActiveSection("sources");
+      } else if (scrollY >= insightsTop) {
+        setActiveSection("insights");
+      } else if (scrollY >= dashTop) {
+        setActiveSection(allGovViewType === "chart" ? "chart" : "map");
+      } else {
+        setActiveSection("hero");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [allGovViewType]);
 
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
@@ -63,6 +98,7 @@ export default function App() {
 
   const handleSelectViewAndScroll = (view: "map" | "chart") => {
     setAllGovViewType(view);
+    setActiveSection(view);
     setCurrentMode("all_governorates");
     scrollToSection("dashboard");
   };
@@ -102,59 +138,89 @@ export default function App() {
 
           {/* Center Navigation Links */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a
-              href="#hero"
-              className="text-white hover:text-cyan-400 transition-colors py-1 relative font-semibold"
+            {/* 1. Home */}
+            <button
+              onClick={() => {
+                setActiveSection("hero");
+                scrollToSection("hero");
+              }}
+              className={`transition-colors py-1 cursor-pointer relative font-medium ${
+                activeSection === "hero"
+                  ? "text-cyan-400 font-bold"
+                  : "text-slate-300 hover:text-white"
+              }`}
             >
               <span>{isAr ? "الرئيسية" : "Home"}</span>
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></span>
-            </a>
+              {activeSection === "hero" && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
+              )}
+            </button>
             
-            {/* 1. Map View */}
+            {/* 2. Map View */}
             <button
               onClick={() => handleSelectViewAndScroll("map")}
               className={`transition-colors py-1 cursor-pointer font-medium relative ${
-                currentMode === "all_governorates" && allGovViewType === "map"
+                activeSection === "map"
                   ? "text-cyan-400 font-bold"
                   : "text-slate-300 hover:text-white"
               }`}
             >
               <span>{isAr ? "الخريطة" : "Map"}</span>
-              {currentMode === "all_governorates" && allGovViewType === "map" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></span>
+              {activeSection === "map" && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
               )}
             </button>
 
-            {/* 2. Charts -> Combo Bar Chart */}
+            {/* 3. Charts -> Combo Bar Chart */}
             <button
               onClick={() => handleSelectViewAndScroll("chart")}
               className={`transition-colors py-1 cursor-pointer font-medium relative ${
-                currentMode === "all_governorates" && allGovViewType === "chart"
+                activeSection === "chart"
                   ? "text-cyan-400 font-bold"
                   : "text-slate-300 hover:text-white"
               }`}
             >
               <span>{isAr ? "الرسوم البيانية" : "Charts"}</span>
-              {currentMode === "all_governorates" && allGovViewType === "chart" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></span>
+              {activeSection === "chart" && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
               )}
             </button>
 
-            {/* 3. Strategic Insights -> Market Interpretation */}
-            <a
-              href="#insights"
-              className="text-slate-300 hover:text-white transition-colors py-1"
+            {/* 4. Strategic Insights -> Market Interpretation */}
+            <button
+              onClick={() => {
+                setActiveSection("insights");
+                scrollToSection("insights");
+              }}
+              className={`transition-colors py-1 cursor-pointer font-medium relative ${
+                activeSection === "insights"
+                  ? "text-cyan-400 font-bold"
+                  : "text-slate-300 hover:text-white"
+              }`}
             >
-              {isAr ? "التحليل الاستراتيجي" : "Strategic Insights"}
-            </a>
+              <span>{isAr ? "التحليل الاستراتيجي" : "Strategic Insights"}</span>
+              {activeSection === "insights" && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
+              )}
+            </button>
 
-            {/* 4. Data Sources (now at the end) */}
-            <a
-              href="#sources"
-              className="text-slate-300 hover:text-white transition-colors py-1"
+            {/* 5. Data Sources */}
+            <button
+              onClick={() => {
+                setActiveSection("sources");
+                scrollToSection("sources");
+              }}
+              className={`transition-colors py-1 cursor-pointer relative font-medium ${
+                activeSection === "sources"
+                  ? "text-cyan-400 font-bold"
+                  : "text-slate-300 hover:text-white"
+              }`}
             >
-              {isAr ? "مصادر البيانات" : "Data Sources"}
-            </a>
+              <span>{isAr ? "مصادر البيانات" : "Data Sources"}</span>
+              {activeSection === "sources" && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-[0_0_8px_rgba(6,182,212,0.8)]"></span>
+              )}
+            </button>
           </nav>
 
           {/* Right Action Controls */}
@@ -237,6 +303,7 @@ export default function App() {
                 <button
                   onClick={() => {
                     setAllGovViewType("map");
+                    setActiveSection("map");
                     handleSelectModeAndScroll("all_governorates");
                   }}
                   className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 shadow-[0_0_25px_rgba(79,70,229,0.5)] hover:shadow-[0_0_35px_rgba(79,70,229,0.7)] hover:brightness-110 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
@@ -270,7 +337,13 @@ export default function App() {
           <div className="rounded-2xl p-4 sm:p-5 border border-white/15 shadow-[0_0_40px_rgba(0,0,0,0.6)] grid grid-cols-2 lg:grid-cols-4 gap-4 divide-y sm:divide-y-0 sm:divide-x rtl:sm:divide-x-reverse divide-white/10 bg-[#0B1024]/85 backdrop-blur-2xl">
             
             {/* Stat 1: 2 Official Sources */}
-            <a href="#sources" className="flex items-center gap-4 p-2 hover:bg-white/5 rounded-xl transition-colors group">
+            <button
+              onClick={() => {
+                setActiveSection("sources");
+                scrollToSection("sources");
+              }}
+              className="flex items-center gap-4 p-2 hover:bg-white/5 rounded-xl transition-colors group cursor-pointer text-start"
+            >
               <div className="w-11 h-11 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl group-hover:scale-105 transition-transform border border-blue-500/30">
                 <Database className="w-5 h-5 text-cyan-400" />
               </div>
@@ -281,7 +354,7 @@ export default function App() {
                 </div>
                 <div className="text-[10px] text-slate-400">COSIT 2022 & Telecom 2024</div>
               </div>
-            </a>
+            </button>
 
             {/* Stat 2: 50+ Indicators */}
             <button
@@ -318,7 +391,13 @@ export default function App() {
             </button>
 
             {/* Stat 4: Real Insights */}
-            <a href="#insights" className="flex items-center gap-4 p-2 hover:bg-white/5 rounded-xl transition-colors group">
+            <button
+              onClick={() => {
+                setActiveSection("insights");
+                scrollToSection("insights");
+              }}
+              className="flex items-center gap-4 p-2 hover:bg-white/5 rounded-xl transition-colors group cursor-pointer text-start"
+            >
               <div className="w-11 h-11 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl group-hover:scale-105 transition-transform border border-purple-500/30">
                 <BarChart3 className="w-5 h-5 text-purple-400" />
               </div>
@@ -329,7 +408,7 @@ export default function App() {
                 </div>
                 <div className="text-[10px] text-slate-400">For a Connected Iraq</div>
               </div>
-            </a>
+            </button>
 
           </div>
 
@@ -362,7 +441,10 @@ export default function App() {
           lang={lang}
           onToggleLang={() => setLang(isAr ? "en" : "ar")}
           viewType={allGovViewType}
-          onViewTypeChange={setAllGovViewType}
+          onViewTypeChange={(view) => {
+            setAllGovViewType(view);
+            setActiveSection(view);
+          }}
         />
 
         {/* Dynamic Mode Display: Exact Original Components */}
@@ -375,7 +457,10 @@ export default function App() {
             }}
             lang={lang}
             viewType={allGovViewType}
-            onViewTypeChange={setAllGovViewType}
+            onViewTypeChange={(view) => {
+              setAllGovViewType(view);
+              setActiveSection(view);
+            }}
           />
         ) : (
           <SingleGovernorateNeonDashboard
