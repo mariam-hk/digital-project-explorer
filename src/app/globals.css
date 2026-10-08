@@ -8,6 +8,10 @@
     --foreground: #f8fafc;
   }
 
+  html {
+    font-size: 17.5px;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -18,6 +22,17 @@
   h1, .font-serif {
     font-family: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
   }
+}
+
+/* Ensure micro labels scale comfortably with the dashboard */
+[class*="text-\[9px\]"] {
+  font-size: 0.68rem !important;
+}
+[class*="text-\[10px\]"] {
+  font-size: 0.72rem !important;
+}
+[class*="text-\[11px\]"] {
+  font-size: 0.76rem !important;
 }
 
 /* Custom modern dark scrollbars */

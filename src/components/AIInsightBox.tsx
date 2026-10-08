@@ -57,7 +57,7 @@ export const AIInsightBox: React.FC<AIInsightBoxProps> = ({
                   {isAr ? "ماذا يعني هذا التحليل؟" : "What does this mean?"}
                 </h2>
                 <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/20">
-                  {isAr ? "تحليل إحصائي استراتيجي" : "Grounded Strategic Analysis"}
+                  {isAr ? "تحليل ذكي مؤسس على الأرقام" : "Grounded AI Analysis"}
                 </span>
               </div>
               <p className="text-xs text-indigo-200/70 mt-0.5">

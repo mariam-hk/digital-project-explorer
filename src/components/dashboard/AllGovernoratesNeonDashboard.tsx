@@ -28,16 +28,19 @@ interface AllGovernoratesNeonDashboardProps {
   selectedTopic: TopicConfig;
   onSelectGovernorate: (gov: GovernorateMetric) => void;
   lang: "en" | "ar";
+  viewType?: "map" | "chart";
+  onViewTypeChange?: (view: "map" | "chart") => void;
 }
 
 export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboardProps> = ({
   selectedTopic,
   onSelectGovernorate,
   lang,
+  viewType = "map",
+  onViewTypeChange,
 }) => {
   const isAr = lang === "ar";
   const [scope, setScope] = useState<"federal" | "all">("all"); // Default to all 18 so map is complete
-  const [viewType, setViewType] = useState<"map" | "chart" | "both">("map"); // Default to Interactive Map
   const [sortBy, setSortBy] = useState<"value" | "spending" | "overall">("value");
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
 
@@ -83,9 +86,9 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
 
   return (
     <div className="space-y-6">
-      {/* Top Banner & Highlights */}
+      {/* Top Banner & Highlights (Hidden upon user request)
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {/* Leading Governorate Card */}
+        // Leading Governorate Card
         <div className="relative overflow-hidden rounded-2xl bg-[#0E1424] border border-cyan-500/30 p-5 shadow-[0_0_20px_rgba(6,182,212,0.15)] flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
@@ -109,7 +112,7 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
           </p>
         </div>
 
-        {/* Average Card */}
+        // Average Card
         <div className="relative overflow-hidden rounded-2xl bg-[#0E1424] border border-purple-500/30 p-5 shadow-[0_0_20px_rgba(168,85,247,0.15)] flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-purple-400 uppercase tracking-wider">
@@ -139,7 +142,7 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
           </p>
         </div>
 
-        {/* Scope Selector Card */}
+        // Scope Selector Card
         <div className="relative overflow-hidden rounded-2xl bg-[#0E1424] border border-amber-500/30 p-5 shadow-[0_0_20px_rgba(245,158,11,0.15)] flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">
@@ -176,8 +179,9 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
           </p>
         </div>
       </div>
+      */}
 
-      {/* View Switcher: Interactive Map vs Combo Chart vs Both */}
+      {/* View Switcher: Interactive Map vs Combo Chart vs Both (Commented out upon user request)
       <div className="flex flex-wrap items-center justify-between gap-3 p-2 rounded-2xl bg-[#090E1D] border border-white/10 shadow-lg">
         <div className="flex items-center gap-1.5">
           <span className="text-xs text-slate-400 font-bold px-2">
@@ -224,42 +228,38 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
             : `Active Indicator: ${selectedTopic.titleEn}`}
         </div>
       </div>
+      */}
 
-      {/* 1. Interactive Map View */}
-      {(viewType === "map" || viewType === "both") && (
-        <IraqInteractiveMap
-          governorates={targetDataset}
-          selectedTopic={selectedTopic}
-          onSelectGovernorate={onSelectGovernorate}
-          lang={lang}
-          scope={scope}
-        />
+      {/* 1. Interactive Map View - ONLY shown when viewType is 'map' */}
+      {viewType === "map" && (
+        <div id="map-section" className="scroll-mt-24">
+          <IraqInteractiveMap
+            governorates={targetDataset}
+            selectedTopic={selectedTopic}
+            onSelectGovernorate={onSelectGovernorate}
+            lang={lang}
+            scope={scope}
+          />
+        </div>
       )}
 
-      {/* 2. Main Visual: Neon Combination Bar + Spline Trend Chart */}
-      {(viewType === "chart" || viewType === "both") && (
-        <NeonComboChart
-          governorates={sortedGovs}
-          metricKey={selectedTopic.metricKey}
-          unit={selectedTopic.unit}
-          neonColor={currentBreakdown.neonColor}
-          neonGlow={currentBreakdown.neonGlow}
-          onSelectGov={onSelectGovernorate}
-          lang={lang}
-        />
+      {/* 2. Main Visual: Neon Combination Bar + Spline Trend Chart - ONLY shown when viewType is 'chart' */}
+      {viewType === "chart" && (
+        <div id="charts" className="scroll-mt-24">
+          <NeonComboChart
+            governorates={sortedGovs}
+            metricKey={selectedTopic.metricKey}
+            unit={selectedTopic.unit}
+            neonColor={currentBreakdown.neonColor}
+            neonGlow={currentBreakdown.neonGlow}
+            onSelectGov={onSelectGovernorate}
+            lang={lang}
+          />
+        </div>
       )}
 
-      {/* 3. Official Census & Survey Tables (Displayed explicitly under the Governorates in Neon Colors) */}
-      <OfficialTablesNeonList
-        tables={currentBreakdown.officialTables}
-        topicTitle={isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
-        neonColor={currentBreakdown.neonColor}
-        neonGlow={currentBreakdown.neonGlow}
-        lang={lang}
-      />
-
-      {/* 4. Strategic Market Interpretation for this Sector */}
-      <div className="rounded-2xl bg-gradient-to-br from-[#10182D] via-[#0D1220] to-[#0A0E18] border border-cyan-500/30 p-6 shadow-[0_0_25px_rgba(6,182,212,0.1)] space-y-4">
+      {/* 3. Strategic Market Interpretation for this Sector */}
+      <div id="insights" className="scroll-mt-24 rounded-2xl bg-gradient-to-br from-[#10182D] via-[#0D1220] to-[#0A0E18] border border-cyan-500/30 p-6 shadow-[0_0_25px_rgba(6,182,212,0.1)] space-y-4">
         <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-cyan-400 animate-pulse" />
@@ -299,6 +299,17 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
             </p>
           </div>
         </div>
+      </div>
+
+      {/* 4. Official Census & Survey Tables (Sources section at the very end) */}
+      <div id="sources" className="scroll-mt-24">
+        <OfficialTablesNeonList
+          tables={currentBreakdown.officialTables}
+          topicTitle={isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
+          neonColor={currentBreakdown.neonColor}
+          neonGlow={currentBreakdown.neonGlow}
+          lang={lang}
+        />
       </div>
     </div>
   );

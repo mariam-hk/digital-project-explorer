@@ -340,81 +340,81 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
             <div className="border-b border-white/10 pb-4 flex items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
+                  <span className="px-2.5 py-1 rounded text-xs font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
                     #{activeGov.rank} {isAr ? "في عموم العراق" : "Nationwide"}
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono">
+                  <span className="text-xs text-slate-300 font-mono">
                     {isAr ? activeGov.regionAr : activeGov.regionEn}
                   </span>
                 </div>
-                <h4 className="text-2xl font-black text-white flex items-center gap-2 mt-1">
-                  <MapPin className="w-6 h-6 text-cyan-400 animate-bounce" />
+                <h4 className="text-2xl sm:text-3xl font-black text-white flex items-center gap-2 mt-1.5">
+                  <MapPin className="w-7 h-7 text-cyan-400 animate-bounce" />
                   <span>{isAr ? activeGov.nameAr : activeGov.nameEn}</span>
                 </h4>
               </div>
 
               {/* Big Metric Display */}
               <div className="text-left rtl:text-right">
-                <span className="text-3xl font-black text-cyan-400 font-mono drop-shadow-[0_0_12px_rgba(6,182,212,0.9)]">
+                <span className="text-3xl sm:text-4xl font-black text-cyan-400 font-mono drop-shadow-[0_0_12px_rgba(6,182,212,0.9)]">
                   {activeGov[selectedTopic.metricKey]}
-                  <span className="text-lg text-slate-300 font-sans ml-1">
+                  <span className="text-xl text-slate-200 font-sans ml-1">
                     {selectedTopic.unit}
                   </span>
                 </span>
-                <span className="block text-[10px] text-slate-400">
+                <span className="block text-xs text-slate-300 font-medium mt-0.5">
                   {selectedTopic.titleAr}
                 </span>
               </div>
             </div>
 
             {/* Metrics Grid */}
-            <div className="space-y-2.5 text-xs">
+            <div className="space-y-3 text-sm">
               {/* Metric 1 */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-cyan-500/30 transition-all">
-                <span className="text-slate-300 font-medium">{selectedTopic.titleAr}</span>
-                <span className="font-black text-cyan-300 font-mono text-sm">
+              <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/5 hover:border-cyan-500/30 transition-all">
+                <span className="text-slate-200 font-medium text-sm">{selectedTopic.titleAr}</span>
+                <span className="font-black text-cyan-300 font-mono text-base">
                   {activeGov[selectedTopic.metricKey]} {selectedTopic.unit}
                 </span>
               </div>
 
               {/* Metric 2: Household Telecom Spend */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-emerald-500/30 transition-all">
-                <span className="text-slate-300 font-medium">
+              <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/5 hover:border-emerald-500/30 transition-all">
+                <span className="text-slate-200 font-medium text-sm">
                   {isAr ? "إنفاق الأسرة الشهري على التقنية" : "Monthly Tech Spending"}
                 </span>
-                <span className="font-black text-emerald-400 font-mono text-sm">
+                <span className="font-black text-emerald-400 font-mono text-base">
                   {activeGov.telecomSpending} {isAr ? "ألف د.ع" : "K IQD"}
                 </span>
               </div>
 
               {/* Metric 3: Best Fit Model */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-amber-500/30 transition-all">
-                <span className="text-slate-300 font-medium">
+              <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/5 hover:border-amber-500/30 transition-all">
+                <span className="text-slate-200 font-medium text-sm">
                   {isAr ? "نموذج العمل الأنسب" : "Best Fit Business Model"}
                 </span>
-                <span className="font-bold text-amber-300 text-xs text-left rtl:text-right">
+                <span className="font-bold text-amber-300 text-sm text-left rtl:text-right">
                   {activeGov.bestFitModel}
                 </span>
               </div>
 
               {/* Metric 4: Market Tier */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all">
-                <span className="text-slate-300 font-medium">
+              <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all">
+                <span className="text-slate-200 font-medium text-sm">
                   {isAr ? "تصنيف السوق" : "Market Tier"}
                 </span>
-                <span className="font-bold text-purple-300 text-[11px] truncate max-w-[150px]">
+                <span className="font-bold text-purple-300 text-xs sm:text-sm truncate max-w-[170px]">
                   {activeGov.marketTier}
                 </span>
               </div>
             </div>
 
             {/* Strategic Intelligence Box */}
-            <div className="p-3.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-xs text-slate-200 leading-relaxed space-y-1.5">
-              <div className="flex items-center gap-1.5 text-cyan-400 font-bold text-xs">
-                <Sparkles className="w-4 h-4" />
+            <div className="p-4 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-slate-200 leading-relaxed space-y-2">
+              <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+                <Sparkles className="w-4.5 h-4.5" />
                 <span>{isAr ? "الرؤية والتحليل الاستثماري:" : "Strategic Investment Analysis:"}</span>
               </div>
-              <p className="text-[11px] text-slate-300">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 {activeGov.aiSummary}
               </p>
             </div>
@@ -422,7 +422,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
             {/* Action Button: Open Full Dashboard */}
             <button
               onClick={() => onSelectGovernorate(activeGov)}
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-[#060A14] font-black text-xs sm:text-sm shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all flex items-center justify-center gap-2 group cursor-pointer"
+              className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-[#060A14] font-black text-sm sm:text-base shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
               <span>
                 {isAr
@@ -430,9 +430,9 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                   : `Open Full Deep-Dive for ${activeGov.nameEn}`}
               </span>
               {isAr ? (
-                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
               ) : (
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               )}
             </button>
           </div>

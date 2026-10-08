@@ -20,7 +20,7 @@ export const DataSourceFooter: React.FC<DataSourceFooterProps> = ({
         {/* Left: Branding & Core Principles */}
         <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-start">
           <span className="font-bold text-slate-800">
-            TechLocation
+            TechLocation <span className="text-indigo-600">AI</span>
           </span>
           <span className="hidden sm:inline text-slate-300">•</span>
           <span>

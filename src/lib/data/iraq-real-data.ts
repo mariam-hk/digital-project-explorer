@@ -327,7 +327,7 @@ export const INTERNET_PURPOSES = [
   { id: "other", nameEn: "Other", nameAr: "خدمات أخرى", percent: 8, color: "#7C3AED" },
 ];
 
-// Market Segmentation Clusters
+// Market Segmentation AI Clusters
 export const MARKET_SEGMENTS = [
   {
     id: "segment1",

@@ -183,6 +183,7 @@ export const TOPICS: TopicConfig[] = [
     sourceAr: "محرك التقييم التحليلي المستند لبيانات المسح والتقرير السنوي",
     sourceEn: "Engineered composite score based on official survey telemetry"
   },
+  /*
   {
     id: "talent",
     titleAr: "مؤشر الكفاءات والبرمجيات",
@@ -197,6 +198,7 @@ export const TOPICS: TopicConfig[] = [
     sourceAr: "مسح تكنولوجيا المعلومات 2022 (جدول 1-10 + جدول 1-17)",
     sourceEn: "COSIT ICT Survey (Table 1-10 & 1-17)"
   }
+  */
 ];
 
 export const ALL_GOVERNORATES: GovernorateMetric[] = [

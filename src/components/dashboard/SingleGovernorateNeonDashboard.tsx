@@ -52,7 +52,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
   // Retrieve topic breakdown configuration and governorate data
   const breakdownConfig =
     TOPIC_BREAKDOWNS[selectedTopic.id] || TOPIC_BREAKDOWNS["smartphones"];
-  const govDetails = breakdownConfig.getGovBreakdown(
+const govDetails = breakdownConfig.getGovBreakdown(
     selectedGov.id,
     selectedGov.nameAr,
     lang
@@ -253,7 +253,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
       </div>
 
       {/* 3. Deep Dive Section for THIS Specific Topic in THIS Governorate */}
-      <div className="space-y-4">
+      <div id="charts" className="space-y-4 scroll-mt-24">
         {/* Section Heading */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
           <div>
@@ -265,9 +265,9 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
                   : `Detailed Breakdown: (${selectedTopic.titleEn}) in ${selectedGov.nameEn}`}
               </span>
             </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
+          {/*  <p className="text-xs text-slate-400 mt-0.5">
               {govDetails.summaryText}
-            </p>
+                </p>*/}
           </div>
           <span
             className="px-3 py-1 rounded-full text-xs font-mono font-bold"
@@ -289,7 +289,6 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
               <NeonDonutChart
                 data={govDetails.donutData}
                 title={isAr ? `توزيع فئات (${selectedTopic.titleAr})` : "Category Distribution"}
-                subtitle={isAr ? "النسب المئوية المستخرجة من جداول المسح الميداني" : "Official field survey distribution"}
                 lang={lang}
               />
             </div>
@@ -306,7 +305,6 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
                   </span>
                 </h3>
                 <p className="text-[11px] text-slate-400 mt-0.5">
-                  {isAr ? "حسب الفئات العمرية والجنس وقنوات الخدمة" : "Segmented by age, gender, and channels"}
                 </p>
               </div>
 
@@ -339,7 +337,6 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
                     <span className="text-xs sm:text-sm font-black font-mono block mt-0.5" style={{ color: kpi.color }}>
                       {kpi.value}
                     </span>
-                    <span className="text-[9px] text-slate-500 font-mono block">{kpi.note}</span>
                   </div>
                 ))}
               </div>
@@ -348,18 +345,8 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
         </div>
       </div>
 
-      {/* 4. Official Census & Survey Tables Supporting this Section */}
-      <OfficialTablesNeonList
-        tables={breakdownConfig.officialTables}
-        topicTitle={isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
-        neonColor={breakdownConfig.neonColor}
-        neonGlow={breakdownConfig.neonGlow}
-        selectedGovAr={selectedGov.nameAr}
-        lang={lang}
-      />
-
-      {/* 5. General Benchmark: 6 Core Behavioral Indicators vs National Mean */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* 4. General Benchmark: 6 Core Behavioral Indicators vs National Mean */}
+      <div id="behavioral-benchmark" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-7 rounded-2xl bg-[#0B0F19] border border-white/10 p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/5 pb-3">
             <div>
@@ -387,18 +374,18 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
 
               return (
                 <div key={ind.key} className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center justify-between text-xs py-0.5">
                     <div className="flex items-center gap-2">
                       <span className="text-sm">{ind.icon}</span>
                       <span className="font-semibold text-slate-200">
                         {isAr ? ind.nameAr : ind.nameEn}
                       </span>
-                      <span className="text-[10px] text-slate-500 hidden sm:inline">({ind.source})</span>
                     </div>
                     <div className="flex items-center gap-2 font-mono">
                       <span className="font-bold text-sm" style={{ color: ind.color }}>
                         {ind.val}%
                       </span>
+                      {/* Benchmark difference badge hidden upon user request
                       <span
                         className={`text-[10px] px-1.5 py-0.5 rounded ${
                           isPositive
@@ -408,6 +395,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
                       >
                         {isPositive ? `+${diff}%` : `${diff}%`}
                       </span>
+                      */}
                     </div>
                   </div>
 
@@ -439,7 +427,6 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
               <span>{isAr ? "المؤشرات الاقتصادية والجاهزية" : "Economic & Readiness Telemetry"}</span>
             </h3>
             <p className="text-[11px] text-slate-400">
-              {isAr ? "بيانات حقيقية مستخرجة ومحسوبة خوارزمياً" : "Verified survey findings & composite scores"}
             </p>
           </div>
 
@@ -488,17 +475,16 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
           </div>
 
           <div className="mt-3 pt-3 border-t border-white/5 text-[10px] text-slate-500 text-center font-mono">
-            {isAr ? "المصدر: مسح استخدام تكنولوجيا المعلومات 2022 وإحصاءات 2024" : "Source: COSIT ICT Survey 2022 & 2024 Telemetry"}
           </div>
         </div>
       </div>
 
-      {/* 6. Strategic Deep Insights for this Governorate: "What does this mean?" */}
-      <div className="rounded-2xl bg-gradient-to-br from-[#10182D] via-[#0D1220] to-[#0A0E18] border border-purple-500/30 p-6 shadow-[0_0_25px_rgba(168,85,247,0.15)] space-y-4">
+      {/* 5. Strategic Deep Insights for this Governorate: "What does this mean?" */}
+      <div id="insights" className="scroll-mt-24 rounded-2xl bg-gradient-to-br from-[#10182D] via-[#0D1220] to-[#0A0E18] border border-purple-500/30 p-6 shadow-[0_0_25px_rgba(168,85,247,0.15)] space-y-4">
         <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-purple-400 animate-pulse" />
-            <h3 className="text-base font-bold text-white">
+            <Sparkles className="w-4 h-4 text-purple-400 animate-pulse" />
+            <h3 className="text-sm font-bold text-white">
               {selectedGov.aiTitle || (isAr ? `ماذا تعني هذه البيانات لمشروعك في ${selectedGov.nameAr}؟` : `Market Strategic Analysis`)}
             </h3>
           </div>
@@ -508,7 +494,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
         </div>
 
         {/* Executive Summary Paragraph */}
-        <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs sm:text-sm leading-relaxed text-slate-200">
+        <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs leading-relaxed text-slate-300">
           <p>{selectedGov.aiSummary}</p>
         </div>
 
@@ -546,6 +532,18 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
             </p>
           </div>
         </div>
+      </div>
+
+      {/* 6. Official Census & Survey Tables Supporting this Section (Sources section at the very end) */}
+      <div id="sources" className="scroll-mt-24">
+        <OfficialTablesNeonList
+          tables={breakdownConfig.officialTables}
+          topicTitle={isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
+          neonColor={breakdownConfig.neonColor}
+          neonGlow={breakdownConfig.neonGlow}
+          selectedGovAr={selectedGov.nameAr}
+          lang={lang}
+        />
       </div>
     </div>
   );
