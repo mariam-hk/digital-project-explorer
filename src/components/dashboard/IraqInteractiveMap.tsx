@@ -343,9 +343,6 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                   <span className="px-2.5 py-1 rounded text-xs font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
                     #{activeGov.rank} {isAr ? "في عموم العراق" : "Nationwide"}
                   </span>
-                  <span className="text-xs text-slate-300 font-mono">
-                    {isAr ? activeGov.regionAr : activeGov.regionEn}
-                  </span>
                 </div>
                 <h4 className="text-2xl sm:text-3xl font-black text-white flex items-center gap-2 mt-1.5">
                   <MapPin className="w-7 h-7 text-cyan-400 animate-bounce" />
