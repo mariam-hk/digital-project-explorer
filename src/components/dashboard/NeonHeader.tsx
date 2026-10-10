@@ -106,7 +106,7 @@ export const NeonHeader: React.FC<NeonHeaderProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-2.5 pt-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 pt-1">
           {TOPICS.map((topic) => {
             const isActive = selectedTopic.id === topic.id;
             return (

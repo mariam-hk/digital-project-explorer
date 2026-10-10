@@ -54,6 +54,7 @@ export interface TopicConfig {
     | "fintechScore"
     | "smartphoneUsagePct"
     | "internetPenetrationPct"
+    | "homeInternetPct"
     | "computerUsagePct"
     | "onlineShoppingPct"
     | "digitalSkillsPct"
@@ -87,45 +88,31 @@ export const TOPICS: TopicConfig[] = [
   },
   {
     id: "smartphones",
-    titleAr: "استخدام الهاتف المحمول",
-    titleEn: "Mobile Phone Usage",
+    titleAr: "الأجهزة الذكية والحواسيب",
+    titleEn: "Smartphones & Computers",
     icon: "📱",
     metricKey: "smartphoneUsagePct",
     unit: "%",
-    neonColor: "#A855F7",
-    neonGlow: "rgba(168, 85, 247, 0.5)",
-    descriptionAr: "نسبة الأفراد الذين يستخدمون جهاز الهاتف المحمول خلال الأشهر الثلاثة الأخيرة.",
-    descriptionEn: "Percentage of individuals actively using mobile phones in the last 3 months.",
-    sourceAr: "مسح استخدام تكنولوجيا المعلومات 2022 (جدول 1-4، صفحة 44)",
-    sourceEn: "COSIT ICT Household Survey 2022 (Table 1-4, Page 44)"
+    neonColor: "#10B981",
+    neonGlow: "rgba(16, 185, 129, 0.5)",
+    descriptionAr: "معدلات انتشار الأجهزة الذكية والحواسيب المحمولة والمكتبية.",
+    descriptionEn: "Penetration rates of smartphones, laptops, and desktop computers.",
+    sourceAr: "مسح تكنولوجيا المعلومات 2022 (جدول 1-5 وجدول 1-10)",
+    sourceEn: "COSIT ICT Household Survey 2022 (Tables 1-5 & 1-10)"
   },
   {
     id: "internet",
-    titleAr: "الهواتف الذكية (Smartphones)",
-    titleEn: "Smartphone Adoption",
+    titleAr: "الإنترنت وإنفاق الأسرة",
+    titleEn: "Internet & Household Spend",
     icon: "🌐",
-    metricKey: "internetPenetrationPct",
+    metricKey: "homeInternetPct",
     unit: "%",
-    neonColor: "#10B981",
-    neonGlow: "rgba(168, 85, 247, 0.5)",
-    descriptionAr: "نسبة مستخدمي الهواتف الذكية الداعمة للتطبيقات والإنترنت مقارنة بالهواتف العادية.",
-    descriptionEn: "Proportion of smartphone users among mobile phone owners.",
-    sourceAr: "مسح استخدام تكنولوجيا المعلومات 2022 (جدول 1-5، صفحة 45-46)",
-    sourceEn: "COSIT ICT Household Survey 2022 (Table 1-5, Page 45-46)"
-  },
-  {
-    id: "computers",
-    titleAr: "استخدام الحواسيب واللابتوب",
-    titleEn: "Computer & Laptop Usage",
-    icon: "💻",
-    metricKey: "computerUsagePct",
-    unit: "%",
-    neonColor: "#F59E0B",
-    neonGlow: "rgba(245, 158, 11, 0.5)",
-    descriptionAr: "نسبة استخدام أجهزة الكمبيوتر المحمولة والمكتبية (مؤشر حرج لشركات البرمجيات).",
-    descriptionEn: "Proportion of individuals using laptops and desktop PCs.",
-    sourceAr: "مسح استخدام تكنولوجيا المعلومات 2022 (جدول 1-10، صفحة 54)",
-    sourceEn: "COSIT ICT Household Survey 2022 (Table 1-10, Page 54)"
+    neonColor: "#3B82F6",
+    neonGlow: "rgba(59, 130, 246, 0.5)",
+    descriptionAr: "نفاذ إنترنت المنازل والاعتماد على باقات النقال مقارنة بإنفاق الأسرة الشهري على الخدمات والأجهزة.",
+    descriptionEn: "Home broadband and mobile data vs household monthly expenditure on telecom and devices.",
+    sourceAr: "مسح تكنولوجيا المعلومات 2022 (جدول 2-2 وجدول 2-5)",
+    sourceEn: "COSIT ICT Household Survey 2022 (Tables 2-2 & 2-5)"
   },
   {
     id: "shopping",
@@ -140,20 +127,6 @@ export const TOPICS: TopicConfig[] = [
     descriptionEn: "Frequency of e-commerce purchases and online delivery orders.",
     sourceAr: "مسح استخدام تكنولوجيا المعلومات 2022 (جدول 1-18، صفحة 87)",
     sourceEn: "COSIT ICT Household Survey 2022 (Table 1-18, Page 87)"
-  },
-  {
-    id: "spending",
-    titleAr: "إنفاق الأسرة على التكنولوجيا",
-    titleEn: "Tech & Telecom Spending",
-    icon: "💰",
-    metricKey: "telecomSpending",
-    unit: " ألف د.ع",
-    neonColor: "#3B82F6",
-    neonGlow: "rgba(59, 130, 246, 0.5)",
-    descriptionAr: "متوسط إنفاق الأسرة الشهري على خدمات الاتصالات والإنترنت والأجهزة.",
-    descriptionEn: "Average household monthly expenditure on telecom and digital services.",
-    sourceAr: "مسح استخدام تكنولوجيا المعلومات 2022 (جدول 2-5، صفحة 112)",
-    sourceEn: "COSIT ICT Household Survey 2022 (Table 2-5, Page 112)"
   },
   {
     id: "skills",
@@ -186,17 +159,17 @@ export const TOPICS: TopicConfig[] = [
   /*
   {
     id: "talent",
-    titleAr: "مؤشر الكفاءات والبرمجيات",
-    titleEn: "Tech Talent Index",
+    titleAr: "مؤشر المواهب وساس",
+    titleEn: "Tech Talent & SaaS Index",
     icon: "🚀",
     metricKey: "digitalTalentScore",
     unit: "%",
-    neonColor: "#F43F5E",
-    neonGlow: "rgba(244, 63, 94, 0.5)",
-    descriptionAr: "مؤشر كثافة مستخدمي أجهزة الحاسوب والمهارات المتقدمة لتأسيس فرق العمل.",
-    descriptionEn: "Workstation computer literacy and engineering talent viability.",
-    sourceAr: "مسح تكنولوجيا المعلومات 2022 (جدول 1-10 + جدول 1-17)",
-    sourceEn: "COSIT ICT Survey (Table 1-10 & 1-17)"
+    neonColor: "#8B5CF6",
+    neonGlow: "rgba(139, 92, 246, 0.5)",
+    descriptionAr: "جاهزية المحافظة لتأسيس فرق برمجية وشركات SaaS بناءً على الحواسيب والمهارات.",
+    descriptionEn: "Readiness for software engineering teams and B2B SaaS hubs.",
+    sourceAr: "محسوب خوارزمياً وفق مصفوفة المهارات البرمجية والألياف الضوئية",
+    sourceEn: "Engineered Talent Score"
   }
   */
 ];

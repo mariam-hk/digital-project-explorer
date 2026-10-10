@@ -288,7 +288,24 @@ const govDetails = breakdownConfig.getGovBreakdown(
             <div className="lg:col-span-6">
               <NeonDonutChart
                 data={govDetails.donutData}
-                title={isAr ? `توزيع فئات (${selectedTopic.titleAr})` : "Category Distribution"}
+                title={
+                  selectedTopic.id === "smartphones"
+                    ? (isAr ? "توزيع حصص الأجهزة الذكية والحواسيب" : "Smart Devices Ecosystem Distribution")
+                    : selectedTopic.id === "internet"
+                    ? (isAr ? "نوع اتصال المنازل بالإنترنت (جدول 2-2)" : "Home Internet Connection Type (Table 2-2)")
+                    : selectedTopic.id === "spending"
+                    ? (isAr ? "توزيع بنود إنفاق الأسرة على التكنولوجيا (جدول 2-5)" : "Household ICT Spend Distribution (Table 2-5)")
+                    : (isAr ? `توزيع فئات (${selectedTopic.titleAr})` : "Category Distribution")
+                }
+                subtitle={
+                  selectedTopic.id === "smartphones"
+                    ? (isAr ? "الحصص النسبية للأجهزة الرقمية النشطة (المجموع: 100%)" : "Relative device shares: smartphones, laptops, desktops, tablets (Total: 100%)")
+                    : selectedTopic.id === "internet"
+                    ? (isAr ? "اتصال المنازل بالإنترنت مقابل الاعتماد على باقات النقال (المجموع: 100%)" : "Home broadband vs mobile data only (Total: 100%)")
+                    : selectedTopic.id === "spending"
+                    ? (isAr ? "خدمات الاتصال وباقات الإنترنت مقابل الأجهزة والمعدات (المجموع: 100%)" : "Telecom services vs hardware & devices (Total: 100%)")
+                    : (isAr ? "النسب المئوية المستخرجة من جداول المسح الميداني" : "Official field survey distribution")
+                }
                 lang={lang}
               />
             </div>
@@ -301,10 +318,23 @@ const govDetails = breakdownConfig.getGovBreakdown(
                 <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
                   <BarChart3 className="w-4 h-4 text-cyan-400" />
                   <span>
-                    {isAr ? "التوزيع الديمغرافي وقنوات الاستخدام" : "Demographics & Channel Adoption"}
+                    {selectedTopic.id === "smartphones"
+                      ? (isAr ? "التوزيع الديمغرافي لمستخدمي الأجهزة (جدول 1-4)" : "Demographic Breakdown of Users (Table 1-4)")
+                      : selectedTopic.id === "internet"
+                      ? (isAr ? "قنوات الإنفاق التكنولوجي للأسرة (جدول 2-5)" : "Household Tech Spending Channels (Table 2-5)")
+                      : selectedTopic.id === "spending"
+                      ? (isAr ? "تفاصيل بنود الإنفاق الشهري للأسرة (جدول 2-5)" : "Monthly Spend Breakdown (Table 2-5)")
+                      : (isAr ? "التوزيع الديمغرافي وقنوات الاستخدام" : "Demographics & Channel Adoption")}
                   </span>
                 </h3>
                 <p className="text-[11px] text-slate-400 mt-0.5">
+                  {selectedTopic.id === "smartphones"
+                    ? (isAr ? "معدلات الاستخدام حسب فئة الشباب والجنس في المحافظة (ص 44)" : "Adoption rates by youth (15-24) and gender (p. 44)")
+                    : selectedTopic.id === "internet"
+                    ? (isAr ? "خدمات الاتصال وباقات الإنترنت مقابل شراء وصيانة الأجهزة (ص 112)" : "Telecom & Net Services vs Hardware & Devices (p. 112)")
+                    : selectedTopic.id === "spending"
+                    ? (isAr ? "متوسط إنفاق الأسرة الشهري على الاتصالات والأجهزة لسنة 2022 (ص 112)" : "Average household expenditure on ICT 2022 (p. 112)")
+                    : (isAr ? "حسب الفئات العمرية والجنس وقنوات الخدمة" : "Segmented by age, gender, and channels")}
                 </p>
               </div>
 
@@ -313,7 +343,9 @@ const govDetails = breakdownConfig.getGovBreakdown(
                   <div key={idx} className="space-y-1">
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-slate-300 font-medium">{item.label}</span>
-                      <span className="font-mono font-bold text-white">{item.value}%</span>
+                      <span className="font-mono font-bold text-white">
+                        {item.displayValue ?? `${item.value}%`}
+                      </span>
                     </div>
                     <div className="w-full bg-[#161F33] h-2.5 rounded-full overflow-hidden">
                       <div
@@ -459,12 +491,14 @@ const govDetails = breakdownConfig.getGovBreakdown(
               </span>
             </div>
 
+            {/*
             <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5">
               <span className="text-slate-400">{isAr ? "مؤشر الكفاءات التقنية وساس" : "Digital Talent & SaaS"}</span>
               <span className="font-bold text-indigo-400 font-mono text-sm">
                 {selectedGov.digitalTalentScore}%
               </span>
             </div>
+            */}
 
             <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-violet-500/30 transition-all">
               <span className="text-slate-400">{isAr ? "مكاتب البطاقات والدفع الذكي" : "Smart Payment Offices"}</span>
