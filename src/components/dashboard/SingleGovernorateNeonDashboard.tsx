@@ -466,10 +466,10 @@ const govDetails = breakdownConfig.getGovBreakdown(
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-cyan-500/30 transition-all">
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-violet-500/30 transition-all">
               <span className="text-slate-400">{isAr ? "مكاتب البطاقات والدفع الذكي" : "Smart Payment Offices"}</span>
-              <span className="font-bold text-cyan-400 font-mono text-sm">
-                {selectedGov.smartCardOffices} {isAr ? "مكتباً (كي)" : "offices"}
+              <span className="font-bold text-violet-400 font-mono text-sm">
+                {selectedGov.smartCardOffices} {isAr ? "مكتب" : "offices"}
               </span>
             </div>
           </div>
