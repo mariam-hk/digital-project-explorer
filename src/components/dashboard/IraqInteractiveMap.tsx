@@ -17,6 +17,7 @@ interface IraqInteractiveMapProps {
   onSelectGovernorate: (gov: GovernorateMetric) => void;
   lang: "ar" | "en";
   scope: "federal" | "all";
+  theme?: "dark" | "light";
 }
 
 const KURDISTAN_IDS = ["erbil", "sulaymaniyah", "duhok"];
@@ -27,7 +28,9 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
   onSelectGovernorate,
   lang,
   scope,
+  theme = "dark",
 }) => {
+  const isLight = theme === "light";
   const isAr = lang === "ar";
   const [hoveredGovId, setHoveredGovId] = useState<string | null>(null);
   const [selectedGovId, setSelectedGovId] = useState<string>(governorates[0]?.id || "baghdad");
@@ -62,7 +65,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
   };
 
   return (
-    <div className="relative w-full rounded-2xl bg-[#080D1A] border border-cyan-500/30 p-4 sm:p-6 shadow-[0_0_35px_rgba(6,182,212,0.15)] space-y-5 overflow-hidden">
+    <div className="relative w-full rounded-2xl bg-white dark:bg-[#080D1A] border border-slate-200 dark:border-cyan-500/30 p-4 sm:p-6 shadow-md dark:shadow-[0_0_35px_rgba(6,182,212,0.15)] space-y-5 overflow-hidden transition-colors duration-300">
       {/* Ambient background glow */}
       <div
         className="absolute top-0 right-1/4 w-96 h-96 rounded-full blur-[140px] pointer-events-none opacity-20"
@@ -70,14 +73,14 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
       />
 
       {/* Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4 relative z-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4 relative z-10">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
             <MapPin className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base sm:text-lg font-black text-white tracking-wide">
+              <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white tracking-wide">
                 {isAr
                   ? `خريطة العراق التفاعلية: ${selectedTopic.titleAr}`
                   : `Iraq Interactive Map: ${selectedTopic.titleEn}`}
@@ -92,7 +95,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                   : "15 Federal"}
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5 flex items-center gap-1.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 flex items-center gap-1.5">
               <MousePointerClick className="w-3.5 h-3.5 text-cyan-400" />
               <span>
                 {isAr
@@ -107,10 +110,10 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
       {/* Main Map Body: Interactive SVG Map (8 Cols) + Details Card (4 Cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start relative z-10">
         {/* SVG Interactive Map Area (8 Cols) */}
-        <div className="lg:col-span-8 relative flex flex-col items-center justify-center rounded-2xl bg-[#060A14]/90 border border-white/10 p-2 sm:p-4 min-h-[500px]">
+        <div className="lg:col-span-8 relative flex flex-col items-center justify-center rounded-2xl bg-slate-50 dark:bg-[#060A14]/90 border border-slate-200 dark:border-white/10 p-2 sm:p-4 min-h-[500px] transition-colors duration-300">
           {/* Quick-Select Governorate Pills Bar (Top of Map) */}
           <div className="w-full flex items-center gap-1.5 overflow-x-auto pb-2 mb-2 scrollbar-none text-[11px]">
-            <span className="text-slate-400 font-bold whitespace-nowrap pl-1 text-[10px]">
+            <span className="text-slate-500 dark:text-slate-400 font-bold whitespace-nowrap pl-1 text-[10px]">
               {isAr ? "المحافظات:" : "Governorates:"}
             </span>
             {governorates.map((g) => {
@@ -124,8 +127,8 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                   onMouseLeave={() => setHoveredGovId(null)}
                   className={`px-2.5 py-1 rounded-lg font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
                     isHovered || isSelected
-                      ? "bg-cyan-500 text-[#070B14] font-black shadow-[0_0_12px_rgba(6,182,212,0.8)] scale-105"
-                      : "bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/5"
+                      ? "bg-cyan-500 text-white dark:bg-cyan-400 dark:text-[#070B14] font-black shadow-md dark:shadow-[0_0_12px_rgba(6,182,212,0.8)] scale-105"
+                      : "bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white dark:border-white/5"
                   }`}
                 >
                   <span>{isAr ? g.nameAr : g.nameEn}</span>
@@ -168,13 +171,13 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                 // 3. ONLY the governorate being hovered over changes color to cyan and shows the percentage!
                 const isHovered = hoveredGovId === region.id && !isExcluded;
 
-                let fillColor = "#162238"; // EXACT same color for all governorates
-                let strokeColor = "rgba(255, 255, 255, 0.22)";
+                let fillColor = isLight ? "#E2E8F0" : "#162238";
+                let strokeColor = isLight ? "#CBD5E1" : "rgba(255, 255, 255, 0.22)";
                 let strokeWidth = "1.2";
 
                 if (isHovered) {
-                  fillColor = "#22D3EE"; // Vivid luminous cyan highlight
-                  strokeColor = "#FFFFFF";
+                  fillColor = isLight ? "#0284C7" : "#22D3EE";
+                  strokeColor = isLight ? "#0369A1" : "#FFFFFF";
                   strokeWidth = "2.5";
                 }
 
@@ -291,27 +294,27 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                   top: `${mousePos.y - 12}px`,
                 }}
               >
-                <div className="bg-[#090E20]/95 backdrop-blur-md border border-cyan-400/80 rounded-xl px-4 py-2.5 shadow-[0_0_25px_rgba(6,182,212,0.6)] text-center min-w-[150px] whitespace-nowrap">
+                <div className="bg-white/95 text-slate-900 dark:bg-[#090E20]/95 dark:text-white backdrop-blur-md border border-slate-300 dark:border-cyan-400/80 rounded-xl px-4 py-2.5 shadow-xl dark:shadow-[0_0_25px_rgba(6,182,212,0.6)] text-center min-w-[150px] whitespace-nowrap">
                   {/* Governorate Name */}
-                  <span className="text-xs font-black text-white block">
+                  <span className="text-xs font-black text-slate-900 dark:text-white block">
                     {isAr ? `محافظة ${hoveredGov.nameAr}` : hoveredGov.nameEn}
                   </span>
 
                   {/* Percentage Value */}
                   <div className="flex items-center justify-center gap-1.5 mt-1">
-                    <span className="text-lg font-black text-cyan-400 font-mono drop-shadow-[0_0_10px_rgba(6,182,212,0.9)]">
+                    <span className="text-lg font-black text-cyan-600 dark:text-cyan-400 font-mono drop-shadow-[0_0_10px_rgba(6,182,212,0.9)]">
                       {hoveredGov[selectedTopic.metricKey]}
-                      <span className="text-xs text-slate-300 font-sans ml-0.5">
+                      <span className="text-xs text-slate-500 dark:text-slate-300 font-sans ml-0.5">
                         {selectedTopic.unit}
                       </span>
                     </span>
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-400/30">
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-700 dark:bg-cyan-500/20 dark:text-cyan-300 font-bold border border-cyan-400/30">
                       #{hoveredGov.rank}
                     </span>
                   </div>
 
                   {/* Metric Subtitle */}
-                  <span className="text-[9px] text-slate-400 block mt-0.5">
+                  <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">
                     {selectedTopic.titleAr}
                   </span>
                 </div>
@@ -320,7 +323,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
           </div>
 
           {/* Map Guidance Footer */}
-          <div className="w-full flex items-center justify-between text-[11px] text-slate-400 border-t border-white/5 pt-2 mt-2 px-2">
+          <div className="w-full flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-white/5 pt-2 mt-2 px-2">
             <span>
               {isAr
                 ? "💡 مرّر الماوس فوق أي محافظة لتضيء وتظهر نسبتها فوراً"
@@ -335,16 +338,16 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
 
         {/* Selected Governorate Full Strategic Intelligence Card (4 Cols) */}
         {activeGov && (
-          <div className="lg:col-span-4 rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#0B1120] to-[#070B14] border-2 border-cyan-500/50 p-5 shadow-[0_0_30px_rgba(6,182,212,0.25)] space-y-4">
+          <div className="lg:col-span-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-indigo-50/40 dark:from-[#0F172A] dark:via-[#0B1120] dark:to-[#070B14] border-2 border-cyan-500/40 dark:border-cyan-500/50 p-5 shadow-lg dark:shadow-[0_0_30px_rgba(6,182,212,0.25)] space-y-4 transition-colors duration-300">
             {/* Header info */}
-            <div className="border-b border-white/10 pb-3 flex items-start justify-between gap-3">
+            <div className="border-b border-slate-200 dark:border-white/10 pb-3 flex items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
                     #{activeGov.rank} {isAr ? "في عموم العراق" : "Nationwide"}
                   </span>
                 </div>
-                <h4 className="text-2xl font-black text-white flex items-center gap-2 mt-1">
+                <h4 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2 mt-1">
                   <MapPin className="w-6 h-6 text-cyan-400 animate-bounce" />
                   <span>{isAr ? activeGov.nameAr : activeGov.nameEn}</span>
                 </h4>
@@ -352,13 +355,13 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
 
               {/* Big Metric Display */}
               <div className="text-left rtl:text-right">
-                <span className="text-3xl font-black text-cyan-400 font-mono drop-shadow-[0_0_12px_rgba(6,182,212,0.9)]">
+                <span className="text-3xl font-black text-cyan-600 dark:text-cyan-400 font-mono drop-shadow-[0_0_12px_rgba(6,182,212,0.9)]">
                   {activeGov[selectedTopic.metricKey]}
-                  <span className="text-lg text-slate-200 font-sans ml-1">
+                  <span className="text-lg text-slate-600 dark:text-slate-200 font-sans ml-1">
                     {selectedTopic.unit}
                   </span>
                 </span>
-                <span className="block text-[11px] text-slate-300 font-medium mt-0.5">
+                <span className="block text-[11px] text-slate-500 dark:text-slate-300 font-medium mt-0.5">
                   {selectedTopic.titleAr}
                 </span>
               </div>
@@ -367,7 +370,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
             {/* Metrics Grid */}
             <div className="space-y-2.5 text-xs sm:text-[13px]">
               {/* Metric 1 */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-cyan-500/30 transition-all">
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-cyan-500/30 dark:bg-white/5 dark:border-white/5 dark:hover:border-cyan-500/30 transition-all">
                 <span className="text-slate-300 font-medium">{selectedTopic.titleAr}</span>
                 <span className="font-black text-cyan-300 font-mono text-[15px]">
                   {activeGov[selectedTopic.metricKey]} {selectedTopic.unit}
@@ -375,7 +378,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
               </div>
 
               {/* Metric 2: Household Telecom Spend */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-emerald-500/30 transition-all">
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-emerald-500/30 dark:bg-white/5 dark:border-white/5 dark:hover:border-emerald-500/30 transition-all">
                 <span className="text-slate-300 font-medium">
                   {isAr ? "إنفاق الأسرة الشهري على التقنية" : "Monthly Tech Spending"}
                 </span>
@@ -385,7 +388,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
               </div>
 
               {/* Metric 3: Best Fit Model */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-amber-500/30 transition-all">
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500/30 dark:bg-white/5 dark:border-white/5 dark:hover:border-amber-500/30 transition-all">
                 <span className="text-slate-300 font-medium">
                   {isAr ? "نموذج العمل الأنسب" : "Best Fit Business Model"}
                 </span>
@@ -395,7 +398,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
               </div>
 
               {/* Metric 4: Market Tier */}
-              <div className="flex justify-between items-center p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all">
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-purple-500/30 dark:bg-white/5 dark:border-white/5 dark:hover:border-purple-500/30 transition-all">
                 <span className="text-slate-300 font-medium">
                   {isAr ? "تصنيف السوق" : "Market Tier"}
                 </span>
@@ -406,12 +409,12 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
             </div>
 
             {/* Strategic Intelligence Box */}
-            <div className="p-3.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-slate-200 leading-relaxed space-y-1.5">
+            <div className="p-3.5 rounded-xl bg-cyan-50/60 border border-cyan-200 dark:bg-cyan-950/40 dark:border-cyan-500/30 text-slate-700 dark:text-slate-200 leading-relaxed space-y-1.5">
               <div className="flex items-center gap-1.5 text-cyan-400 font-bold text-xs">
                 <Sparkles className="w-4 h-4" />
                 <span>{isAr ? "الرؤية والتحليل الاستثماري:" : "Strategic Investment Analysis:"}</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 {activeGov.aiSummary}
               </p>
             </div>

@@ -17,6 +17,7 @@ interface OfficialTablesNeonListProps {
   neonGlow: string;
   selectedGovAr?: string;
   lang: "ar" | "en";
+  theme?: "dark" | "light";
 }
 
 export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
@@ -26,8 +27,10 @@ export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
   neonGlow,
   selectedGovAr,
   lang,
+  theme = "dark",
 }) => {
   const isAr = lang === "ar";
+  const isLight = theme === "light";
   const [activeTableData, setActiveTableData] = useState<OfficialTableData | null>(null);
 
   // Handle opening table detail
@@ -67,29 +70,29 @@ export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
 
   return (
     <>
-      <div className="rounded-2xl bg-[#090D1B] border border-white/10 p-5 sm:p-6 shadow-2xl space-y-4">
+      <div className="rounded-2xl bg-white dark:bg-[#090D1B] border border-slate-200 dark:border-white/10 p-5 sm:p-6 shadow-sm dark:shadow-2xl space-y-4 transition-colors duration-300">
         {/* Title */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
           <div className="flex items-center gap-2.5">
-            <Database className="w-5 h-5 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+            <Database className="w-5 h-5 text-cyan-600 dark:text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+            <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight">
               {isAr
                 ? `الجداول والمسوح الإحصائية الرسمية المعتمدة لقطاع: (${topicTitle})`
                 : `Official Survey & Census Tables Grounding: (${topicTitle})`}
             </h3>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>{isAr ? "بيانات حكومية موثقة 100%" : "Verified Government Telemetry"}</span>
           </div>
         </div>
 
-        <p className="text-xs text-slate-400 leading-relaxed flex items-center justify-between flex-wrap gap-2">
+        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed flex items-center justify-between flex-wrap gap-2">
           <span>
             {isAr
               ? "تم استخراج ومعايرة هذه المؤشرات من الجداول الرسمية الصادرة عن هيئة الإحصاء (COSIT) ووزارة الاتصالات. "
               : "Directly extracted from official statistical reports published by COSIT and Ministry of Communications. "}
-            <strong className="text-cyan-300 font-medium">
+            <strong className="text-cyan-600 dark:text-cyan-300 font-medium">
               {isAr ? "(انقر على أي جدول لعرض بياناته التفصيلية لكافة المحافظات)" : "(Click any table card to view its full dataset)"}
             </strong>
           </span>
@@ -101,7 +104,7 @@ export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
             <div
               key={idx}
               onClick={() => handleOpenTable(tbl)}
-              className="group relative p-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 hover:border-cyan-400/60 shadow-lg hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-200 cursor-pointer"
+              className="group relative p-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-cyan-400 dark:bg-white/[0.03] dark:hover:bg-white/[0.07] dark:border-white/5 dark:hover:border-cyan-400/60 shadow-sm dark:shadow-lg hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-200 cursor-pointer"
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <div className="space-y-1.5 flex-1">
@@ -118,28 +121,28 @@ export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
                     >
                       {tbl.tableNumber}
                     </span>
-                    <span className="text-[11px] text-slate-400 font-mono">
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                       {tbl.source}
                     </span>
                   </div>
 
                   {/* Table Official Full Title */}
-                  <h4 className="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-cyan-200 transition-colors leading-relaxed">
+                  <h4 className="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-cyan-600 dark:text-slate-200 dark:group-hover:text-cyan-200 transition-colors leading-relaxed">
                     {isAr ? tbl.titleAr : tbl.titleEn}
                   </h4>
 
                   {/* Key Finding Badge */}
-                  <div className="flex items-center gap-1.5 text-[11px] text-slate-300 pt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                    <span className="font-medium text-cyan-300">
+                  <div className="flex items-center gap-1.5 text-[11px] text-slate-700 dark:text-slate-300 pt-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 dark:bg-cyan-400"></span>
+                    <span className="font-medium text-cyan-600 dark:text-cyan-300">
                       {isAr ? "النتيجة الميدانية:" : "Finding:"}
                     </span>
-                    <span className="text-slate-400">{tbl.keyFindingAr}</span>
+                    <span className="text-slate-600 dark:text-slate-400">{tbl.keyFindingAr}</span>
                   </div>
                 </div>
 
                 {/* Click action indicator */}
-                <div className="self-start sm:self-center flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-bold font-mono transition-all flex-shrink-0">
+                <div className="self-start sm:self-center flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-50 group-hover:bg-cyan-100 text-cyan-700 border border-cyan-200 dark:bg-cyan-500/10 dark:group-hover:bg-cyan-500/20 dark:text-cyan-400 dark:border-cyan-500/30 text-xs font-bold font-mono transition-all flex-shrink-0">
                   <Table className="w-3.5 h-3.5" />
                   <span>{isAr ? "عرض الجدول بالكامل" : "View Table"}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -157,6 +160,7 @@ export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
           selectedGovAr={selectedGovAr}
           onClose={() => setActiveTableData(null)}
           lang={lang}
+          theme={theme}
         />
       )}
     </>

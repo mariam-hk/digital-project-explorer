@@ -23,6 +23,8 @@ import {
   Filter,
   Map as MapIcon,
   CheckCircle,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 export default function App() {
@@ -32,15 +34,38 @@ export default function App() {
   const [selectedGov, setSelectedGov] = useState<GovernorateMetric>(ALL_GOVERNORATES[0]); // Default to Baghdad
   const [scope, setScope] = useState<"all" | "federal">("all");
   const [lang, setLang] = useState<"ar" | "en">("ar");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [activeNav, setActiveNav] = useState<"home" | "map" | "charts" | "insights" | "sources">("home");
 
   const isAr = lang === "ar";
 
   useEffect(() => {
+    try {
+      const savedTheme = localStorage.getItem("app_theme") as "dark" | "light" | null;
+      if (savedTheme === "light" || savedTheme === "dark") {
+        setTheme(savedTheme);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
     document.documentElement.dir = isAr ? "rtl" : "ltr";
     document.documentElement.lang = lang;
-    document.documentElement.classList.add("dark");
-  }, [lang, isAr]);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+    }
+    try {
+      localStorage.setItem("app_theme", theme);
+    } catch {
+      // ignore
+    }
+  }, [lang, isAr, theme]);
 
   const targetDataset = scope === "federal" ? FEDERAL_GOVERNORATES : ALL_GOVERNORATES;
 
@@ -74,17 +99,17 @@ export default function App() {
   };
 
   return (
-    <div dir={isAr ? "rtl" : "ltr"} className="min-h-screen bg-[#070A12] text-slate-100 selection:bg-cyan-500 selection:text-black font-sans pb-16">
+    <div dir={isAr ? "rtl" : "ltr"} className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#070A12] dark:text-slate-100 selection:bg-cyan-500 selection:text-black font-sans pb-16 transition-colors duration-300">
       
       {/* ======================================================== */}
       {/* 1. TOP NAVIGATION BAR                                     */}
       {/* ======================================================== */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#070A12]/90 border-b border-white/10 transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/85 dark:bg-[#070A12]/90 border-b border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none transition-all duration-300">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-20 flex items-center justify-between">
           
           {/* Official Logo */}
           <a href="#home" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center p-0.5 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.35)] bg-[#070A12]">
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center p-0.5 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.35)] bg-white dark:bg-[#070A12]">
               <img
                 src="/techlocation_logo.jpg"
                 alt="TechLocation Logo"
@@ -93,14 +118,14 @@ export default function App() {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="text-lg font-black tracking-tight text-white">
-                  Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500">Location</span>
+                <span className="text-lg font-black tracking-tight text-slate-900 dark:text-white">
+                  Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-500 dark:to-indigo-500">Location</span>
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-cyan-300 border border-blue-500/30 font-mono">
+                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 border border-blue-500/20 dark:bg-blue-500/20 dark:text-cyan-300 dark:border-blue-500/30 font-mono">
                   IRAQ
                 </span>
               </div>
-              <span className="text-[9px] font-semibold tracking-wider text-slate-400 uppercase">
+              <span className="text-[9px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
                 Digital Market Explorer
               </span>
             </div>
@@ -195,11 +220,31 @@ export default function App() {
             </button>
           </nav>
 
-          {/* Right Action: Language Switcher */}
-          <div className="flex items-center gap-3">
+          {/* Right Action: Theme Switcher & Language Switcher */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="px-2.5 sm:px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/15 hover:border-amber-400 dark:hover:border-cyan-400/50 text-xs font-bold transition-all text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 cursor-pointer shadow-sm flex items-center gap-1.5"
+              title={theme === "dark" ? (isAr ? "التبديل إلى الوضع النهاري" : "Switch to Light Mode") : (isAr ? "التبديل إلى الوضع الليلي" : "Switch to Dark Mode")}
+            >
+              {theme === "dark" ? (
+                <>
+                  <Sun className="w-4 h-4 text-amber-400" />
+                  <span className="text-[11px] font-bold hidden sm:inline">{isAr ? "نهاري" : "Light"}</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-4 h-4 text-indigo-600" />
+                  <span className="text-[11px] font-bold hidden sm:inline">{isAr ? "ليلي" : "Dark"}</span>
+                </>
+              )}
+            </button>
+
+            {/* Language Switcher */}
             <button
               onClick={() => setLang(isAr ? "en" : "ar")}
-              className="px-3.5 py-1.5 rounded-lg border border-white/15 hover:border-cyan-400/50 text-xs font-bold font-mono transition-colors text-slate-300 bg-white/5 cursor-pointer shadow-sm"
+              className="px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-white/15 hover:border-cyan-400/50 text-xs font-bold font-mono transition-colors text-slate-700 dark:text-slate-300 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 cursor-pointer shadow-sm"
             >
               {isAr ? "EN" : "عربي"}
             </button>
@@ -212,17 +257,17 @@ export default function App() {
       {/* 2. HERO BANNER CARD (Exact Match to Screenshot 1)         */}
       {/* ======================================================== */}
       <section id="home" className="pt-28 pb-6 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1720px] mx-auto">
-        <div className="relative rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 bg-[#090E1D]/90 shadow-[0_0_50px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden min-h-[320px] flex items-center">
+        <div className="relative rounded-3xl p-6 sm:p-8 lg:p-12 border border-slate-200 dark:border-white/10 bg-white dark:bg-[#090E1D]/90 shadow-xl dark:shadow-[0_0_50px_rgba(0,0,0,0.6)] backdrop-blur-xl overflow-hidden min-h-[320px] flex items-center transition-colors duration-300">
           {/* Background 3D Iraq Map */}
           <div className="absolute inset-0 pointer-events-none select-none z-0">
             <img
               src="/hero_iraq_banner_bg.jpg"
               alt="خارطة شبكة العراق الرقمية"
-              className="w-full h-full object-cover object-center lg:object-[80%_35%] rtl:lg:object-[20%_35%] opacity-65"
+              className="w-full h-full object-cover object-center lg:object-[80%_35%] rtl:lg:object-[20%_35%] opacity-20 dark:opacity-65 mix-blend-multiply dark:mix-blend-normal transition-opacity duration-300"
             />
             {/* Directional & Vignette Gradients for maximum contrast on text side and clear visibility on map side */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#090E1D]/95 via-[#090E1D]/70 to-transparent rtl:bg-gradient-to-l rtl:from-[#090E1D]/95 rtl:via-[#090E1D]/70 rtl:to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#090E1D]/80 via-transparent to-[#090E1D]/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent rtl:bg-gradient-to-l rtl:from-white/95 rtl:via-white/80 rtl:to-transparent dark:from-[#090E1D]/95 dark:via-[#090E1D]/70 dark:to-transparent rtl:dark:from-[#090E1D]/95 rtl:dark:via-[#090E1D]/70 rtl:dark:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-white/40 dark:from-[#090E1D]/80 dark:via-transparent dark:to-[#090E1D]/40" />
           </div>
 
           {/* Subtle Ambient Glows */}
@@ -230,20 +275,20 @@ export default function App() {
           <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 max-w-2xl lg:max-w-3xl space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-cyan-400 text-[11px] font-bold tracking-wider uppercase backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 dark:bg-blue-500/15 border border-blue-500/20 dark:border-blue-500/30 text-blue-600 dark:text-cyan-400 text-[11px] font-bold tracking-wider uppercase backdrop-blur-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-cyan-400 animate-pulse"></span>
                 <span>{isAr ? "• بيانات رسمية • رؤى حقيقية" : "• OFFICIAL DATA • REAL INSIGHTS"}</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.15]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
                 {isAr ? "دليل السوق " : "Digital Market "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400">
                   {isAr ? "الرقمي " : "Intelligence "}
                 </span>
                 {isAr ? "لمحافظات العراق" : "for Iraq"}
               </h1>
 
-              <p className="text-sm sm:text-base text-slate-300 max-w-xl font-normal leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl font-normal leading-relaxed">
                 {isAr
                   ? "بيانات ورؤى مكانية موثقة تُمكّن رواد الأعمال وصنّاع القرار من اتخاذ قرارات توسع مبنية على أرقام واقعية."
                   : "Location intelligence and official metrics empowering entrepreneurs to make data-driven expansion decisions."}
@@ -259,8 +304,8 @@ export default function App() {
                   }}
                   className={`flex items-center gap-2.5 px-5 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "all_governorates"
-                      ? "bg-cyan-400 text-slate-950 font-black shadow-[0_0_20px_rgba(6,182,212,0.5)] scale-[1.02]"
-                      : "bg-[#0E1528] text-slate-300 border border-white/10 hover:border-white/20"
+                      ? "bg-cyan-500 text-white dark:bg-cyan-400 dark:text-slate-950 font-black shadow-lg dark:shadow-[0_0_20px_rgba(6,182,212,0.5)] scale-[1.02]"
+                      : "bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 dark:bg-[#0E1528] dark:text-slate-300 dark:border-white/10 dark:hover:border-white/20"
                   }`}
                 >
                   <MapPin className="w-4 h-4" />
@@ -276,8 +321,8 @@ export default function App() {
                   }}
                   className={`flex items-center gap-2.5 px-5 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "single_governorate"
-                      ? "bg-purple-600 text-white font-black shadow-[0_0_20px_rgba(168,85,247,0.5)] scale-[1.02]"
-                      : "bg-[#0E1528] text-slate-300 border border-white/10 hover:border-white/20"
+                      ? "bg-purple-600 text-white font-black shadow-lg dark:shadow-[0_0_20px_rgba(168,85,247,0.5)] scale-[1.02]"
+                      : "bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 dark:bg-[#0E1528] dark:text-slate-300 dark:border-white/10 dark:hover:border-white/20"
                   }`}
                 >
                   <Building2 className="w-4 h-4 text-purple-400" />
@@ -359,8 +404,8 @@ export default function App() {
           <aside className="lg:col-span-3 xl:col-span-3 space-y-4 lg:sticky lg:top-24">
             
             {/* CARD 1: VIEW MODE (Map vs Charts) */}
-            <div className="p-4 rounded-2xl bg-[#090E1D] border border-white/10 shadow-lg space-y-3">
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#090E1D] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-lg space-y-3 transition-colors duration-300">
+              <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 {isAr ? "نمط العرض" : "VIEW MODE"}
               </div>
               <div className="grid grid-cols-2 gap-2">
@@ -372,8 +417,8 @@ export default function App() {
                   }}
                   className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "all_governorates" && viewMode === "map"
-                      ? "bg-cyan-400 text-slate-950 font-black shadow-[0_0_15px_rgba(6,182,212,0.5)]"
-                      : "bg-white/5 text-slate-400 hover:text-white hover:bg-white/10"
+                      ? "bg-cyan-500 text-white dark:bg-cyan-400 dark:text-slate-950 font-black shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/10"
                   }`}
                 >
                   <MapIcon className="w-3.5 h-3.5" />
@@ -388,8 +433,8 @@ export default function App() {
                   }}
                   className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "all_governorates" && viewMode === "charts"
-                      ? "bg-cyan-400 text-slate-950 font-black shadow-[0_0_15px_rgba(6,182,212,0.5)]"
-                      : "bg-white/5 text-slate-400 hover:text-white hover:bg-white/10"
+                      ? "bg-cyan-500 text-white dark:bg-cyan-400 dark:text-slate-950 font-black shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/10"
                   }`}
                 >
                   <BarChart3 className="w-3.5 h-3.5" />
@@ -438,12 +483,12 @@ export default function App() {
             */}
 
             {/* CARD 3: SELECT INDICATOR (Vertical Topic List with Glow) */}
-            <div className="p-4 rounded-2xl bg-[#090E1D] border border-white/10 shadow-lg space-y-3">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#090E1D] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-lg space-y-3 transition-colors duration-300">
               <div className="flex items-center justify-between">
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   {isAr ? "اختيار المؤشر" : "SELECT INDICATOR"}
                 </div>
-                <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-white/5 text-slate-400">
+                <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400">
                   {TOPICS.length}
                 </span>
               </div>
@@ -457,8 +502,8 @@ export default function App() {
                       onClick={() => setSelectedTopic(topic)}
                       className={`w-full text-start p-3 rounded-xl text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
                         isSelected
-                          ? "bg-[#0C152B] border border-cyan-400 text-white shadow-[0_0_15px_rgba(6,182,212,0.25)] font-bold"
-                          : "bg-white/5 border border-white/5 text-slate-300 hover:text-white hover:bg-white/10"
+                          ? "bg-blue-50 border border-blue-500 text-blue-900 shadow-sm dark:bg-[#0C152B] dark:border-cyan-400 dark:text-white dark:shadow-[0_0_15px_rgba(6,182,212,0.25)] font-bold"
+                          : "bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:bg-white/5 dark:border-white/5 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/10"
                       }`}
                     >
                       <span className="text-base">{topic.icon}</span>
@@ -576,6 +621,7 @@ export default function App() {
                     }}
                     lang={lang}
                     scope={scope}
+                    theme={theme}
                   />
                 ) : (
                   <NeonComboChart
@@ -590,6 +636,7 @@ export default function App() {
                       setActiveNav("insights");
                     }}
                     lang={lang}
+                    theme={theme}
                   />
                 )}
 
@@ -604,6 +651,7 @@ export default function App() {
                 onBackToAll={() => setCurrentMode("all_governorates")}
                 lang={lang}
                 sidebarMode={true}
+                theme={theme}
               />
             )}
 
@@ -614,7 +662,7 @@ export default function App() {
         {/* ======================================================== */}
         {/* 4. FOOTER                                                */}
         {/* ======================================================== */}
-        <footer id="sources" className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
+        <footer id="sources" className="mt-16 pt-8 border-t border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400 font-medium">
           <div>
             <span>
               {isAr

@@ -11,6 +11,7 @@ interface NeonComboChartProps {
   neonGlow: string;
   onSelectGov: (gov: GovernorateMetric) => void;
   lang: "ar" | "en";
+  theme?: "dark" | "light";
 }
 
 export const NeonComboChart: React.FC<NeonComboChartProps> = ({
@@ -21,7 +22,9 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
   neonGlow,
   onSelectGov,
   lang,
+  theme = "dark",
 }) => {
+  const isLight = theme === "light";
   const isAr = lang === "ar";
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
@@ -80,11 +83,11 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
   const splinePath = getSplinePath();
 
   return (
-    <div className="relative w-full overflow-hidden rounded-2xl bg-[#080D1A] border border-white/10 p-4 sm:p-6 shadow-2xl">
+    <div className="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-[#080D1A] border border-slate-200 dark:border-white/10 p-4 sm:p-6 shadow-md dark:shadow-2xl transition-colors duration-300">
       {/* Chart Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200 dark:border-white/5">
         <div className="flex items-center gap-2">
-          <span className="text-xs sm:text-sm font-bold text-white tracking-wide">
+          <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-wide">
             {isAr
               ? "مخطط الأعمدة والمنحنى التوافقي (Combo Bar + Spline Trend)"
               : "Governorate Distribution (Combo Bar + Spline Trend)"}
@@ -93,7 +96,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
         <div className="flex items-center gap-4 text-xs font-mono">
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded-sm" style={{ backgroundColor: neonColor }}></span>
-            <span className="text-slate-300">{isAr ? "قيمة المؤشر" : "Metric Value"}</span>
+            <span className="text-slate-600 dark:text-slate-300">{isAr ? "قيمة المؤشر" : "Metric Value"}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-5 h-0.5 bg-cyan-400"></span>
@@ -144,7 +147,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   y1={y}
                   x2={width - paddingX}
                   y2={y}
-                  stroke="rgba(255, 255, 255, 0.06)"
+                  stroke={isLight ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.06)"}
                   strokeDasharray="4 4"
                   strokeWidth="1"
                 />
@@ -152,7 +155,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={paddingX - 10}
                   y={y + 4}
                   textAnchor="end"
-                  fill="rgba(148, 163, 184, 0.5)"
+                  fill={isLight ? "rgba(100, 116, 139, 0.8)" : "rgba(148, 163, 184, 0.5)"}
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -168,7 +171,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
             y1={paddingTop + chartHeight}
             x2={width - paddingX}
             y2={paddingTop + chartHeight}
-            stroke="rgba(255, 255, 255, 0.15)"
+            stroke={isLight ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.15)"}
             strokeWidth="1.5"
           />
 
@@ -192,7 +195,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                     y={paddingTop}
                     width={step - 4}
                     height={chartHeight}
-                    fill="rgba(255, 255, 255, 0.04)"
+                    fill={isLight ? "rgba(0, 0, 0, 0.04)" : "rgba(255, 255, 255, 0.04)"}
                     rx="6"
                   />
                 )}
@@ -220,7 +223,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={pt.x}
                   y={pt.y - 8}
                   textAnchor="middle"
-                  fill={isHovered ? "#FFFFFF" : "#38BDF8"}
+                  fill={isHovered ? (isLight ? "#0F172A" : "#FFFFFF") : isLight ? "#0284C7" : "#38BDF8"}
                   fontSize={isHovered ? "12" : "11"}
                   fontWeight="bold"
                   fontFamily="monospace"
@@ -236,7 +239,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={pt.x}
                   y={paddingTop + chartHeight + 22}
                   textAnchor="middle"
-                  fill={isHovered ? "#38BDF8" : "#94A3B8"}
+                  fill={isHovered ? (isLight ? "#0284C7" : "#38BDF8") : isLight ? "#475569" : "#94A3B8"}
                   fontSize={isHovered ? "12" : "11"}
                   fontWeight={isHovered ? "bold" : "medium"}
                   transform={
@@ -284,7 +287,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   cx={pt.x}
                   cy={pt.y}
                   r={isHovered ? "6" : "4"}
-                  fill="#0B1329"
+                  fill={isLight ? "#FFFFFF" : "#0B1329"}
                   stroke="#22D3EE"
                   strokeWidth="2.5"
                   style={{
@@ -299,9 +302,9 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
 
       {/* Interactive Tooltip Card at the bottom of chart */}
       {hoveredIdx !== null && points[hoveredIdx] && (
-        <div className="mt-3 p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/30 flex items-center justify-between text-xs animate-fadeIn">
+        <div className="mt-3 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200 dark:bg-cyan-950/40 dark:border-cyan-500/30 flex items-center justify-between text-xs animate-fadeIn">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-cyan-300 text-sm">
+            <span className="font-bold text-cyan-800 dark:text-cyan-300 text-sm">
               {isAr ? points[hoveredIdx].gov.nameAr : points[hoveredIdx].gov.nameEn}
             </span>
             <span className="text-slate-400">
@@ -312,7 +315,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-white font-mono font-bold text-sm">
+            <span className="text-slate-900 dark:text-white font-mono font-bold text-sm">
               {points[hoveredIdx].val} {unit}
             </span>
             <span className="text-[11px] text-cyan-400 underline cursor-pointer">

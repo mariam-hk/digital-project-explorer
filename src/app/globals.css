@@ -4,6 +4,11 @@
 
 @layer base {
   :root {
+    --background: #F8FAFC;
+    --foreground: #0F172A;
+  }
+
+  .dark {
     --background: #090C15;
     --foreground: #f8fafc;
   }
@@ -17,6 +22,7 @@
     color: var(--foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   h1, .font-serif {
@@ -35,19 +41,29 @@
   font-size: 0.76rem !important;
 }
 
-/* Custom modern dark scrollbars */
+/* Custom modern scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
+  background: #E2E8F0;
+}
+.dark ::-webkit-scrollbar-track {
   background: #0D111D;
 }
 ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
   background: #1E293B;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
 
