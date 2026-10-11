@@ -340,10 +340,10 @@ const govDetails = breakdownConfig.getGovBreakdown(
         </div>
 
         {/* Specialized Visual Charts for this Topic */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Chart 1: National Benchmark Comparison Card OR Donut / Pie Breakdown */}
           {govDetails.benchmarkData ? (
-            <div className={`${govDetails.barData ? "lg:col-span-6" : "lg:col-span-12"} rounded-2xl bg-[#090E1D] border border-white/10 p-5 sm:p-6 shadow-2xl flex flex-col justify-between`}>
+            <div className={`${govDetails.barData ? "lg:col-span-6" : "lg:col-span-12"} rounded-2xl bg-[#090E1D] border border-white/10 p-5 sm:p-6 shadow-2xl flex flex-col justify-between h-full`}>
               {(() => {
                 const pillars = govDetails.benchmarkData.filter((i) => !i.isOverallResult);
                 const overallResult = govDetails.benchmarkData.find((i) => i.isOverallResult);
@@ -551,7 +551,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
               })()}
             </div>
           ) : govDetails.donutData ? (
-            <div className="lg:col-span-6">
+            <div className="lg:col-span-6 h-full flex flex-col">
               <NeonDonutChart
                 data={govDetails.donutData}
                 title={
@@ -566,13 +566,14 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     : (isAr ? `توزيع فئات (${selectedTopic.titleAr})` : "Category Distribution")
                 }
                 lang={lang}
+                className="h-full"
               />
             </div>
           ) : null}
 
           {/* Chart 2: Demographic / Sub-Channel Bars (6 cols) */}
           {govDetails.barData && (
-            <div className="lg:col-span-6 rounded-2xl bg-[#090E1D] border border-white/10 p-5 shadow-2xl flex flex-col justify-between">
+            <div className="lg:col-span-6 rounded-2xl bg-[#090E1D] border border-white/10 p-5 shadow-2xl flex flex-col justify-between h-full">
               <div className="border-b border-white/5 pb-3">
                 <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
                   <BarChart3 className="w-4 h-4 text-cyan-400" />
@@ -647,8 +648,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
       </div>
 
       {/* 4. General Benchmark: 6 Core Behavioral Indicators vs National Mean */}
-      <div id="behavioral-benchmark" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-7 rounded-2xl bg-[#0B0F19] border border-white/10 p-6 shadow-2xl space-y-4">
+      <div id="behavioral-benchmark" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="lg:col-span-7 rounded-2xl bg-[#0B0F19] border border-white/10 p-6 shadow-2xl space-y-4 flex flex-col justify-between h-full">
           <div className="flex items-center justify-between border-b border-white/5 pb-3">
             <div>
               <h3 className="text-sm font-bold text-white tracking-tight">
@@ -721,7 +722,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
         </div>
 
         {/* Right Telemetry: Economic & Readiness */}
-        <div className="lg:col-span-5 rounded-2xl bg-[#0B0F19] border border-white/10 p-6 shadow-2xl flex flex-col justify-between">
+        <div className="lg:col-span-5 rounded-2xl bg-[#0B0F19] border border-white/10 p-6 shadow-2xl flex flex-col justify-between h-full">
           <div className="border-b border-white/5 pb-3">
             <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
               <Layers className="w-4 h-4 text-cyan-400" />
@@ -801,9 +802,9 @@ const govDetails = breakdownConfig.getGovBreakdown(
           <p>{selectedGov.aiSummary}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed text-slate-300">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed text-slate-300 items-stretch">
           {/* Box 1: Recommended Business Models */}
-          <div className="bg-white/5 rounded-xl p-4 border border-white/5 space-y-2">
+          <div className="bg-white/5 rounded-xl p-4 border border-white/5 space-y-2 flex flex-col justify-between h-full">
             <div className="flex items-center gap-1.5 font-bold text-cyan-400">
               <Lightbulb className="w-4 h-4" />
               <span>{isAr ? "أبرز نماذج المشاريع التقنية الموصى بها:" : "Recommended Startup Models:"}</span>
@@ -822,7 +823,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
           </div>
 
           {/* Box 2: Bottlenecks & Strategic Advice */}
-          <div className="bg-white/5 rounded-xl p-4 border border-white/5 space-y-2">
+          <div className="bg-white/5 rounded-xl p-4 border border-white/5 space-y-2 flex flex-col justify-between h-full">
             <div className="flex items-center gap-1.5 font-bold text-amber-400">
               <AlertTriangle className="w-4 h-4" />
               <span>{isAr ? "التحدي التشغيلي وكيفية التغلب عليه:" : "Friction & Founder Strategy:"}</span>

@@ -15,6 +15,7 @@ interface NeonDonutChartProps {
   centerLabel?: string;
   centerValue?: string;
   lang: "ar" | "en";
+  className?: string;
 }
 
 export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
@@ -24,6 +25,7 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
   centerLabel,
   centerValue,
   lang,
+  className = "",
 }) => {
   const isAr = lang === "ar";
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -47,7 +49,7 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
   });
 
   return (
-    <div className="rounded-2xl bg-[#090E1D] border border-white/10 p-5 shadow-2xl flex flex-col justify-between">
+    <div className={`rounded-2xl bg-[#090E1D] border border-white/10 p-5 shadow-2xl flex flex-col justify-between h-full ${className}`}>
       <div className="border-b border-white/5 pb-3">
         <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
@@ -56,7 +58,7 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
         {subtitle && <p className="text-[11px] text-slate-400 mt-0.5">{subtitle}</p>}
       </div>
 
-      <div className="my-4 flex flex-col sm:flex-row items-center justify-around gap-6">
+      <div className="my-auto py-3 flex flex-col sm:flex-row items-center justify-around gap-6 flex-1">
         {/* SVG Donut */}
         <div className="relative w-48 h-48 flex-shrink-0">
           <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-full -rotate-90">
@@ -139,6 +141,18 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Bottom Summary Bar for visual alignment with adjacent demographic card */}
+      <div className="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 mt-auto">
+        <div className="flex items-center gap-1.5">
+          <span className="text-slate-400">{isAr ? "القطاع المتصدر:" : "Leading Segment:"}</span>
+          <span className="font-bold text-cyan-400 font-mono">{data[0]?.label}</span>
+        </div>
+        <div className="flex items-center gap-1.5 font-mono">
+          <span className="text-slate-400">{isAr ? "الحصة:" : "Share:"}</span>
+          <span className="font-bold text-white bg-white/10 px-2 py-0.5 rounded-md text-xs">{data[0]?.value}%</span>
         </div>
       </div>
     </div>
