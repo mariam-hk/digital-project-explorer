@@ -308,14 +308,14 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                         {selectedTopic.unit}
                       </span>
                     </span>
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-700 dark:bg-cyan-500/20 dark:text-cyan-300 font-bold border border-cyan-400/30">
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-700 dark:bg-cyan-500/20 dark:text-cyan-300 font-bold border border-cyan-400/30 whitespace-nowrap">
                       #{hoveredGov.rank}
                     </span>
                   </div>
 
                   {/* Metric Subtitle */}
-                  <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">
-                    {selectedTopic.titleAr}
+                  <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5 whitespace-nowrap">
+                    {isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
                   </span>
                 </div>
               </div>
@@ -340,29 +340,29 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
         {activeGov && (
           <div className="lg:col-span-4 rounded-2xl bg-gradient-to-br from-white via-slate-50 to-indigo-50/40 dark:from-[#0F172A] dark:via-[#0B1120] dark:to-[#070B14] border-2 border-cyan-500/40 dark:border-cyan-500/50 p-5 shadow-lg dark:shadow-[0_0_30px_rgba(6,182,212,0.25)] space-y-4 transition-colors duration-300">
             {/* Header info */}
-            <div className="border-b border-slate-200 dark:border-white/10 pb-3 flex items-start justify-between gap-3">
-              <div>
+            <div className="border-b border-slate-200 dark:border-white/10 pb-3 flex items-start justify-between gap-2 sm:gap-3">
+              <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-400/40 whitespace-nowrap inline-flex items-center">
                     #{activeGov.rank} {isAr ? "في عموم العراق" : "Nationwide"}
                   </span>
                 </div>
-                <h4 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2 mt-1">
-                  <MapPin className="w-6 h-6 text-cyan-400 animate-bounce" />
-                  <span>{isAr ? activeGov.nameAr : activeGov.nameEn}</span>
+                <h4 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-1.5 sm:gap-2 mt-1 truncate">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 animate-bounce shrink-0" />
+                  <span className="truncate">{isAr ? activeGov.nameAr : activeGov.nameEn}</span>
                 </h4>
               </div>
 
               {/* Big Metric Display */}
-              <div className="text-left rtl:text-right">
-                <span className="text-3xl font-black text-cyan-600 dark:text-cyan-400 font-mono drop-shadow-[0_0_12px_rgba(6,182,212,0.9)]">
+              <div className="text-left rtl:text-right shrink-0">
+                <span className="text-2xl sm:text-3xl font-black text-cyan-600 dark:text-cyan-400 font-mono drop-shadow-[0_0_12px_rgba(6,182,212,0.9)] whitespace-nowrap block">
                   {activeGov[selectedTopic.metricKey]}
-                  <span className="text-lg text-slate-600 dark:text-slate-200 font-sans ml-1">
+                  <span className="text-base sm:text-lg text-slate-600 dark:text-slate-200 font-sans ml-1">
                     {selectedTopic.unit}
                   </span>
                 </span>
-                <span className="block text-[11px] text-slate-500 dark:text-slate-300 font-medium mt-0.5">
-                  {selectedTopic.titleAr}
+                <span className="block text-[10px] text-slate-500 dark:text-slate-300 font-medium mt-0.5 whitespace-nowrap">
+                  {isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
                 </span>
               </div>
             </div>
