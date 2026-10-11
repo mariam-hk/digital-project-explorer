@@ -2,7 +2,7 @@
 // Based strictly on COSIT 2022 ICT Survey & 2024 Telecom Reports
 // Dynamically connected to verified per-governorate data
 
-import { ALL_GOVERNORATES, GovernorateMetric } from "./iraq-dashboard-data";
+import { ALL_GOVERNORATES, GovernorateMetric, NATIONAL_AVERAGE_METRICS } from "./iraq-dashboard-data";
 import { OFFICIAL_TABLES_STORE } from "./official-tables-data";
 
 export interface OfficialTableCitation {
@@ -11,6 +11,15 @@ export interface OfficialTableCitation {
   titleEn: string;
   source: string;
   keyFindingAr: string;
+}
+
+export interface BenchmarkItem {
+  metricLabel: string;
+  govValue: number;
+  nationalValue: number;
+  delta: number;
+  tableNote: string;
+  color: string;
 }
 
 export interface TopicBreakdownConfig {
@@ -30,6 +39,7 @@ export interface TopicBreakdownConfig {
     summaryText: string;
     donutData?: { label: string; value: number; color: string }[];
     barData?: { label: string; value: number; color: string; displayValue?: string }[];
+    benchmarkData?: BenchmarkItem[];
     kpiStats: { label: string; value: string; note: string; color: string }[];
   };
 }
@@ -878,38 +888,59 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
       const isAr = lang === "ar";
       const gov = getGov(govId, govNameAr);
 
-      // Calculate the 3 Digital Maturity Tiers (Sum to 100.0%)
-      // Tier 1: Advanced (PC, high skills, high connectivity)
-      const rawAdvanced = Math.min(35, Math.max(10, Number((gov.computerUsagePct * 0.65 + gov.digitalSkillsPct * 0.22).toFixed(1))));
-      // Tier 3: Limited / Digital Divide (low readiness, lack of connectivity/skills)
-      const rawLimited = Math.min(30, Math.max(12, Number(((100 - gov.digitalReadinessScore) * 0.52).toFixed(1))));
-      // Tier 2: Mainstream / Mobile-First (smartphone-driven, daily connectivity)
-      const mobileFirstPct = Number((100 - rawAdvanced - rawLimited).toFixed(1));
-      const advancedPct = rawAdvanced;
-      const limitedPct = rawLimited;
+      const homeNetDelta = Number((gov.homeInternetPct - NATIONAL_AVERAGE_METRICS.homeInternetPct).toFixed(1));
+      const readinessDelta = Number((gov.digitalReadinessScore - NATIONAL_AVERAGE_METRICS.digitalReadinessScore).toFixed(1));
+      const skillsDelta = Number((gov.digitalSkillsPct - NATIONAL_AVERAGE_METRICS.digitalSkillsPct).toFixed(1));
+      const phonesDelta = Number((gov.smartphoneUsagePct - NATIONAL_AVERAGE_METRICS.smartphoneUsagePct).toFixed(1));
+      const computerDelta = Number((gov.computerUsagePct - NATIONAL_AVERAGE_METRICS.computerUsagePct).toFixed(1));
 
       return {
         summaryTitle: isAr
-          ? `تقييم الجاهزية الرقمية وشرائح النضج في ${gov.nameAr}`
-          : `Digital Readiness & Maturity Profile in ${gov.nameEn}`,
+          ? `تقييم الجاهزية الرقمية والمقارنة الوطنية في ${gov.nameAr}`
+          : `Digital Readiness & National Benchmark in ${gov.nameEn}`,
         summaryText: isAr
-          ? `تسجل ${gov.nameAr} مؤشر جاهزية رقمية مركب يبلغ ${gov.digitalReadinessScore}% (الترتيب: #${gov.rank})، حيث يتوزع المجتمع إلى ${advancedPct}% فئة جاهزية متقدمة (حواسيب وفايبر)، و${mobileFirstPct}% جاهزية استهلاكية عبر الهواتف الذكية، بينما تشكل الفجوة الرقمية المحدودة ${limitedPct}%.`
-          : `${gov.nameEn} scores ${gov.digitalReadinessScore}% on digital readiness (Rank #${gov.rank}), distributed into ${advancedPct}% advanced digital tier, ${mobileFirstPct}% mobile-first mainstream tier, and ${limitedPct}% limited adoption gap.`,
-        donutData: [
+          ? `تسجل ${gov.nameAr} مؤشر جاهزية مركب يبلغ ${gov.digitalReadinessScore}% (الترتيب: #${gov.rank} وطنياً)، بمقارنة مباشرة مع الخط المعياري لعموم العراق (${NATIONAL_AVERAGE_METRICS.digitalReadinessScore}%).`
+          : `${gov.nameEn} scores ${gov.digitalReadinessScore}% on digital readiness (Rank #${gov.rank}), benchmarked against Iraq's national average (${NATIONAL_AVERAGE_METRICS.digitalReadinessScore}%).`,
+        benchmarkData: [
           {
-            label: isAr ? "جاهزية متقدمة (حواسيب وفايبر)" : "Advanced Readiness (PC & Fiber)",
-            value: advancedPct,
-            color: "#10B981",
-          },
-          {
-            label: isAr ? "جاهزية متوسطة (هواتف وباقات نت)" : "Mobile-First Mainstream",
-            value: mobileFirstPct,
+            metricLabel: isAr ? "إنترنت المنازل والواي فاي" : "Home Internet Access",
+            govValue: gov.homeInternetPct,
+            nationalValue: NATIONAL_AVERAGE_METRICS.homeInternetPct,
+            delta: homeNetDelta,
+            tableNote: isAr ? "جدول 2-2" : "Table 2-2",
             color: "#3B82F6",
           },
           {
-            label: isAr ? "جاهزية محدودة (فجوة رقمية)" : "Limited / Digital Divide",
-            value: limitedPct,
-            color: "#64748B",
+            metricLabel: isAr ? "مؤشر الجاهزية الرقمية الكلي" : "Overall Readiness Index",
+            govValue: gov.digitalReadinessScore,
+            nationalValue: NATIONAL_AVERAGE_METRICS.digitalReadinessScore,
+            delta: readinessDelta,
+            tableNote: isAr ? "مؤشر مركب" : "Composite",
+            color: "#14B8A6",
+          },
+          {
+            metricLabel: isAr ? "مؤشر المهارات التقنية" : "Digital Skills Rate",
+            govValue: gov.digitalSkillsPct,
+            nationalValue: NATIONAL_AVERAGE_METRICS.digitalSkillsPct,
+            delta: skillsDelta,
+            tableNote: isAr ? "جدول 1-17" : "Table 1-17",
+            color: "#A855F7",
+          },
+          {
+            metricLabel: isAr ? "انتشار الهواتف الذكية" : "Smartphone Penetration",
+            govValue: gov.smartphoneUsagePct,
+            nationalValue: NATIONAL_AVERAGE_METRICS.smartphoneUsagePct,
+            delta: phonesDelta,
+            tableNote: isAr ? "جدول 1-4" : "Table 1-4",
+            color: "#10B981",
+          },
+          {
+            metricLabel: isAr ? "معدل استخدام الحواسيب" : "Computer Usage",
+            govValue: gov.computerUsagePct,
+            nationalValue: NATIONAL_AVERAGE_METRICS.computerUsagePct,
+            delta: computerDelta,
+            tableNote: isAr ? "جدول 1-10" : "Table 1-10",
+            color: "#F59E0B",
           },
         ],
         barData: [
@@ -947,16 +978,16 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             color: "#14B8A6",
           },
           {
-            label: isAr ? "الجاهزية المتقدمة" : "Advanced Tier",
-            value: `${advancedPct}%`,
-            note: isAr ? "نضج رقمي عالي" : "High Maturity",
-            color: "#10B981",
+            label: isAr ? "المعدل الوطني للعراق" : "Iraq Benchmark",
+            value: `${NATIONAL_AVERAGE_METRICS.digitalReadinessScore}%`,
+            note: isAr ? "إجمالي مسح 2022" : "COSIT 2022",
+            color: "#06B6D4",
           },
           {
-            label: isAr ? "الفئة المعتمدة على النقال" : "Mobile-First Tier",
-            value: `${mobileFirstPct}%`,
-            note: isAr ? "استهلاك يومي" : "Daily Adoption",
-            color: "#3B82F6",
+            label: isAr ? "الفارق عن المعدل العام" : "Benchmark Delta",
+            value: `${readinessDelta > 0 ? "+" : ""}${readinessDelta}%`,
+            note: readinessDelta >= 0 ? (isAr ? "متفوقة على المعدل" : "Above Benchmark") : (isAr ? "فجوة عن المعدل" : "Below Benchmark"),
+            color: readinessDelta >= 0 ? "#10B981" : "#F59E0B",
           },
         ],
       };
