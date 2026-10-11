@@ -39,6 +39,7 @@ interface SingleGovernorateNeonDashboardProps {
   onSelectGov: (gov: GovernorateMetric) => void;
   onBackToAll: () => void;
   lang: "en" | "ar";
+  sidebarMode?: boolean;
 }
 
 export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashboardProps> = ({
@@ -48,6 +49,7 @@ export const SingleGovernorateNeonDashboard: React.FC<SingleGovernorateNeonDashb
   onSelectGov,
   onBackToAll,
   lang,
+  sidebarMode = false,
 }) => {
   const isAr = lang === "ar";
   const [govDropdownOpen, setGovDropdownOpen] = useState(false);
@@ -127,161 +129,214 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
   return (
     <div className="space-y-6">
-      {/* 1. Top Governorate Banner & Dual Switcher */}
-      <div className="relative rounded-2xl bg-gradient-to-r from-[#10172B] via-[#0E1527] to-[#0A0F1D] border border-purple-500/30 p-6 shadow-[0_0_25px_rgba(168,85,247,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 z-30">
-        <div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onBackToAll}
-              className="text-xs text-purple-400 hover:text-purple-300 font-semibold hover:underline flex items-center gap-1"
-            >
-              {isAr ? "← العودة لمقارنة كل المحافظات" : "← Back to all governorates"}
-            </button>
-            <span className="text-slate-600">•</span>
-            <span className="text-xs text-slate-400">
-              {isAr ? selectedGov.regionAr : selectedGov.regionEn}
-            </span>
-            {selectedGov.regionType === "Kurdistan" && (
-              <span className="px-2 py-0.5 rounded text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                {isAr ? "إقليم كردستان" : "Kurdistan Region"}
+      {/* 1. Top Governorate Banner & Dual Switcher (Only if NOT in sidebar mode) */}
+      {!sidebarMode && (
+        <div className="relative rounded-2xl bg-gradient-to-r from-[#10172B] via-[#0E1527] to-[#0A0F1D] border border-purple-500/30 p-6 shadow-[0_0_25px_rgba(168,85,247,0.15)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 z-30">
+          <div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onBackToAll}
+                className="text-xs text-purple-400 hover:text-purple-300 font-semibold hover:underline flex items-center gap-1"
+              >
+                {isAr ? "← العودة لمقارنة كل المحافظات" : "← Back to all governorates"}
+              </button>
+              <span className="text-slate-600">•</span>
+              <span className="text-xs text-slate-400">
+                {isAr ? selectedGov.regionAr : selectedGov.regionEn}
               </span>
-            )}
+              {selectedGov.regionType === "Kurdistan" && (
+                <span className="px-2 py-0.5 rounded text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  {isAr ? "إقليم كردستان" : "Kurdistan Region"}
+                </span>
+              )}
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 flex items-center gap-2.5">
+              <MapPin className="w-6 h-6 text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
+              <span>{isAr ? selectedGov.nameAr : selectedGov.nameEn}</span>
+              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+                {isAr ? `الترتيب الوطني: #${selectedGov.rank}` : `Rank: #${selectedGov.rank}`}
+              </span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl font-light">
+              {selectedGov.marketTier} • {isAr ? `النموذج الأنسب: ${selectedGov.bestFitModel}` : `Best Fit: ${selectedGov.bestFitModel}`}
+            </p>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 flex items-center gap-2.5">
-            <MapPin className="w-6 h-6 text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
-            <span>{isAr ? selectedGov.nameAr : selectedGov.nameEn}</span>
-            <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
-              {isAr ? `الترتيب الوطني: #${selectedGov.rank}` : `Rank: #${selectedGov.rank}`}
-            </span>
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl font-light">
-            {selectedGov.marketTier} • {isAr ? `النموذج الأنسب: ${selectedGov.bestFitModel}` : `Best Fit: ${selectedGov.bestFitModel}`}
-          </p>
-        </div>
-
-        {/* Quick Switcher for Governorate with Dropdown & Full List */}
-        <div className="relative self-start sm:self-center">
-          <button
-            onClick={() => setGovDropdownOpen(!govDropdownOpen)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#162038] hover:bg-[#1E2B4A] text-white text-xs font-bold border border-purple-500/40 shadow-[0_0_12px_rgba(168,85,247,0.3)] transition-colors"
-          >
-            <span>{isAr ? "تغيير المحافظة" : "Switch Governorate"}</span>
-            <ChevronDown className={`w-4 h-4 text-purple-400 transition-transform duration-200 ${govDropdownOpen ? "rotate-180" : ""}`} />
-          </button>
-
-          {govDropdownOpen && (
-            <>
-              {/* Overlay Backdrop to close on click outside */}
-              <div
-                className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
-                onClick={() => setGovDropdownOpen(false)}
-              ></div>
-
-              {/* High Z-Index Popup Menu */}
-              <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-72 max-h-96 overflow-y-auto rounded-2xl bg-[#0E1528] border border-purple-500/60 shadow-[0_20px_50px_rgba(0,0,0,0.95)] py-2 z-50 text-xs divide-y divide-white/5">
-                <div className="px-3.5 py-2 text-[11px] font-bold text-slate-400 flex items-center justify-between">
-                  <span className="text-purple-300 font-bold">{isAr ? "اختر من المحافظات الـ 18:" : "Select Governorate (18):"}</span>
-                  <span className="text-[10px] text-cyan-400 font-mono">
-                    {ALL_GOVERNORATES.length} {isAr ? "محافظة" : "govs"}
-                  </span>
-                </div>
-                <div className="py-1">
-                  {ALL_GOVERNORATES.map((g) => {
-                    const isSelected = selectedGov.id === g.id;
-                    return (
-                      <button
-                        key={g.id}
-                        onClick={() => {
-                          onSelectGov(g);
-                          setGovDropdownOpen(false);
-                        }}
-                        className={`w-full text-right px-3.5 py-2.5 hover:bg-purple-600/30 text-slate-200 transition-colors flex justify-between items-center ${
-                          isSelected
-                            ? "font-bold text-cyan-300 bg-purple-600/25 border-r-4 border-cyan-400 shadow-[inset_0_0_10px_rgba(6,182,212,0.2)]"
-                            : ""
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-white">
-                            {isAr ? g.nameAr : g.nameEn}
-                          </span>
-                          {g.regionType === "Kurdistan" && (
-                            <span className="px-1.5 py-0.2 rounded text-[9px] bg-purple-500/30 text-purple-300 border border-purple-500/40">
-                              {isAr ? "إقليم" : "KRG"}
-                            </span>
-                          )}
-                        </div>
-                        <span className="text-[11px] text-cyan-400 font-mono font-bold">
-                          #{g.rank} ({g.overallScore}%)
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* 2. Interactive Sector / Topic Navigation Pills */}
-      <div className="rounded-2xl bg-[#0B0F19] border border-white/10 p-3 shadow-xl flex items-center gap-2 overflow-x-auto">
-        <span className="text-xs text-slate-400 font-bold px-2 flex-shrink-0">
-          {isAr ? "القطاع المعروض:" : "Active Sector:"}
-        </span>
-        {TOPICS.map((topic) => {
-          const isActive = selectedTopic.id === topic.id;
-          return (
+          {/* Quick Switcher for Governorate with Dropdown & Full List */}
+          <div className="relative self-start sm:self-center">
             <button
-              key={topic.id}
-              onClick={() => onSelectTopic(topic)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${
-                isActive
-                  ? "border shadow-lg"
-                  : "bg-white/5 border border-white/5 text-slate-400 hover:text-white hover:border-white/20"
-              }`}
-              style={{
-                backgroundColor: isActive ? `${topic.neonColor}22` : undefined,
-                borderColor: isActive ? topic.neonColor : undefined,
-                color: isActive ? topic.neonColor : undefined,
-                boxShadow: isActive ? `0 0 15px ${topic.neonGlow}` : undefined,
-              }}
+              onClick={() => setGovDropdownOpen(!govDropdownOpen)}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#162038] hover:bg-[#1E2B4A] text-white text-xs font-bold border border-purple-500/40 shadow-[0_0_12px_rgba(168,85,247,0.3)] transition-colors"
             >
-              <span className="text-sm">{topic.icon}</span>
-              <span>{isAr ? topic.titleAr : topic.titleEn}</span>
+              <span>{isAr ? "تغيير المحافظة" : "Switch Governorate"}</span>
+              <ChevronDown className={`w-4 h-4 text-purple-400 transition-transform duration-200 ${govDropdownOpen ? "rotate-180" : ""}`} />
             </button>
-          );
-        })}
-      </div>
+
+            {govDropdownOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+                  onClick={() => setGovDropdownOpen(false)}
+                ></div>
+
+                <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-72 max-h-96 overflow-y-auto rounded-2xl bg-[#0E1528] border border-purple-500/60 shadow-[0_20px_50px_rgba(0,0,0,0.95)] py-2 z-50 text-xs divide-y divide-white/5">
+                  <div className="px-3.5 py-2 text-[11px] font-bold text-slate-400 flex items-center justify-between">
+                    <span className="text-purple-300 font-bold">{isAr ? "اختر من المحافظات الـ 18:" : "Select Governorate (18):"}</span>
+                    <span className="text-[10px] text-cyan-400 font-mono">
+                      {ALL_GOVERNORATES.length} {isAr ? "محافظة" : "govs"}
+                    </span>
+                  </div>
+                  <div className="py-1">
+                    {ALL_GOVERNORATES.map((g) => {
+                      const isSelected = selectedGov.id === g.id;
+                      return (
+                        <button
+                          key={g.id}
+                          onClick={() => {
+                            onSelectGov(g);
+                            setGovDropdownOpen(false);
+                          }}
+                          className={`w-full text-right px-3.5 py-2.5 hover:bg-purple-600/30 text-slate-200 transition-colors flex justify-between items-center ${
+                            isSelected
+                              ? "font-bold text-cyan-300 bg-purple-600/25 border-r-4 border-cyan-400 shadow-[inset_0_0_10px_rgba(6,182,212,0.2)]"
+                              : ""
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-white">
+                              {isAr ? g.nameAr : g.nameEn}
+                            </span>
+                            {g.regionType === "Kurdistan" && (
+                              <span className="px-1.5 py-0.2 rounded text-[9px] bg-purple-500/30 text-purple-300 border border-purple-500/40">
+                                {isAr ? "إقليم" : "KRG"}
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-[11px] text-cyan-400 font-mono font-bold">
+                            #{g.rank} ({g.overallScore}%)
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 2. Interactive Sector / Topic Navigation Pills (Only if NOT in sidebar mode) */}
+      {!sidebarMode && (
+        <div className="rounded-2xl bg-[#0B0F19] border border-white/10 p-3 shadow-xl flex items-center gap-2 overflow-x-auto">
+          <span className="text-xs text-slate-400 font-bold px-2 flex-shrink-0">
+            {isAr ? "القطاع المعروض:" : "Active Sector:"}
+          </span>
+          {TOPICS.map((topic) => {
+            const isActive = selectedTopic.id === topic.id;
+            return (
+              <button
+                key={topic.id}
+                onClick={() => onSelectTopic(topic)}
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${
+                  isActive
+                    ? "border shadow-lg"
+                    : "bg-white/5 border border-white/5 text-slate-400 hover:text-white hover:border-white/20"
+                }`}
+                style={{
+                  backgroundColor: isActive ? `${topic.neonColor}22` : undefined,
+                  borderColor: isActive ? topic.neonColor : undefined,
+                  color: isActive ? topic.neonColor : undefined,
+                  boxShadow: isActive ? `0 0 15px ${topic.neonGlow}` : undefined,
+                }}
+              >
+                <span className="text-sm">{topic.icon}</span>
+                <span>{isAr ? topic.titleAr : topic.titleEn}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* 3. Deep Dive Section for THIS Specific Topic in THIS Governorate */}
       <div id="charts" className="space-y-4 scroll-mt-24">
         {/* Section Heading */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
           <div>
-            <h3 className="text-lg font-black text-white flex items-center gap-2">
+            <h3 className="text-lg sm:text-xl font-black text-white flex items-center gap-2">
               <span className="text-xl">{selectedTopic.icon}</span>
               <span>
                 {isAr
                   ? `تفاصيل قطاع (${selectedTopic.titleAr}) في ${selectedGov.nameAr}`
-                  : `Detailed Breakdown: (${selectedTopic.titleEn}) in ${selectedGov.nameEn}`}
+                  : `Detailed Breakdown: ${selectedTopic.titleEn} in ${selectedGov.nameEn}`}
               </span>
             </h3>
-          {/*  <p className="text-xs text-slate-400 mt-0.5">
-              {govDetails.summaryText}
-                </p>*/}
+            {/* Subtitle hidden upon user request
+            <p className="text-xs text-slate-400 mt-0.5">
+              {isAr ? "تحليل فرعي وتفصيلي مبني على البيانات الرسمية الموثقة" : "Specialized analysis based on official data"}
+            </p>
+            */}
           </div>
-          <span
-            className="px-3 py-1 rounded-full text-xs font-mono font-bold"
-            style={{
-              backgroundColor: `${breakdownConfig.neonColor}22`,
-              color: breakdownConfig.neonColor,
-              border: `1px solid ${breakdownConfig.neonColor}66`,
-            }}
-          >
-            {isAr ? "تحليل فرعي مخصص" : "Specialized Domain Telemetry"}
-          </span>
+          <div className="flex items-center gap-2.5">
+            {sidebarMode && (
+              <div className="relative">
+                <button
+                  onClick={() => setGovDropdownOpen(!govDropdownOpen)}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#162038] hover:bg-[#1E2B4A] text-white text-xs font-bold border border-purple-500/40 shadow-[0_0_12px_rgba(168,85,247,0.3)] transition-colors cursor-pointer"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-purple-400" />
+                  <span>{isAr ? selectedGov.nameAr : selectedGov.nameEn}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 text-purple-400 transition-transform duration-200 ${govDropdownOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {govDropdownOpen && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+                      onClick={() => setGovDropdownOpen(false)}
+                    ></div>
+                    <div className="absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-64 max-h-80 overflow-y-auto rounded-2xl bg-[#0E1528] border border-purple-500/60 shadow-[0_20px_50px_rgba(0,0,0,0.95)] py-2 z-50 text-xs divide-y divide-white/5">
+                      <div className="px-3.5 py-1.5 text-[10px] font-bold text-slate-400 flex items-center justify-between">
+                        <span className="text-purple-300 font-bold">{isAr ? "اختر المحافظة:" : "Select Governorate:"}</span>
+                        <span className="text-cyan-400 font-mono">18</span>
+                      </div>
+                      <div className="py-1">
+                        {ALL_GOVERNORATES.map((g) => (
+                          <button
+                            key={g.id}
+                            onClick={() => {
+                              onSelectGov(g);
+                              setGovDropdownOpen(false);
+                            }}
+                            className={`w-full text-start px-3.5 py-2 hover:bg-purple-600/30 text-slate-200 transition-colors flex justify-between items-center ${
+                              selectedGov.id === g.id ? "font-bold text-cyan-300 bg-purple-600/25 border-l-4 rtl:border-l-0 rtl:border-r-4 border-cyan-400" : ""
+                            }`}
+                          >
+                            <span>{isAr ? g.nameAr : g.nameEn}</span>
+                            <span className="text-[10px] text-cyan-400 font-mono">#{g.rank}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Badge pill hidden upon user request
+            <span
+              className="px-3 py-1 rounded-full text-xs font-mono font-bold"
+              style={{
+                backgroundColor: `${breakdownConfig.neonColor}22`,
+                color: breakdownConfig.neonColor,
+                border: `1px solid ${breakdownConfig.neonColor}66`,
+              }}
+            >
+              {isAr ? "تحليل فرعي مخصص" : "Domain Telemetry"}
+            </span>
+            */}
+          </div>
         </div>
 
         {/* Specialized Visual Charts for this Topic */}
@@ -510,17 +565,6 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     ? (isAr ? "توزيع بنود إنفاق الأسرة على التكنولوجيا (جدول 2-5)" : "Household ICT Spend Distribution (Table 2-5)")
                     : (isAr ? `توزيع فئات (${selectedTopic.titleAr})` : "Category Distribution")
                 }
-                subtitle={
-                  selectedTopic.id === "smartphones"
-                    ? (isAr ? "الحصص النسبية للأجهزة الرقمية النشطة (المجموع: 100%)" : "Relative device shares: smartphones, laptops, desktops, tablets (Total: 100%)")
-                    : selectedTopic.id === "internet"
-                    ? (isAr ? "اتصال المنازل بالإنترنت مقابل الاعتماد على باقات النقال (المجموع: 100%)" : "Home broadband vs mobile data only (Total: 100%)")
-                    : selectedTopic.id === "skills"
-                    ? (isAr ? "تواصل اجتماعي، مراسلة، بحث وتعليم، عمل وبنوك (المجموع: 100%)" : "Social media, messaging, learning, work & banking (Total: 100%)")
-                    : selectedTopic.id === "spending"
-                    ? (isAr ? "خدمات الاتصال وباقات الإنترنت مقابل الأجهزة والمعدات (المجموع: 100%)" : "Telecom services vs hardware & devices (Total: 100%)")
-                    : (isAr ? "النسب المئوية المستخرجة من جداول المسح الميداني" : "Official field survey distribution")
-                }
                 lang={lang}
               />
             </div>
@@ -546,6 +590,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                       : (isAr ? "التوزيع الديمغرافي وقنوات الاستخدام" : "Demographics & Channel Adoption")}
                   </span>
                 </h3>
+                {/* Subtitle hidden upon user request
                 <p className="text-[11px] text-slate-400 mt-0.5">
                   {selectedTopic.id === "smartphones"
                     ? (isAr ? "معدلات الاستخدام حسب فئة الشباب والجنس في المحافظة (ص 44)" : "Adoption rates by youth (15-24) and gender (p. 44)")
@@ -559,6 +604,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     ? (isAr ? "نسب النفاذ الميدانية: مؤشر الجاهزية، الهواتف، إنترنت المنازل، المهارات، واستخدام الحاسوب" : "Survey penetration rates: Composite readiness, smartphones, home internet, skills, and PC usage")
                     : (isAr ? "حسب الفئات العمرية والجنس وقنوات الخدمة" : "Segmented by age, gender, and channels")}
                 </p>
+                */}
               </div>
 
               <div className="space-y-3.5 my-4">

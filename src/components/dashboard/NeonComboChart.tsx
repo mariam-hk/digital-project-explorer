@@ -26,9 +26,9 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   // SVG Dimension setups
-  const width = 1100;
+  const width = 1150;
   const height = 340;
-  const paddingX = 40;
+  const paddingX = 28;
   const paddingTop = 40;
   const paddingBottom = 60;
 

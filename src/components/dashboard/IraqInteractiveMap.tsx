@@ -138,7 +138,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
           <div className="relative w-full flex items-center justify-center">
             <svg
               viewBox="0 0 800 820"
-              className="w-full max-w-[620px] h-auto select-none filter drop-shadow-[0_0_25px_rgba(6,182,212,0.12)] cursor-pointer"
+              className="w-full max-w-[780px] h-auto select-none filter drop-shadow-[0_0_25px_rgba(6,182,212,0.12)] cursor-pointer"
               onMouseMove={handleMouseMove}
               onMouseLeave={() => {
                 setHoveredGovId(null);
