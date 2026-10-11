@@ -286,120 +286,214 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
         {/* Specialized Visual Charts for this Topic */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Chart 1: National Benchmark Comparison Card OR Donut / Pie Breakdown (6 cols) */}
+          {/* Chart 1: National Benchmark Comparison Card OR Donut / Pie Breakdown */}
           {govDetails.benchmarkData ? (
-            <div className="lg:col-span-6 rounded-2xl bg-[#090E1D] border border-white/10 p-5 shadow-2xl flex flex-col justify-between">
-              {/* Header */}
-              <div className="border-b border-white/5 pb-3 flex items-start justify-between gap-3">
-                <div>
-                  <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
-                    <Scale className="w-4 h-4 text-emerald-400" />
-                    <span>
-                      {isAr
-                        ? `المقارنة المعيارية: ${selectedGov.nameAr} مقابل عموم العراق`
-                        : `Benchmark: ${selectedGov.nameEn} vs. Iraq National Average`}
-                    </span>
-                  </h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5">
-                    {isAr
-                      ? "فارق النقاط المئوية مقارنة بالمجموع العام لجمهورية العراق (مسح 2022)"
-                      : "Percentage-point delta against official COSIT 2022 Iraq baseline"}
-                  </p>
-                </div>
-                {/* Legend */}
-                <div className="flex items-center gap-2.5 text-[10px] font-mono shrink-0 pt-0.5">
-                  <div className="flex items-center gap-1">
-                    <span className="w-2.5 h-2.5 rounded-sm bg-cyan-400"></span>
-                    <span className="text-slate-200">{selectedGov.nameAr}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="w-2.5 h-2.5 rounded-sm bg-slate-500"></span>
-                    <span className="text-slate-400">{isAr ? "العراق" : "Iraq"}</span>
-                  </div>
-                </div>
-              </div>
+            <div className={`${govDetails.barData ? "lg:col-span-6" : "lg:col-span-12"} rounded-2xl bg-[#090E1D] border border-white/10 p-5 sm:p-6 shadow-2xl flex flex-col justify-between`}>
+              {(() => {
+                const pillars = govDetails.benchmarkData.filter((i) => !i.isOverallResult);
+                const overallResult = govDetails.benchmarkData.find((i) => i.isOverallResult);
 
-              {/* Benchmark List */}
-              <div className="space-y-3 my-3">
-                {govDetails.benchmarkData.map((item, idx) => {
-                  const isPositive = item.delta > 0;
-                  const isNeutral = Math.abs(item.delta) < 0.8;
-                  const deltaSign = item.delta > 0 ? "+" : "";
-
-                  return (
-                    <div key={idx} className="bg-[#0D1424] p-2.5 rounded-xl border border-white/5 space-y-1.5">
-                      <div className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-slate-200 font-semibold">{item.metricLabel}</span>
-                          <span className="text-[10px] text-slate-500 font-mono">({item.tableNote})</span>
-                        </div>
-                        <div
-                          className={`flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-mono font-bold ${
-                            isNeutral
-                              ? "bg-slate-500/20 text-slate-300 border border-slate-500/30"
-                              : isPositive
-                              ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-                              : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                          }`}
-                        >
-                          {isNeutral ? (
-                            <span>{isAr ? "مطابقة تقريباً" : "Parity"} ({deltaSign}{item.delta}%)</span>
-                          ) : isPositive ? (
-                            <>
-                              <ArrowUpRight className="w-3 h-3 text-emerald-400" />
-                              <span>+{item.delta}% {isAr ? "أعلى" : "Above"}</span>
-                            </>
-                          ) : (
-                            <>
-                              <ArrowDownRight className="w-3 h-3 text-amber-400" />
-                              <span>{item.delta}% {isAr ? "أقل" : "Below"}</span>
-                            </>
-                          )}
-                        </div>
+                return (
+                  <>
+                    {/* Header */}
+                    <div className="border-b border-white/5 pb-3 flex items-start justify-between gap-3">
+                      <div>
+                        <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+                          <Scale className="w-4 h-4 text-emerald-400" />
+                          <span>
+                            {isAr
+                              ? `المقارنة المعيارية: ${selectedGov.nameAr} مقابل عموم العراق`
+                              : `Benchmark: ${selectedGov.nameEn} vs. Iraq National Average`}
+                          </span>
+                        </h3>
+                        <p className="text-[11px] text-slate-400 mt-0.5">
+                          {isAr
+                            ? "فارق النقاط المئوية مقارنة بالمجموع العام لجمهورية العراق (مسح 2022)"
+                            : "Percentage-point delta against official COSIT 2022 Iraq baseline"}
+                        </p>
                       </div>
-
-                      {/* Parallel Bars */}
-                      <div className="space-y-1 pt-0.5">
-                        <div className="flex items-center gap-2 text-[11px]">
-                          <span className="w-12 text-slate-400 text-[10px] truncate">{selectedGov.nameAr}</span>
-                          <div className="flex-1 bg-[#162035] h-2 rounded-full overflow-hidden">
-                            <div
-                              className="h-full rounded-full transition-all duration-500"
-                              style={{
-                                width: `${Math.min(100, item.govValue)}%`,
-                                backgroundColor: item.color,
-                                boxShadow: `0 0 6px ${item.color}88`,
-                              }}
-                            ></div>
-                          </div>
-                          <span className="w-12 text-right font-mono font-bold text-white text-[11px]">
-                            {item.govValue}%
-                          </span>
+                      {/* Legend */}
+                      <div className="flex items-center gap-3 text-[10px] font-mono shrink-0 pt-0.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-sm bg-cyan-400"></span>
+                          <span className="text-slate-200">{selectedGov.nameAr}</span>
                         </div>
-
-                        <div className="flex items-center gap-2 text-[11px]">
-                          <span className="w-12 text-slate-500 text-[10px] truncate">{isAr ? "العراق" : "Iraq"}</span>
-                          <div className="flex-1 bg-[#162035] h-1.5 rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-slate-500 rounded-full transition-all duration-500"
-                              style={{ width: `${Math.min(100, item.nationalValue)}%` }}
-                            ></div>
-                          </div>
-                          <span className="w-12 text-right font-mono text-slate-400 text-[10px]">
-                            {item.nationalValue}%
-                          </span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-sm bg-slate-500"></span>
+                          <span className="text-slate-400">{isAr ? "العراق" : "Iraq"}</span>
                         </div>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
 
-              {/* Footer */}
-              <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400">
-                <span>{isAr ? "المصدر: إجمالي جمهورية العراق الرسمي (مسح تكنولوجيا المعلومات 2022)" : "Source: Official COSIT Grand Total Baseline 2022"}</span>
-                <span className="font-mono text-cyan-400 font-bold">COSIT 2022</span>
-              </div>
+                    {/* 4 Foundational Pillars (rendered in 2 columns on wide screens) */}
+                    <div className={`grid grid-cols-1 ${govDetails.barData ? "" : "md:grid-cols-2"} gap-3.5 my-4`}>
+                      {pillars.map((item, idx) => {
+                        const isPositive = item.delta > 0;
+                        const isNeutral = Math.abs(item.delta) < 0.8;
+                        const deltaSign = item.delta > 0 ? "+" : "";
+
+                        return (
+                          <div key={idx} className="bg-[#0D1424] p-3 rounded-xl border border-white/5 space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-slate-200 font-semibold">{item.metricLabel}</span>
+                                <span className="text-[10px] text-slate-500 font-mono">({item.tableNote})</span>
+                              </div>
+                              <div
+                                className={`flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-mono font-bold ${
+                                  isNeutral
+                                    ? "bg-slate-500/20 text-slate-300 border border-slate-500/30"
+                                    : isPositive
+                                    ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+                                    : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+                                }`}
+                              >
+                                {isNeutral ? (
+                                  <span>{isAr ? "مطابقة تقريباً" : "Parity"} ({deltaSign}{item.delta}%)</span>
+                                ) : isPositive ? (
+                                  <>
+                                    <ArrowUpRight className="w-3 h-3 text-emerald-400" />
+                                    <span>+{item.delta}% {isAr ? "أعلى" : "Above"}</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <ArrowDownRight className="w-3 h-3 text-amber-400" />
+                                    <span>{item.delta}% {isAr ? "أقل" : "Below"}</span>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Parallel Bars */}
+                            <div className="space-y-1.5 pt-0.5">
+                              <div className="flex items-center gap-2 text-[11px]">
+                                <span className="w-12 text-slate-400 text-[10px] truncate">{selectedGov.nameAr}</span>
+                                <div className="flex-1 bg-[#162035] h-2 rounded-full overflow-hidden">
+                                  <div
+                                    className="h-full rounded-full transition-all duration-500"
+                                    style={{
+                                      width: `${Math.min(100, item.govValue)}%`,
+                                      backgroundColor: item.color,
+                                      boxShadow: `0 0 6px ${item.color}88`,
+                                    }}
+                                  ></div>
+                                </div>
+                                <span className="w-12 text-right font-mono font-bold text-white text-[11px]">
+                                  {item.govValue}%
+                                </span>
+                              </div>
+
+                              <div className="flex items-center gap-2 text-[11px]">
+                                <span className="w-12 text-slate-500 text-[10px] truncate">{isAr ? "العراق" : "Iraq"}</span>
+                                <div className="flex-1 bg-[#162035] h-1.5 rounded-full overflow-hidden">
+                                  <div
+                                    className="h-full bg-slate-500 rounded-full transition-all duration-500"
+                                    style={{ width: `${Math.min(100, item.nationalValue)}%` }}
+                                  ></div>
+                                </div>
+                                <span className="w-12 text-right font-mono text-slate-400 text-[10px]">
+                                  {item.nationalValue}%
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Overall Composite Result (Bottom Highlighted Section) */}
+                    {overallResult && (
+                      <div className="my-2 p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-[#0B1728] via-[#0E2038] to-[#0B1728] border border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.12)] space-y-2.5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                              <Sparkles className="w-4 h-4" />
+                            </span>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-white font-bold text-sm tracking-wide">
+                                  {overallResult.metricLabel}
+                                </span>
+                                <span className="text-[10px] text-cyan-300 font-mono bg-cyan-950/90 px-2 py-0.5 rounded-full border border-cyan-700/60 font-semibold">
+                                  {isAr ? "النتيجة المركبة الإجمالية" : "Overall Composite Outcome"}
+                                </span>
+                              </div>
+                              <span className="text-[11px] text-slate-400">
+                                {isAr
+                                  ? "المحصلة الموزونة لركائز الجاهزية الرقمية للمحافظة (جدول 1-4، 1-10، 1-17، 2-2)"
+                                  : "Weighted aggregate across all readiness dimensions"}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Delta Badge for Overall Result */}
+                          <div
+                            className={`self-start sm:self-auto flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold ${
+                              Math.abs(overallResult.delta) < 0.8
+                                ? "bg-slate-500/20 text-slate-300 border border-slate-500/30"
+                                : overallResult.delta > 0
+                                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+                                : "bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]"
+                            }`}
+                          >
+                            {Math.abs(overallResult.delta) < 0.8 ? (
+                              <span>{isAr ? "مطابقة للمعدل الوطني" : "National Parity"} ({overallResult.delta > 0 ? "+" : ""}{overallResult.delta}%)</span>
+                            ) : overallResult.delta > 0 ? (
+                              <>
+                                <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
+                                <span>+{overallResult.delta}% {isAr ? "أعلى من المعدل العام" : "Above National Avg"}</span>
+                              </>
+                            ) : (
+                              <>
+                                <ArrowDownRight className="w-3.5 h-3.5 text-amber-400" />
+                                <span>{overallResult.delta}% {isAr ? "فجوة عن المعدل العام" : "Below National Avg"}</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Parallel Bars for Overall Result */}
+                        <div className="space-y-1.5 pt-1">
+                          <div className="flex items-center gap-3 text-xs">
+                            <span className="w-16 text-cyan-300 font-bold text-xs truncate">{selectedGov.nameAr}</span>
+                            <div className="flex-1 bg-[#162035] h-3 rounded-full overflow-hidden">
+                              <div
+                                className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-400"
+                                style={{
+                                  width: `${Math.min(100, overallResult.govValue)}%`,
+                                  boxShadow: "0 0 12px rgba(6, 182, 212, 0.6)",
+                                }}
+                              ></div>
+                            </div>
+                            <span className="w-16 text-right font-mono font-bold text-cyan-300 text-sm">
+                              {overallResult.govValue}%
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-3 text-xs">
+                            <span className="w-16 text-slate-400 text-xs truncate">{isAr ? "عموم العراق" : "Iraq"}</span>
+                            <div className="flex-1 bg-[#162035] h-2 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-slate-500 rounded-full transition-all duration-500"
+                                style={{ width: `${Math.min(100, overallResult.nationalValue)}%` }}
+                              ></div>
+                            </div>
+                            <span className="w-16 text-right font-mono text-slate-400 text-xs">
+                              {overallResult.nationalValue}%
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Footer */}
+                    <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400 mt-2">
+                      <span>{isAr ? "المصدر: إجمالي جمهورية العراق الرسمي (مسح تكنولوجيا المعلومات 2022)" : "Source: Official COSIT Grand Total Baseline 2022"}</span>
+                      <span className="font-mono text-cyan-400 font-bold">COSIT 2022</span>
+                    </div>
+                  </>
+                );
+              })()}
             </div>
           ) : govDetails.donutData ? (
             <div className="lg:col-span-6">

@@ -20,6 +20,7 @@ export interface BenchmarkItem {
   delta: number;
   tableNote: string;
   color: string;
+  isOverallResult?: boolean;
 }
 
 export interface TopicBreakdownConfig {
@@ -911,12 +912,12 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             color: "#3B82F6",
           },
           {
-            metricLabel: isAr ? "مؤشر الجاهزية الرقمية الكلي" : "Overall Readiness Index",
-            govValue: gov.digitalReadinessScore,
-            nationalValue: NATIONAL_AVERAGE_METRICS.digitalReadinessScore,
-            delta: readinessDelta,
-            tableNote: isAr ? "مؤشر مركب" : "Composite",
-            color: "#14B8A6",
+            metricLabel: isAr ? "انتشار الهواتف الذكية" : "Smartphone Penetration",
+            govValue: gov.smartphoneUsagePct,
+            nationalValue: NATIONAL_AVERAGE_METRICS.smartphoneUsagePct,
+            delta: phonesDelta,
+            tableNote: isAr ? "جدول 1-4" : "Table 1-4",
+            color: "#10B981",
           },
           {
             metricLabel: isAr ? "مؤشر المهارات التقنية" : "Digital Skills Rate",
@@ -927,14 +928,6 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             color: "#A855F7",
           },
           {
-            metricLabel: isAr ? "انتشار الهواتف الذكية" : "Smartphone Penetration",
-            govValue: gov.smartphoneUsagePct,
-            nationalValue: NATIONAL_AVERAGE_METRICS.smartphoneUsagePct,
-            delta: phonesDelta,
-            tableNote: isAr ? "جدول 1-4" : "Table 1-4",
-            color: "#10B981",
-          },
-          {
             metricLabel: isAr ? "معدل استخدام الحواسيب" : "Computer Usage",
             govValue: gov.computerUsagePct,
             nationalValue: NATIONAL_AVERAGE_METRICS.computerUsagePct,
@@ -942,32 +935,14 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             tableNote: isAr ? "جدول 1-10" : "Table 1-10",
             color: "#F59E0B",
           },
-        ],
-        barData: [
           {
-            label: isAr ? "مؤشر الجاهزية الرقمية الكلي" : "Overall Readiness Score",
-            value: gov.digitalReadinessScore,
+            metricLabel: isAr ? "مؤشر الجاهزية الرقمية الكلي" : "Overall Readiness Index",
+            govValue: gov.digitalReadinessScore,
+            nationalValue: NATIONAL_AVERAGE_METRICS.digitalReadinessScore,
+            delta: readinessDelta,
+            tableNote: isAr ? "مؤشر مركب" : "Composite",
             color: "#14B8A6",
-          },
-          {
-            label: isAr ? "انتشار الهواتف الذكية" : "Smartphones",
-            value: gov.smartphoneUsagePct,
-            color: "#10B981",
-          },
-          {
-            label: isAr ? "إنترنت المنازل والواي فاي" : "Home Internet",
-            value: gov.homeInternetPct,
-            color: "#3B82F6",
-          },
-          {
-            label: isAr ? "مؤشر المهارات التقنية" : "Digital Skills",
-            value: gov.digitalSkillsPct,
-            color: "#A855F7",
-          },
-          {
-            label: isAr ? "معدل استخدام الحواسيب" : "Computer Usage",
-            value: gov.computerUsagePct,
-            color: "#F59E0B",
+            isOverallResult: true,
           },
         ],
         kpiStats: [
