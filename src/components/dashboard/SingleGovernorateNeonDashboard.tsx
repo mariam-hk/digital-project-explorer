@@ -337,9 +337,9 @@ const govDetails = breakdownConfig.getGovBreakdown(
                             <div className="flex items-center justify-between text-xs">
                               <div className="flex items-center gap-1.5">
                                 <span className="text-slate-200 font-semibold">{item.metricLabel}</span>
-                                <span className="text-[10px] text-slate-500 font-mono">({item.tableNote})</span>
+                                {/* <span className="text-[10px] text-slate-500 font-mono">({item.tableNote})</span> */}
                               </div>
-                              <div
+                              {/* <div
                                 className={`flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-mono font-bold ${
                                   isNeutral
                                     ? "bg-slate-500/20 text-slate-300 border border-slate-500/30"
@@ -361,7 +361,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                                     <span>{item.delta}% {isAr ? "أقل" : "Below"}</span>
                                   </>
                                 )}
-                              </div>
+                              </div> */}
                             </div>
 
                             {/* Parallel Bars */}
@@ -418,16 +418,16 @@ const govDetails = breakdownConfig.getGovBreakdown(
                                   {isAr ? "النتيجة المركبة الإجمالية" : "Overall Composite Outcome"}
                                 </span>
                               </div>
-                              <span className="text-[11px] text-slate-400">
+                              {/* <span className="text-[11px] text-slate-400">
                                 {isAr
                                   ? "المحصلة الموزونة لركائز الجاهزية الرقمية للمحافظة (جدول 1-4، 1-10، 1-17، 2-2)"
                                   : "Weighted aggregate across all readiness dimensions"}
-                              </span>
+                              </span> */}
                             </div>
                           </div>
 
                           {/* Delta Badge for Overall Result */}
-                          <div
+                          {/* <div
                             className={`self-start sm:self-auto flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold ${
                               Math.abs(overallResult.delta) < 0.8
                                 ? "bg-slate-500/20 text-slate-300 border border-slate-500/30"
@@ -449,7 +449,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                                 <span>{overallResult.delta}% {isAr ? "فجوة عن المعدل العام" : "Below National Avg"}</span>
                               </>
                             )}
-                          </div>
+                          </div> */}
                         </div>
 
                         {/* Parallel Bars for Overall Result */}
