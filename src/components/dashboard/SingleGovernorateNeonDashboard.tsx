@@ -294,7 +294,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     : selectedTopic.id === "internet"
                     ? (isAr ? "نوع اتصال المنازل بالإنترنت (جدول 2-2)" : "Home Internet Connection Type (Table 2-2)")
                     : selectedTopic.id === "skills"
-                    ? (isAr ? "الحصص النسبية لفئات المهارات الرقمية (جدول 1-17)" : "Digital Skills Portfolio Distribution (Table 1-17)")
+                    ? (isAr ? "مجالات استخدام الإنترنت اليومية (جدول 1-16)" : "Daily Internet Usage Domains (Table 1-16)")
                     : selectedTopic.id === "spending"
                     ? (isAr ? "توزيع بنود إنفاق الأسرة على التكنولوجيا (جدول 2-5)" : "Household ICT Spend Distribution (Table 2-5)")
                     : (isAr ? `توزيع فئات (${selectedTopic.titleAr})` : "Category Distribution")
@@ -305,7 +305,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     : selectedTopic.id === "internet"
                     ? (isAr ? "اتصال المنازل بالإنترنت مقابل الاعتماد على باقات النقال (المجموع: 100%)" : "Home broadband vs mobile data only (Total: 100%)")
                     : selectedTopic.id === "skills"
-                    ? (isAr ? "الحصص النسبية لمحفظة المهارات: نقل الملفات، تثبيت التطبيقات، البرمجة (المجموع: 100%)" : "Relative weight of basic, intermediate, and coding skills (Total: 100%)")
+                    ? (isAr ? "تواصل اجتماعي، مراسلة، بحث وتعليم، عمل وبنوك (المجموع: 100%)" : "Social media, messaging, learning, work & banking (Total: 100%)")
                     : selectedTopic.id === "spending"
                     ? (isAr ? "خدمات الاتصال وباقات الإنترنت مقابل الأجهزة والمعدات (المجموع: 100%)" : "Telecom services vs hardware & devices (Total: 100%)")
                     : (isAr ? "النسب المئوية المستخرجة من جداول المسح الميداني" : "Official field survey distribution")
@@ -326,6 +326,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
                       ? (isAr ? "التوزيع الديمغرافي لمستخدمي الأجهزة (جدول 1-4)" : "Demographic Breakdown of Users (Table 1-4)")
                       : selectedTopic.id === "internet"
                       ? (isAr ? "قنوات الإنفاق التكنولوجي للأسرة (جدول 2-5)" : "Household Tech Spending Channels (Table 2-5)")
+                      : selectedTopic.id === "skills"
+                      ? (isAr ? "مصفوفة المهارات التقنية للأفراد (جدول 1-17)" : "Digital Skills Matrix (Table 1-17)")
                       : selectedTopic.id === "spending"
                       ? (isAr ? "تفاصيل بنود الإنفاق الشهري للأسرة (جدول 2-5)" : "Monthly Spend Breakdown (Table 2-5)")
                       : (isAr ? "التوزيع الديمغرافي وقنوات الاستخدام" : "Demographics & Channel Adoption")}
@@ -336,6 +338,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     ? (isAr ? "معدلات الاستخدام حسب فئة الشباب والجنس في المحافظة (ص 44)" : "Adoption rates by youth (15-24) and gender (p. 44)")
                     : selectedTopic.id === "internet"
                     ? (isAr ? "خدمات الاتصال وباقات الإنترنت مقابل شراء وصيانة الأجهزة (ص 112)" : "Telecom & Net Services vs Hardware & Devices (p. 112)")
+                    : selectedTopic.id === "skills"
+                    ? (isAr ? "نسبة الأفراد الذين يمتلكون المهارات حسب مسح تكنولوجيا المعلومات (ص 78)" : "Percentage of individuals with digital competencies (p. 78)")
                     : selectedTopic.id === "spending"
                     ? (isAr ? "متوسط إنفاق الأسرة الشهري على الاتصالات والأجهزة لسنة 2022 (ص 112)" : "Average household expenditure on ICT 2022 (p. 112)")
                     : (isAr ? "حسب الفئات العمرية والجنس وقنوات الخدمة" : "Segmented by age, gender, and channels")}

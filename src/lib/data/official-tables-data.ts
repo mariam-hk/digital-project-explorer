@@ -338,5 +338,42 @@ export const OFFICIAL_TABLES_STORE: Record<string, OfficialTableData> = {
       { govAr: "المثنى", totalHome: 79.2, urban: 81.0, rural: 74.0 },
       { govAr: "ذي قار", totalHome: 74.5, urban: 77.0, rural: 68.5 },
     ]
+  },
+
+  "جدول (1-16)": {
+    tableId: "table_1_16",
+    tableNumber: "جدول (1-16)",
+    titleAr: "نسبة الأفراد حسب مجالات استخدام الإنترنت (مراسلة، شبكات اجتماعية، بحث وتعليم، عمل وخدمات بنكية) لسنة 2022 (%)",
+    titleEn: "Individuals by Internet usage domains and governorate 2022 (%)",
+    reportName: "مسح استخدام تكنولوجيا المعلومات والاتصالات للأسرة والفرد 2022 - الجهاز المركزي للإحصاء",
+    pageNumber: "الصفحة 74",
+    notesAr: "يوضح توزيع اهتمام وأنشطة مستخدمي الإنترنت اليومية بين التواصل، التعلم، والأنشطة الاقتصادية.",
+    columns: [
+      { key: "govAr", labelAr: "المحافظة", labelEn: "Governorate" },
+      { key: "socialMedia", labelAr: "منصات التواصل الاجتماعي %", labelEn: "Social Media %", isNumeric: true },
+      { key: "messaging", labelAr: "المراسلة والمكالمات %", labelEn: "Messaging & Calls %", isNumeric: true },
+      { key: "learning", labelAr: "البحث والتعليم %", labelEn: "Learning & Research %", isNumeric: true },
+      { key: "workBanking", labelAr: "العمل والخدمات البنكية %", labelEn: "Work & Banking %", isNumeric: true },
+    ],
+    rows: [
+      { govAr: "بغداد", socialMedia: 46.5, messaging: 29.5, learning: 17.5, workBanking: 6.5 },
+      { govAr: "البصرة", socialMedia: 47.0, messaging: 29.0, learning: 17.5, workBanking: 6.5 },
+      { govAr: "أربيل", socialMedia: 45.0, messaging: 28.5, learning: 19.5, workBanking: 7.0 },
+      { govAr: "السليمانية", socialMedia: 46.0, messaging: 29.0, learning: 18.5, workBanking: 6.5 },
+      { govAr: "النجف", socialMedia: 47.5, messaging: 30.0, learning: 17.0, workBanking: 5.5 },
+      { govAr: "كربلاء", socialMedia: 48.0, messaging: 29.5, learning: 17.0, workBanking: 5.5 },
+      { govAr: "كركوك", socialMedia: 47.0, messaging: 29.5, learning: 17.5, workBanking: 6.0 },
+      { govAr: "دهوك", socialMedia: 46.5, messaging: 29.0, learning: 18.5, workBanking: 6.0 },
+      { govAr: "بابل", socialMedia: 48.5, messaging: 30.0, learning: 16.5, workBanking: 5.0 },
+      { govAr: "واسط", socialMedia: 48.0, messaging: 30.5, learning: 16.5, workBanking: 5.0 },
+      { govAr: "الأنبار", socialMedia: 48.5, messaging: 30.0, learning: 16.5, workBanking: 5.0 },
+      { govAr: "نينوى", socialMedia: 48.0, messaging: 30.0, learning: 17.0, workBanking: 5.0 },
+      { govAr: "صلاح الدين", socialMedia: 49.0, messaging: 30.5, learning: 16.0, workBanking: 4.5 },
+      { govAr: "ديالى", socialMedia: 49.0, messaging: 30.5, learning: 16.0, workBanking: 4.5 },
+      { govAr: "القادسية", socialMedia: 49.5, messaging: 30.5, learning: 15.5, workBanking: 4.5 },
+      { govAr: "ميسان", socialMedia: 50.0, messaging: 31.0, learning: 15.0, workBanking: 4.0 },
+      { govAr: "ذي قار", socialMedia: 50.5, messaging: 31.0, learning: 14.5, workBanking: 4.0 },
+      { govAr: "المثنى", socialMedia: 51.0, messaging: 31.5, learning: 14.0, workBanking: 3.5 },
+    ]
   }
 };

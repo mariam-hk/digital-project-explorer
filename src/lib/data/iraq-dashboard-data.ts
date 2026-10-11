@@ -130,17 +130,17 @@ export const TOPICS: TopicConfig[] = [
   },
   {
     id: "skills",
-    titleAr: "المهارات الرقمية",
-    titleEn: "Digital Skills",
+    titleAr: "المهارات ومجالات الاستخدام",
+    titleEn: "Skills & Internet Usage",
     icon: "🎓",
     metricKey: "digitalSkillsPct",
     unit: "%",
     neonColor: "#6366F1",
     neonGlow: "rgba(99, 102, 241, 0.5)",
-    descriptionAr: "نسبة الأفراد الذين يمتلكون مهارات تقنية متقدمة ونقل ومعالجة البيانات.",
-    descriptionEn: "Software literacy, data management, and technical talent density.",
-    sourceAr: "مسح استخدام تكنولوجيا المعلومات 2022 (جدول 1-17، صفحة 78)",
-    sourceEn: "COSIT ICT Household Survey 2022 (Table 1-17, Page 78)"
+    descriptionAr: "مجالات استخدام الإنترنت اليومية ومصفوفة المهارات التقنية والبرمجية للأفراد.",
+    descriptionEn: "Daily internet usage activities and individual digital skills matrix.",
+    sourceAr: "مسح استخدام تكنولوجيا المعلومات 2022 (جدول 1-16 وجدول 1-17)",
+    sourceEn: "COSIT ICT Household Survey 2022 (Tables 1-16 & 1-17)"
   },
   {
     id: "readiness",

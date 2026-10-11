@@ -641,15 +641,15 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
 
   skills: {
     topicId: "skills",
-    titleAr: "المهارات الرقمية والمواهب",
-    titleEn: "Digital Skills & Talent",
+    titleAr: "المهارات ومجالات الاستخدام",
+    titleEn: "Skills & Internet Usage",
     neonColor: "#A855F7",
     neonGlow: "rgba(168, 85, 247, 0.6)",
     chartType: "demographic_bars",
     officialTables: [
       {
         tableNumber: "جدول (1-16)",
-        titleAr: "نسبة الأفراد حسب مجالات استخدام الإنترنت (مراسلة، شبكات اجتماعية، بحث، عمل، خدمات بنكية) لسنة 2022 (%)",
+        titleAr: "نسبة الأفراد حسب مجالات استخدام الإنترنت (مراسلة، شبكات اجتماعية، بحث وتعليم، عمل وخدمات بنكية) لسنة 2022 (%)",
         titleEn: "Internet usage purposes (communication, social media, work, banking) 2022",
         source: "مسح استخدام تكنولوجيا المعلومات 2022 - ص 74",
         keyFindingAr: "التواصل والشبكات الاجتماعية والبحث عن المعلومات تتصدر الأنشطة اليومية."
@@ -665,40 +665,45 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     getGovBreakdown: (govId, govNameAr, lang = "ar") => {
       const isAr = lang === "ar";
       const gov = getGov(govId, govNameAr);
+      const row1_16 = getTableRow("جدول (1-16)", gov.nameAr);
       const row1_17 = getTableRow("جدول (1-17)", gov.nameAr);
+
+      const socialMedia = row1_16?.socialMedia ?? 46.5;
+      const messaging = row1_16?.messaging ?? 29.5;
+      const learning = row1_16?.learning ?? 17.5;
+      const workBanking = Number((100 - (socialMedia + messaging + learning)).toFixed(1));
 
       const overallSkills = row1_17?.overallSkills ?? gov.digitalSkillsPct;
       const fileTransfer = row1_17?.fileTransfer ?? Math.round(overallSkills * 1.5);
       const softwareInstall = row1_17?.softwareInstall ?? Math.round(overallSkills * 1.2);
       const coding = row1_17?.programming ?? Math.max(7.0, Math.round(overallSkills * 0.28));
 
-      // Calculate relative distribution of skills so Donut sums to exactly 100.0%
-      const totalSkillPoints = fileTransfer + softwareInstall + coding || 1;
-      const fileShare = Number(((fileTransfer / totalSkillPoints) * 100).toFixed(1));
-      const softwareShare = Number(((softwareInstall / totalSkillPoints) * 100).toFixed(1));
-      const codingShare = Number((100 - (fileShare + softwareShare)).toFixed(1));
-
       return {
         summaryTitle: isAr
-          ? `مستويات المهارات التقنية في ${gov.nameAr}`
-          : `Digital Skills Profile for ${gov.nameEn}`,
+          ? `المهارات التقنية ومجالات الاستخدام في ${gov.nameAr}`
+          : `Digital Skills & Internet Usage in ${gov.nameEn}`,
         summaryText: isAr
-          ? `تسجل ${gov.nameAr} نسبة مهارات رقمية عامة تبلغ ${overallSkills}% (الترتيب: #${gov.rank})، حيث يمتلك ${fileTransfer}% مهارات نقل وتبادل الملفات و${softwareInstall}% مهارات تثبيت التطبيقات، مع ${coding}% كفاءات برمجية وتقنية متقدمة.`
-          : `${gov.nameEn} records an overall digital skills rate of ${overallSkills}% (Rank #${gov.rank}), with ${fileTransfer}% in file management, ${softwareInstall}% in software setup, and ${coding}% in programming skills.`,
+          ? `تسجل ${gov.nameAr} نسبة مهارات رقمية تبلغ ${overallSkills}% (الترتيب: #${gov.rank})، حيث يقضي المستخدمون وقتهم بين منصات التواصل (${socialMedia}%) والمراسلة (${messaging}%) والتعليم والبحث (${learning}%) والعمل والبنوك (${workBanking}%)، مع امتلاك ${coding}% كفاءات برمجية وتقنية متقدمة.`
+          : `${gov.nameEn} records an overall digital skills rate of ${overallSkills}% (Rank #${gov.rank}), with online activities centered on social media (${socialMedia}%), messaging (${messaging}%), learning (${learning}%), and work/banking (${workBanking}%), alongside ${coding}% advanced programming talent.`,
         donutData: [
           {
-            label: isAr ? "نقل وتبادل الملفات" : "File Transfer & Storage",
-            value: fileShare,
+            label: isAr ? "التواصل والشبكات الاجتماعية" : "Social Media",
+            value: socialMedia,
             color: "#A855F7",
           },
           {
-            label: isAr ? "تثبيت وضبط التطبيقات" : "Software Installation",
-            value: softwareShare,
+            label: isAr ? "المراسلة والمكالمات" : "Messaging & Calls",
+            value: messaging,
             color: "#06B6D4",
           },
           {
-            label: isAr ? "البرمجة والأكواد التقنية" : "Coding & Development",
-            value: codingShare,
+            label: isAr ? "البحث والقراءة والتعليم" : "Learning & Research",
+            value: learning,
+            color: "#10B981",
+          },
+          {
+            label: isAr ? "العمل والخدمات البنكية" : "Work & Banking",
+            value: workBanking,
             color: "#F59E0B",
           },
         ],
@@ -718,13 +723,6 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             value: overallSkills,
             color: "#10B981",
           },
-          /*
-          {
-            label: isAr ? "مؤشر الكفاءات وساس" : "SaaS & Tech Talent Score",
-            value: gov.digitalTalentScore,
-            color: "#3B82F6",
-          },
-          */
           {
             label: isAr ? "البرمجة وتطوير الأنظمة" : "Coding & Software Dev",
             value: coding,
@@ -739,9 +737,9 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             color: "#A855F7",
           },
           {
-            label: isAr ? "تثبيت وضبط البرمجيات" : "Software Install",
-            value: `${softwareInstall}%`,
-            note: isAr ? "جدول 1-17" : "Table 1-17",
+            label: isAr ? "منصات التواصل اليومي" : "Daily Social Media",
+            value: `${socialMedia}%`,
+            note: isAr ? "جدول 1-16" : "Table 1-16",
             color: "#06B6D4",
           },
           {
