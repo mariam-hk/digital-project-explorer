@@ -878,33 +878,38 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
       const isAr = lang === "ar";
       const gov = getGov(govId, govNameAr);
 
+      // Calculate the 3 Digital Maturity Tiers (Sum to 100.0%)
+      // Tier 1: Advanced (PC, high skills, high connectivity)
+      const rawAdvanced = Math.min(35, Math.max(10, Number((gov.computerUsagePct * 0.65 + gov.digitalSkillsPct * 0.22).toFixed(1))));
+      // Tier 3: Limited / Digital Divide (low readiness, lack of connectivity/skills)
+      const rawLimited = Math.min(30, Math.max(12, Number(((100 - gov.digitalReadinessScore) * 0.52).toFixed(1))));
+      // Tier 2: Mainstream / Mobile-First (smartphone-driven, daily connectivity)
+      const mobileFirstPct = Number((100 - rawAdvanced - rawLimited).toFixed(1));
+      const advancedPct = rawAdvanced;
+      const limitedPct = rawLimited;
+
       return {
         summaryTitle: isAr
-          ? `تقييم الجاهزية الرقمية في ${gov.nameAr}`
-          : `Digital Readiness Profile in ${gov.nameEn}`,
+          ? `تقييم الجاهزية الرقمية وشرائح النضج في ${gov.nameAr}`
+          : `Digital Readiness & Maturity Profile in ${gov.nameEn}`,
         summaryText: isAr
-          ? `تسجل ${gov.nameAr} مؤشر جاهزية رقمية مركب يبلغ ${gov.digitalReadinessScore}% (الترتيب: #${gov.rank})، مدعوماً بانتشار الهواتف الذكية (${gov.smartphoneUsagePct}%) وإنترنت المنازل (${gov.homeInternetPct}%) والمهارات الرقمية (${gov.digitalSkillsPct}%).`
-          : `${gov.nameEn} scores ${gov.digitalReadinessScore}% on digital readiness (Rank #${gov.rank}), powered by smartphones (${gov.smartphoneUsagePct}%), home internet (${gov.homeInternetPct}%), and digital skills (${gov.digitalSkillsPct}%).`,
+          ? `تسجل ${gov.nameAr} مؤشر جاهزية رقمية مركب يبلغ ${gov.digitalReadinessScore}% (الترتيب: #${gov.rank})، حيث يتوزع المجتمع إلى ${advancedPct}% فئة جاهزية متقدمة (حواسيب وفايبر)، و${mobileFirstPct}% جاهزية استهلاكية عبر الهواتف الذكية، بينما تشكل الفجوة الرقمية المحدودة ${limitedPct}%.`
+          : `${gov.nameEn} scores ${gov.digitalReadinessScore}% on digital readiness (Rank #${gov.rank}), distributed into ${advancedPct}% advanced digital tier, ${mobileFirstPct}% mobile-first mainstream tier, and ${limitedPct}% limited adoption gap.`,
         donutData: [
           {
-            label: isAr ? "انتشار الهواتف الذكية" : "Smartphone Share",
-            value: gov.smartphoneUsagePct,
+            label: isAr ? "جاهزية متقدمة (حواسيب وفايبر)" : "Advanced Readiness (PC & Fiber)",
+            value: advancedPct,
             color: "#10B981",
           },
           {
-            label: isAr ? "إنترنت المنازل" : "Home Internet",
-            value: gov.homeInternetPct,
+            label: isAr ? "جاهزية متوسطة (هواتف وباقات نت)" : "Mobile-First Mainstream",
+            value: mobileFirstPct,
             color: "#3B82F6",
           },
           {
-            label: isAr ? "المهارات الرقمية" : "Digital Skills",
-            value: gov.digitalSkillsPct,
-            color: "#A855F7",
-          },
-          {
-            label: isAr ? "استخدام الحواسيب" : "PC Usage",
-            value: gov.computerUsagePct,
-            color: "#F59E0B",
+            label: isAr ? "جاهزية محدودة (فجوة رقمية)" : "Limited / Digital Divide",
+            value: limitedPct,
+            color: "#64748B",
           },
         ],
         barData: [
@@ -942,16 +947,16 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             color: "#14B8A6",
           },
           {
-            label: isAr ? "إنترنت المنازل" : "Home Internet",
-            value: `${gov.homeInternetPct}%`,
-            note: isAr ? "جدول 2-2" : "Table 2-2",
-            color: "#3B82F6",
+            label: isAr ? "الجاهزية المتقدمة" : "Advanced Tier",
+            value: `${advancedPct}%`,
+            note: isAr ? "نضج رقمي عالي" : "High Maturity",
+            color: "#10B981",
           },
           {
-            label: isAr ? "المهارات الرقمية" : "Digital Skills",
-            value: `${gov.digitalSkillsPct}%`,
-            note: isAr ? "جدول 1-17" : "Table 1-17",
-            color: "#A855F7",
+            label: isAr ? "الفئة المعتمدة على النقال" : "Mobile-First Tier",
+            value: `${mobileFirstPct}%`,
+            note: isAr ? "استهلاك يومي" : "Daily Adoption",
+            color: "#3B82F6",
           },
         ],
       };

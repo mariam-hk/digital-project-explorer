@@ -297,6 +297,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     ? (isAr ? "مجالات استخدام الإنترنت اليومية (جدول 1-16)" : "Daily Internet Usage Domains (Table 1-16)")
                     : selectedTopic.id === "spending"
                     ? (isAr ? "توزيع بنود إنفاق الأسرة على التكنولوجيا (جدول 2-5)" : "Household ICT Spend Distribution (Table 2-5)")
+                    : selectedTopic.id === "readiness"
+                    ? (isAr ? "مستويات الجاهزية والنضج الرقمي للمجتمع" : "Digital Readiness & Maturity Tiers")
                     : (isAr ? `توزيع فئات (${selectedTopic.titleAr})` : "Category Distribution")
                 }
                 subtitle={
@@ -308,6 +310,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     ? (isAr ? "تواصل اجتماعي، مراسلة، بحث وتعليم، عمل وبنوك (المجموع: 100%)" : "Social media, messaging, learning, work & banking (Total: 100%)")
                     : selectedTopic.id === "spending"
                     ? (isAr ? "خدمات الاتصال وباقات الإنترنت مقابل الأجهزة والمعدات (المجموع: 100%)" : "Telecom services vs hardware & devices (Total: 100%)")
+                    : selectedTopic.id === "readiness"
+                    ? (isAr ? "تصنيف المجتمع إلى 3 شرائح: متقدمة، استهلاكية بالهاتف، ومحدودة (المجموع: 100%)" : "Community segmentation: Advanced, Mobile-First, and Limited (Total: 100%)")
                     : (isAr ? "النسب المئوية المستخرجة من جداول المسح الميداني" : "Official field survey distribution")
                 }
                 lang={lang}
@@ -330,6 +334,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
                       ? (isAr ? "مصفوفة المهارات التقنية للأفراد (جدول 1-17)" : "Digital Skills Matrix (Table 1-17)")
                       : selectedTopic.id === "spending"
                       ? (isAr ? "تفاصيل بنود الإنفاق الشهري للأسرة (جدول 2-5)" : "Monthly Spend Breakdown (Table 2-5)")
+                      : selectedTopic.id === "readiness"
+                      ? (isAr ? "ركائز ومؤشرات الجاهزية الرقمية المستقلة" : "Digital Readiness Survey Pillars")
                       : (isAr ? "التوزيع الديمغرافي وقنوات الاستخدام" : "Demographics & Channel Adoption")}
                   </span>
                 </h3>
@@ -342,6 +348,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     ? (isAr ? "نسبة الأفراد الذين يمتلكون المهارات حسب مسح تكنولوجيا المعلومات (ص 78)" : "Percentage of individuals with digital competencies (p. 78)")
                     : selectedTopic.id === "spending"
                     ? (isAr ? "متوسط إنفاق الأسرة الشهري على الاتصالات والأجهزة لسنة 2022 (ص 112)" : "Average household expenditure on ICT 2022 (p. 112)")
+                    : selectedTopic.id === "readiness"
+                    ? (isAr ? "نسب النفاذ الميدانية: مؤشر الجاهزية، الهواتف، إنترنت المنازل، المهارات، واستخدام الحاسوب" : "Survey penetration rates: Composite readiness, smartphones, home internet, skills, and PC usage")
                     : (isAr ? "حسب الفئات العمرية والجنس وقنوات الخدمة" : "Segmented by age, gender, and channels")}
                 </p>
               </div>
