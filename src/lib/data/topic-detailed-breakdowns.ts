@@ -358,12 +358,12 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           : `${gov.nameEn} represents a prime FinTech conversion market with monthly household ICT spend of ${telecomSpend}K IQD and ${smartOffices} smart card offices, alongside ${cod}% cash dependency.`,
         donutData: [
           {
-            label: isAr ? "كاش عند الاستلام (فرصة تحويل)" : "Cash-on-Delivery (Opportunity)",
+            label: isAr ? "كاش عند الاستلام" : "Cash-on-Delivery",
             value: cod,
             color: "#F59E0B",
           },
           {
-            label: isAr ? "دفع رقمي ومحافظ حالي" : "Current Digital Payments",
+            label: isAr ? "دفع الكتروني" : "Digital Payments",
             value: digitalShare > 0 ? digitalShare : 0.3,
             color: "#06B6D4",
           },
