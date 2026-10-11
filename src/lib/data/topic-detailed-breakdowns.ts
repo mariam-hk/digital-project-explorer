@@ -672,6 +672,12 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
       const softwareInstall = row1_17?.softwareInstall ?? Math.round(overallSkills * 1.2);
       const coding = row1_17?.programming ?? Math.max(7.0, Math.round(overallSkills * 0.28));
 
+      // Calculate relative distribution of skills so Donut sums to exactly 100.0%
+      const totalSkillPoints = fileTransfer + softwareInstall + coding || 1;
+      const fileShare = Number(((fileTransfer / totalSkillPoints) * 100).toFixed(1));
+      const softwareShare = Number(((softwareInstall / totalSkillPoints) * 100).toFixed(1));
+      const codingShare = Number((100 - (fileShare + softwareShare)).toFixed(1));
+
       return {
         summaryTitle: isAr
           ? `مستويات المهارات التقنية في ${gov.nameAr}`
@@ -682,22 +688,17 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
         donutData: [
           {
             label: isAr ? "نقل وتبادل الملفات" : "File Transfer & Storage",
-            value: fileTransfer,
+            value: fileShare,
             color: "#A855F7",
           },
           {
             label: isAr ? "تثبيت وضبط التطبيقات" : "Software Installation",
-            value: softwareInstall,
+            value: softwareShare,
             color: "#06B6D4",
           },
           {
-            label: isAr ? "المهارات الرقمية العامة" : "General Digital Literacy",
-            value: overallSkills,
-            color: "#10B981",
-          },
-          {
             label: isAr ? "البرمجة والأكواد التقنية" : "Coding & Development",
-            value: coding,
+            value: codingShare,
             color: "#F59E0B",
           },
         ],
