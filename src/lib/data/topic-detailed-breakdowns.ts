@@ -596,12 +596,12 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           : `Home internet connectivity in ${gov.nameEn} stands at ${homeNet}% vs ${mobileOnly}% mobile-only reliance (Table 2-2), backed by monthly household spend of ${totalSpend}K IQD (Table 2-5), split into ${telecomPct}% for services and ${devicesPct}% for devices.`,
         donutData: [
           {
-            label: isAr ? "اتصال المنازل بالإنترنت" : "Home Internet",
+            label: isAr ? "إنترنت منزلي" : "Home Internet",
             value: homeNet,
             color: "#3B82F6",
           },
           {
-            label: isAr ? "الاعتماد الحصري على باقات النقال" : "Mobile Cellular Only",
+            label: isAr ? "إنترنت الموبايل" : "Mobile Cellular",
             value: mobileOnly > 0 ? mobileOnly : 5.0,
             color: "#64748B",
           },
