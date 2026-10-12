@@ -90,7 +90,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
     },
     {
       key: "internet",
-      nameAr: "الهواتف الذكية (Smartphones)",
+      nameAr: "الهواتف الذكية",
       nameEn: "Smartphone Share",
       val: selectedGov.internetPenetrationPct,
       natAvg: NATIONAL_AVERAGE_METRICS.internetPenetrationPct,

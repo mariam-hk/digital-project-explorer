@@ -136,22 +136,22 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           : `${gov.nameEn} exhibits heavy smartphone dominance (${smartPct}%, representing ${smartShare}% of active devices), led by youth adoption (${youthUsage}%), alongside laptops (${laptopShare}%), desktops (${desktopShare}%), and tablets (${tabletShare}%).`,
         donutData: [
           {
-            label: isAr ? "هواتف ذكية (Smartphones)" : "Smartphones",
+            label: isAr ? "هواتف ذكية" : "Smartphones",
             value: smartShare,
             color: "#10B981",
           },
           {
-            label: isAr ? "حواسيب محمولة (Laptops)" : "Laptops",
+            label: isAr ? "حواسيب محمولة" : "Laptops",
             value: laptopShare,
             color: "#F59E0B",
           },
           {
-            label: isAr ? "حواسيب مكتبية (Desktops)" : "Desktops",
+            label: isAr ? "حواسيب مكتبية" : "Desktops",
             value: desktopShare,
             color: "#3B82F6",
           },
           {
-            label: isAr ? "أجهزة لوحية (Tablets)" : "Tablets",
+            label: isAr ? "أجهزة لوحية" : "Tablets",
             value: tabletShare,
             color: "#A855F7",
           },
@@ -257,7 +257,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           : `${gov.nameEn} records an e-commerce shopping rate of ${shoppingRate}% (Rank #${gov.rank}), led by apparel (${clothes}%) and food delivery (${food}%), with ${cod}% Cash-on-Delivery.`,
         donutData: [
           {
-            label: isAr ? "ملابس وأزياء (Apparel)" : "Apparel & Fashion",
+            label: isAr ? "ملابس وأزياء" : "Apparel & Fashion",
             value: clothes,
             color: "#EC4899",
           },
@@ -279,7 +279,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
         ],
         barData: [
           {
-            label: isAr ? "الدفع نقداً عند الاستلام (COD)" : "Cash-on-Delivery (COD)",
+            label: isAr ? "الدفع نقداً عند الاستلام" : "Cash-on-Delivery (COD)",
             value: cod,
             color: "#F59E0B",
           },
@@ -470,28 +470,28 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           ? `محطات العمل والحواسيب في ${gov.nameAr}`
           : `Workstation & PC Landscape in ${gov.nameEn}`,
         summaryText: isAr
-          ? `تسجل ${gov.nameAr} معدل استخدام حواسيب يبلغ ${pcUsage}% (الترتيب: #${gov.rank})، مع سيطرة واضحة للحواسيب المحمولة (Laptop) بنسبة ${laptop}% مقابل ${desktop}% للحواسيب المكتبية، ما يجعلها بيئة مناسبة لـ (${gov.bestFitModel}).`
+          ? `تسجل ${gov.nameAr} معدل استخدام حواسيب يبلغ ${pcUsage}% (الترتيب: #${gov.rank})، مع سيطرة واضحة للحواسيب المحمولة بنسبة ${laptop}% مقابل ${desktop}% للحواسيب المكتبية، ما يجعلها بيئة مناسبة لـ (${gov.bestFitModel}).`
           : `${gov.nameEn} records a computer usage rate of ${pcUsage}% (Rank #${gov.rank}), dominated by laptops at ${laptop}% vs desktops at ${desktop}%, making it suitable for ${gov.bestFitModel}.`,
         donutData: [
           {
-            label: isAr ? "حاسوب محمول (Laptop)" : "Laptop",
+            label: isAr ? "حاسوب محمول" : "Laptop",
             value: laptop,
             color: "#F59E0B",
           },
           {
-            label: isAr ? "حاسوب مكتبي (Desktop)" : "Desktop PC",
+            label: isAr ? "حاسوب مكتبي" : "Desktop PC",
             value: desktop,
             color: "#3B82F6",
           },
           {
-            label: isAr ? "جهاز لوحي (Tablet)" : "Tablet",
+            label: isAr ? "جهاز لوحي" : "Tablet",
             value: tablet,
             color: "#10B981",
           },
         ],
         barData: [
           {
-            label: isAr ? "حصة الحواسيب المحمولة (Laptop)" : "Laptop Share",
+            label: isAr ? "حصة الحواسيب المحمولة" : "Laptop Share",
             value: laptop,
             color: "#F59E0B",
           },
@@ -501,7 +501,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             color: "#06B6D4",
           },
           {
-            label: isAr ? "حصة الحواسيب المكتبية (Desktop)" : "Desktop Share",
+            label: isAr ? "حصة الحواسيب المكتبية" : "Desktop Share",
             value: desktop,
             color: "#3B82F6",
           },
@@ -513,7 +513,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           },
           */
           {
-            label: isAr ? "الأجهزة اللوحية (Tablet)" : "Tablet Share",
+            label: isAr ? "الأجهزة اللوحية" : "Tablet Share",
             value: tablet,
             color: "#10B981",
           },
@@ -596,7 +596,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           : `Home internet connectivity in ${gov.nameEn} stands at ${homeNet}% vs ${mobileOnly}% mobile-only reliance (Table 2-2), backed by monthly household spend of ${totalSpend}K IQD (Table 2-5), split into ${telecomPct}% for services and ${devicesPct}% for devices.`,
         donutData: [
           {
-            label: isAr ? "اتصال المنازل بالإنترنت (Home Net)" : "Home Internet (Home Net)",
+            label: isAr ? "اتصال المنازل بالإنترنت" : "Home Internet",
             value: homeNet,
             color: "#3B82F6",
           },
