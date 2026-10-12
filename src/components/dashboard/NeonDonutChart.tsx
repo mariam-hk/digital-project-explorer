@@ -52,13 +52,13 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
   });
 
   return (
-    <div className={`rounded-2xl bg-white dark:bg-[#090E1D] border border-slate-200 dark:border-white/10 p-5 shadow-sm dark:shadow-2xl flex flex-col justify-between h-full transition-colors duration-300 ${className}`}>
-      <div className="border-b border-slate-200 dark:border-white/5 pb-3">
-        <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse"></span>
+    <div className={`rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-5 shadow-sm dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300 ${className}`}>
+      <div className="border-b border-[#D5DFEB] dark:border-[#344258] pb-3">
+        <h3 className="text-sm font-bold text-[#17243A] dark:text-[#E8EEF7] tracking-tight flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#087EAD] dark:bg-[#58B6CC] animate-pulse"></span>
           <span>{title}</span>
         </h3>
-        {subtitle && <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{subtitle}</p>}
+        {subtitle && <p className="text-[11px] text-[#52647B] dark:text-[#A9B8CB] mt-0.5">{subtitle}</p>}
       </div>
 
       <div className="my-auto py-3 flex flex-col sm:flex-row items-center justify-around gap-6 flex-1">
@@ -71,7 +71,7 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
               cy={center}
               r={radius}
               fill="transparent"
-              stroke={isLight ? "rgba(0, 0, 0, 0.07)" : "rgba(255, 255, 255, 0.05)"}
+              stroke={isLight ? "rgba(82, 100, 123, 0.12)" : "rgba(169, 184, 203, 0.10)"}
               strokeWidth={strokeWidth}
             />
 
@@ -105,12 +105,12 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
 
           {/* Center Text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center p-2">
-            <span className="text-2xl font-black text-slate-900 dark:text-white font-mono drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">
+            <span className="text-2xl font-black text-[#17243A] dark:text-[#E8EEF7] font-mono">
               {hoveredIdx !== null
                 ? `${data[hoveredIdx].value}%`
                 : centerValue || `${data[0]?.value || 0}%`}
             </span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium max-w-[90px] truncate">
+            <span className="text-[10px] text-[#52647B] dark:text-[#A9B8CB] font-medium max-w-[90px] truncate">
               {hoveredIdx !== null ? data[hoveredIdx].label : centerLabel || data[0]?.label}
             </span>
           </div>
@@ -128,11 +128,11 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
                 className={`p-2 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
                   isHovered
                     ? isLight
-                      ? "bg-cyan-50 border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]"
-                      : "bg-white/10 border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.3)]"
+                      ? "bg-[#EAF0F7] border-[#087EAD] shadow-sm"
+                      : "bg-[#223047] border-[#58B6CC] shadow-sm"
                     : isLight
-                    ? "bg-slate-50 border-slate-200 hover:border-slate-300"
-                    : "bg-white/5 border-white/5 hover:border-white/20"
+                    ? "bg-[#F4F7FB] border-[#D5DFEB] hover:border-[#087EAD]/40"
+                    : "bg-[#223047]/60 border-[#344258] hover:border-[#58B6CC]/40"
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -140,9 +140,9 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
                     className="w-3 h-3 rounded-full flex-shrink-0"
                     style={{ backgroundColor: item.color, boxShadow: `0 0 8px ${item.color}` }}
                   ></span>
-                  <span className="text-slate-700 dark:text-slate-200 font-medium">{item.label}</span>
+                  <span className="text-[#17243A] dark:text-[#E8EEF7] font-medium">{item.label}</span>
                 </div>
-                <span className="font-mono font-bold text-slate-900 dark:text-white text-sm">
+                <span className="font-mono font-bold text-[#17243A] dark:text-[#E8EEF7] text-sm">
                   {item.value}%
                 </span>
               </div>
@@ -152,14 +152,14 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
       </div>
 
       {/* Bottom Summary Bar for visual alignment with adjacent demographic card */}
-      <div className="pt-3 border-t border-slate-200 dark:border-white/5 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mt-auto">
+      <div className="pt-3 border-t border-[#D5DFEB] dark:border-[#344258] flex items-center justify-between text-xs text-[#52647B] dark:text-[#A9B8CB] mt-auto">
         <div className="flex items-center gap-1.5">
           <span className="text-slate-500 dark:text-slate-400">{isAr ? "القطاع المتصدر:" : "Leading Segment:"}</span>
-          <span className="font-bold text-cyan-600 dark:text-cyan-400 font-mono">{data[0]?.label}</span>
+          <span className="font-bold text-[#087EAD] dark:text-[#58B6CC] font-mono">{data[0]?.label}</span>
         </div>
         <div className="flex items-center gap-1.5 font-mono">
           <span className="text-slate-500 dark:text-slate-400">{isAr ? "الحصة:" : "Share:"}</span>
-          <span className="font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-white/10 px-2 py-0.5 rounded-md text-xs">{data[0]?.value}%</span>
+          <span className="font-bold text-[#17243A] dark:text-[#E8EEF7] bg-[#EAF0F7] dark:bg-[#223047] px-2 py-0.5 rounded-md text-xs">{data[0]?.value}%</span>
         </div>
       </div>
     </div>

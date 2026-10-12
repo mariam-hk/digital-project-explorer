@@ -92,12 +92,12 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
       <div className="absolute inset-0" onClick={onClose}></div>
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-5xl max-h-[92vh] rounded-3xl bg-white dark:bg-[#090E1D] border border-slate-200 dark:border-cyan-500/40 shadow-2xl dark:shadow-[0_0_50px_rgba(6,182,212,0.25)] flex flex-col z-10 overflow-hidden transition-colors duration-300">
+      <div className="relative w-full max-w-5xl max-h-[92vh] rounded-3xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] shadow-2xl flex flex-col z-10 overflow-hidden transition-colors duration-300">
         {/* Modal Header */}
-        <div className="p-5 sm:p-6 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0E1529] flex items-start justify-between gap-4">
+        <div className="p-5 sm:p-6 border-b border-[#D5DFEB] dark:border-[#344258] bg-[#EAF0F7] dark:bg-[#101827] flex items-start justify-between gap-4">
           <div className="space-y-1.5 flex-1">
             <div className="flex items-center gap-2.5 flex-wrap">
-              <span className="px-3 py-1 rounded-xl text-xs sm:text-sm font-black font-mono bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-400/40 shadow-sm dark:shadow-[0_0_12px_rgba(6,182,212,0.4)]">
+              <span className="px-3 py-1 rounded-xl text-xs sm:text-sm font-black font-mono bg-[#EAF0F7] text-[#087EAD] border border-[#087EAD]/40 dark:bg-[#223047] dark:text-[#58B6CC] dark:border-[#58B6CC]/40 shadow-sm">
                 {tableData.tableNumber}
               </span>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
@@ -120,7 +120,7 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
         </div>
 
         {/* Action Controls & Search Bar */}
-        <div className="px-5 sm:px-6 py-3 border-b border-slate-200 dark:border-white/5 bg-slate-100/50 dark:bg-[#0A1022] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="px-5 sm:px-6 py-3 border-b border-[#D5DFEB] dark:border-[#344258] bg-white dark:bg-[#192436] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           {/* Search Box */}
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 text-slate-400 absolute start-3 top-1/2 -translate-y-1/2" />
@@ -129,7 +129,7 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isAr ? "بحث عن محافظة أو رقم..." : "Filter governorates..."}
-              className="w-full ps-9 pe-4 py-2 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-cyan-500 dark:focus:border-cyan-400 focus:outline-none text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
+              className="w-full ps-9 pe-4 py-2 rounded-xl bg-white dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258] focus:border-[#087EAD] dark:focus:border-[#58B6CC] focus:outline-none text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
             />
           </div>
 
@@ -140,7 +140,7 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
             </span>
             <button
               onClick={handleExportCSV}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-cyan-700 dark:bg-[#162038] dark:hover:bg-[#1E2B4A] dark:text-cyan-300 text-xs font-bold border border-slate-200 dark:border-cyan-500/40 shadow-sm dark:shadow-[0_0_10px_rgba(6,182,212,0.2)] transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#EAF0F7] hover:bg-[#D5DFEB] text-[#087EAD] dark:bg-[#223047] dark:hover:bg-[#344258] dark:text-[#58B6CC] text-xs font-bold border border-[#D5DFEB] dark:border-[#344258] shadow-sm transition-all cursor-pointer"
             >
               {copied ? (
                 <>
@@ -159,7 +159,7 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
 
         {/* Informative Note Box */}
         {tableData.notesAr && (
-          <div className="px-5 sm:px-6 py-2.5 bg-cyan-50 dark:bg-cyan-950/30 border-b border-cyan-200 dark:border-cyan-500/20 flex items-center gap-2 text-xs text-cyan-800 dark:text-cyan-300">
+          <div className="px-5 sm:px-6 py-2.5 bg-[#EAF0F7] dark:bg-[#223047] border-b border-[#D5DFEB] dark:border-[#344258] flex items-center gap-2 text-xs text-[#087EAD] dark:text-[#58B6CC]">
             <Info className="w-4 h-4 flex-shrink-0 text-cyan-600 dark:text-cyan-400" />
             <span className="text-slate-700 dark:text-slate-300">{tableData.notesAr}</span>
           </div>
@@ -169,7 +169,7 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
         <div className="flex-1 overflow-y-auto overflow-x-auto p-4 sm:p-6">
           <table className="w-full text-xs text-right border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 font-mono uppercase text-[11px]">
+              <tr className="border-b border-[#D5DFEB] dark:border-[#344258] text-[#52647B] dark:text-[#A9B8CB] font-mono uppercase text-[11px]">
                 <th className="p-3 text-center w-12">#</th>
                 {tableData.columns.map((col) => {
                   const isSorted = sortKey === col.key;
@@ -257,7 +257,7 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0A1022] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+        <div className="p-4 border-t border-[#D5DFEB] dark:border-[#344258] bg-[#EAF0F7] dark:bg-[#101827] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#52647B] dark:text-[#A9B8CB]">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
             <span>
@@ -268,7 +268,7 @@ export const OfficialTableDetailModal: React.FC<OfficialTableDetailModalProps> =
           </div>
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white font-bold transition-all cursor-pointer"
+            className="px-5 py-2 rounded-xl bg-white hover:bg-[#EAF0F7] text-[#17243A] border border-[#D5DFEB] dark:bg-[#223047] dark:hover:bg-[#344258] dark:text-[#E8EEF7] dark:border-[#344258] font-bold transition-all cursor-pointer"
           >
             {isAr ? "إغلاق" : "Close"}
           </button>

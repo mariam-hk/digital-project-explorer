@@ -71,8 +71,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "smartphones",
     titleAr: "الأجهزة الذكية والحواسيب",
     titleEn: "Smartphones & Computers",
-    neonColor: "#10B981", // Emerald Neon
-    neonGlow: "rgba(16, 185, 129, 0.6)",
+    neonColor: "#53B69B", // Muted Emerald
+    neonGlow: "rgba(83, 182, 155, 0.4)",
     chartType: "combo_spline",
     officialTables: [
       {
@@ -138,39 +138,39 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           {
             label: isAr ? "هواتف ذكية" : "Smartphones",
             value: smartShare,
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "حواسيب محمولة" : "Laptops",
             value: laptopShare,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "حواسيب مكتبية" : "Desktops",
             value: desktopShare,
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "أجهزة لوحية" : "Tablets",
             value: tabletShare,
-            color: "#A855F7",
+            color: "#AE91D9",
           },
         ],
         barData: [
           {
             label: isAr ? "الشباب (15 - 24 سنة)" : "Youth (15-24 yrs)",
             value: youthUsage,
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "الذكور" : "Male Users",
             value: maleUsage,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "الإناث" : "Female Users",
             value: femaleUsage,
-            color: "#EC4899",
+            color: "#D38BAD",
           },
           {
             label: isAr ? "المعدل العام للمحافظة" : "Governorate Total",
@@ -183,19 +183,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "نسبة الهواتف الذكية" : "Smartphone Share",
             value: `${smartPct}%`,
             note: isAr ? "جدول 1-5" : "Table 1-5",
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "معدل استخدام الحاسوب" : "Computer Usage Rate",
             value: `${totalPC}%`,
             note: isAr ? "جدول 1-10" : "Table 1-10",
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "استخدام فئة الشباب" : "Youth Adoption",
             value: `${youthUsage}%`,
             note: isAr ? "جدول 1-4" : "Table 1-4",
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
         ],
       };
@@ -206,8 +206,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "shopping",
     titleAr: "التسوق والشراء الإلكتروني",
     titleEn: "Online Shopping & E-Commerce",
-    neonColor: "#EC4899",
-    neonGlow: "rgba(236, 72, 153, 0.6)",
+    neonColor: "#D38BAD",
+    neonGlow: "rgba(211, 139, 173, 0.4)",
     chartType: "donut_breakdown",
     officialTables: [
       {
@@ -259,39 +259,39 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           {
             label: isAr ? "ملابس وأزياء" : "Apparel & Fashion",
             value: clothes,
-            color: "#EC4899",
+            color: "#D38BAD",
           },
           {
             label: isAr ? "وجبات طعام ومشروبات" : "Food & Beverages",
             value: food,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "إلكترونيات وهواتف" : "Electronics & Gadgets",
             value: electronics,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "مستحضرات وسلع متنوعة" : "Beauty & General",
             value: other,
-            color: "#A855F7",
+            color: "#AE91D9",
           },
         ],
         barData: [
           {
             label: isAr ? "الدفع نقداً عند الاستلام" : "Cash-on-Delivery (COD)",
             value: cod,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "معدل المتسوقين عبر الإنترنت" : "Online Shoppers Rate",
             value: shoppingRate,
-            color: "#EC4899",
+            color: "#D38BAD",
           },
           {
             label: isAr ? "التوصيل المباشر للمنزل" : "Home Delivery Rate",
             value: 92.0,
-            color: "#10B981",
+            color: "#53B69B",
           },
         ],
         kpiStats: [
@@ -299,19 +299,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "معدل الشراء الإلكتروني" : "E-Commerce Rate",
             value: `${shoppingRate}%`,
             note: isAr ? "جدول 1-18" : "Table 1-18",
-            color: "#EC4899",
+            color: "#D38BAD",
           },
           {
             label: isAr ? "السلعة الأكثر طلباً" : "Top Category",
             value: isAr ? `الملابس (${clothes}%)` : `Apparel (${clothes}%)`,
             note: isAr ? "جدول 1-18" : "Table 1-18",
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "نسبة الدفع عند الاستلام" : "Cash-on-Delivery",
             value: `${cod}%`,
             note: isAr ? "جدول 1-19" : "Table 1-19",
-            color: "#10B981",
+            color: "#53B69B",
           },
         ],
       };
@@ -322,8 +322,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "payments",
     titleAr: "الدفع الإلكتروني والفنتك",
     titleEn: "Digital Payments & FinTech",
-    neonColor: "#06B6D4",
-    neonGlow: "rgba(6, 182, 212, 0.6)",
+    neonColor: "#58B6CC",
+    neonGlow: "rgba(88, 182, 204, 0.4)",
     chartType: "combo_spline",
     officialTables: [
       {
@@ -371,34 +371,34 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           {
             label: isAr ? "كاش عند الاستلام" : "Cash-on-Delivery",
             value: cod,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "دفع الكتروني" : "Digital Payments",
             value: digitalShare > 0 ? digitalShare : 0.3,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
         ],
         barData: [
           {
             label: isAr ? "الاعتماد على الكاش عند الاستلام" : "Cash Dependency Rate",
             value: cod,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "مؤشر الفنتك والتحول المالي" : "FinTech & Financial Score",
             value: gov.fintechScore,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "مؤشر الجاهزية الرقمية" : "Digital Readiness Score",
             value: gov.digitalReadinessScore,
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "حجم القدرة على الإنفاق التقني" : "ICT Spend Capacity Index",
             value: Math.min(100, Math.round((telecomSpend / 500) * 100)),
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
         ],
         kpiStats: [
@@ -406,19 +406,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "مكاتب بطاقة كي المتاحة" : "Smart Card Offices",
             value: isAr ? `${smartOffices} مكتباً` : `${smartOffices} offices`,
             note: isAr ? "إحصاءات 2024" : "Telecom 2024",
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "إنفاق الأسرة التكنولوجي" : "Household ICT Spend",
             value: isAr ? `${telecomSpend} ألف د.ع` : `${telecomSpend}K IQD`,
             note: isAr ? "جدول 2-5" : "Table 2-5",
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "فجوة الكاش الواعدة" : "Cash Conversion Gap",
             value: `${cod}%`,
             note: isAr ? "جدول 1-19" : "Table 1-19",
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
         ],
       };
@@ -429,8 +429,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "computers",
     titleAr: "أجهزة الحاسوب واللابتوب",
     titleEn: "Computers & Laptops",
-    neonColor: "#F59E0B",
-    neonGlow: "rgba(245, 158, 11, 0.6)",
+    neonColor: "#D7AC68",
+    neonGlow: "rgba(215, 172, 104, 0.4)",
     chartType: "device_split",
     officialTables: [
       {
@@ -476,46 +476,46 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           {
             label: isAr ? "حاسوب محمول" : "Laptop",
             value: laptop,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "حاسوب مكتبي" : "Desktop PC",
             value: desktop,
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "جهاز لوحي" : "Tablet",
             value: tablet,
-            color: "#10B981",
+            color: "#53B69B",
           },
         ],
         barData: [
           {
             label: isAr ? "حصة الحواسيب المحمولة" : "Laptop Share",
             value: laptop,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "معدل استخدام الحواسيب الإجمالي" : "Total Computer Usage",
             value: pcUsage,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "حصة الحواسيب المكتبية" : "Desktop Share",
             value: desktop,
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           /*
           {
             label: isAr ? "مؤشر الكفاءات وساس" : "SaaS & Talent Index",
             value: gov.digitalTalentScore,
-            color: "#A855F7",
+            color: "#AE91D9",
           },
           */
           {
             label: isAr ? "الأجهزة اللوحية" : "Tablet Share",
             value: tablet,
-            color: "#10B981",
+            color: "#53B69B",
           },
         ],
         kpiStats: [
@@ -523,19 +523,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "نسبة استخدام الحاسوب" : "Computer Usage Rate",
             value: `${pcUsage}%`,
             note: isAr ? "جدول 1-10" : "Table 1-10",
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             label: isAr ? "الجهاز الأكثر انتشاراً" : "Dominant Device",
             value: isAr ? `المحمول (${laptop}%)` : `Laptop (${laptop}%)`,
             note: isAr ? "جدول 1-10" : "Table 1-10",
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "الحواسيب المكتبية" : "Desktop PC Share",
             value: `${desktop}%`,
             note: isAr ? "جدول 1-10" : "Table 1-10",
-            color: "#10B981",
+            color: "#53B69B",
           },
         ],
       };
@@ -546,8 +546,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "internet",
     titleAr: "الإنترنت وإنفاق الأسرة",
     titleEn: "Internet & Household Spend",
-    neonColor: "#3B82F6",
-    neonGlow: "rgba(59, 130, 246, 0.6)",
+    neonColor: "#7A9FE0",
+    neonGlow: "rgba(122, 159, 224, 0.4)",
     chartType: "combo_spline",
     officialTables: [
       {
@@ -598,7 +598,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           {
             label: isAr ? "إنترنت منزلي" : "Home Internet",
             value: homeNet,
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "إنترنت الموبايل" : "Mobile Cellular",
@@ -611,19 +611,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "خدمات الاتصال وباقات الإنترنت" : "Telecom & Net Services",
             value: telecomPct,
             displayValue: isAr ? `${telecomServices} ألف د.ع` : `${telecomServices}K IQD`,
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "شراء وصيانة الأجهزة والمعدات" : "Hardware & Devices",
             value: devicesPct,
             displayValue: isAr ? `${devicesSpend} ألف د.ع` : `${devicesSpend}K IQD`,
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? `إجمالي إنفاق الأسرة في ${gov.nameAr}` : `Total Household Spend in ${gov.nameEn}`,
             value: 100,
             displayValue: isAr ? `${totalSpend} ألف د.ع` : `${totalSpend}K IQD`,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
         ],
         kpiStats: [
@@ -631,19 +631,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "نفاذ إنترنت المنازل" : "Home Internet Rate",
             value: `${homeNet}%`,
             note: isAr ? "جدول 2-2" : "Table 2-2",
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "إنفاق الأسرة الشهري" : "Household ICT Spend",
             value: isAr ? `${totalSpend} ألف د.ع` : `${totalSpend}K IQD`,
             note: isAr ? "جدول 2-5" : "Table 2-5",
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "مشتركو الفايبر الضوئي" : "FTTH Fiber Subs",
             value: `${gov.ftthSubscribers.toLocaleString()}`,
             note: isAr ? "تقرير الاتصالات 2024" : "Telecom 2024",
-            color: "#A855F7",
+            color: "#AE91D9",
           },
         ],
       };
@@ -654,8 +654,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "skills",
     titleAr: "المهارات ومجالات الاستخدام",
     titleEn: "Skills & Internet Usage",
-    neonColor: "#A855F7",
-    neonGlow: "rgba(168, 85, 247, 0.6)",
+    neonColor: "#AE91D9",
+    neonGlow: "rgba(174, 145, 217, 0.4)",
     chartType: "demographic_bars",
     officialTables: [
       {
@@ -700,44 +700,44 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           {
             label: isAr ? "التواصل والشبكات الاجتماعية" : "Social Media",
             value: socialMedia,
-            color: "#A855F7",
+            color: "#AE91D9",
           },
           {
             label: isAr ? "المراسلة والمكالمات" : "Messaging & Calls",
             value: messaging,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "البحث والقراءة والتعليم" : "Learning & Research",
             value: learning,
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "العمل والخدمات البنكية" : "Work & Banking",
             value: workBanking,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
         ],
         barData: [
           {
             label: isAr ? "نقل وتبادل الملفات الرقمية" : "File Transfer Skills",
             value: fileTransfer,
-            color: "#A855F7",
+            color: "#AE91D9",
           },
           {
             label: isAr ? "استخدام وتثبيت البرمجيات" : "Software Setup & Config",
             value: softwareInstall,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "معدل المهارات الرقمية العام" : "Overall Digital Skills Rate",
             value: overallSkills,
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? "البرمجة وتطوير الأنظمة" : "Coding & Software Dev",
             value: coding,
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
         ],
         kpiStats: [
@@ -745,19 +745,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "المهارات الرقمية العامة" : "Overall Skills Rate",
             value: `${overallSkills}%`,
             note: isAr ? "جدول 1-17" : "Table 1-17",
-            color: "#A855F7",
+            color: "#AE91D9",
           },
           {
             label: isAr ? "منصات التواصل اليومي" : "Daily Social Media",
             value: `${socialMedia}%`,
             note: isAr ? "جدول 1-16" : "Table 1-16",
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "الكوادر البرمجية المتقدمة" : "Advanced Coders",
             value: `${coding}%`,
             note: isAr ? "جدول 1-17" : "Table 1-17",
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
         ],
       };
@@ -768,8 +768,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "spending",
     titleAr: "إنفاق الأسرة على التكنولوجيا والاتصالات",
     titleEn: "Household ICT & Telecom Spending",
-    neonColor: "#3B82F6",
-    neonGlow: "rgba(59, 130, 246, 0.6)",
+    neonColor: "#7A9FE0",
+    neonGlow: "rgba(122, 159, 224, 0.4)",
     chartType: "donut_breakdown",
     officialTables: [
       {
@@ -803,12 +803,12 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           {
             label: isAr ? "خدمات الاتصال وباقات الإنترنت" : "Telecom & Net Services",
             value: telecomPct,
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "شراء وصيانة الأجهزة والمعدات" : "Hardware & Devices",
             value: devicesPct,
-            color: "#10B981",
+            color: "#53B69B",
           },
         ],
         barData: [
@@ -816,19 +816,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "خدمات الاتصال وباقات الإنترنت" : "Telecom & Net Services",
             value: telecomPct,
             displayValue: isAr ? `${telecomServices} ألف د.ع` : `${telecomServices}K IQD`,
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "شراء وصيانة الأجهزة والمعدات" : "Hardware & Devices",
             value: devicesPct,
             displayValue: isAr ? `${devicesSpend} ألف د.ع` : `${devicesSpend}K IQD`,
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             label: isAr ? `إجمالي إنفاق الأسرة في ${gov.nameAr}` : `Total Household Spend in ${gov.nameEn}`,
             value: Math.min(100, Math.round((totalSpend / 500.2) * 100)),
             displayValue: isAr ? `${totalSpend} ألف د.ع` : `${totalSpend}K IQD`,
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
         ],
         kpiStats: [
@@ -836,19 +836,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "إجمالي الإنفاق الشهري" : "Total Monthly Spend",
             value: isAr ? `${totalSpend} ألف د.ع` : `${totalSpend}K IQD`,
             note: isAr ? "جدول 2-5" : "Table 2-5",
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             label: isAr ? "إنفاق الاتصال والإنترنت" : "Telecom & Net Spend",
             value: isAr ? `${telecomServices} ألف د.ع` : `${telecomServices}K IQD`,
             note: isAr ? "جدول 2-5" : "Table 2-5",
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "إنفاق الأجهزة والصيانة" : "Hardware & Devices",
             value: isAr ? `${devicesSpend} ألف د.ع` : `${devicesSpend}K IQD`,
             note: isAr ? "جدول 2-5" : "Table 2-5",
-            color: "#10B981",
+            color: "#53B69B",
           },
         ],
       };
@@ -859,8 +859,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
     topicId: "readiness",
     titleAr: "مؤشر الجاهزية الرقمية الشاملة",
     titleEn: "Digital Readiness Index",
-    neonColor: "#14B8A6",
-    neonGlow: "rgba(20, 184, 166, 0.6)",
+    neonColor: "#58B6CC",
+    neonGlow: "rgba(88, 182, 204, 0.4)",
     chartType: "combo_spline",
     officialTables: [
       {
@@ -909,7 +909,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             nationalValue: NATIONAL_AVERAGE_METRICS.homeInternetPct,
             delta: homeNetDelta,
             tableNote: isAr ? "جدول 2-2" : "Table 2-2",
-            color: "#3B82F6",
+            color: "#7A9FE0",
           },
           {
             metricLabel: isAr ? "انتشار الهواتف الذكية" : "Smartphone Penetration",
@@ -917,7 +917,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             nationalValue: NATIONAL_AVERAGE_METRICS.smartphoneUsagePct,
             delta: phonesDelta,
             tableNote: isAr ? "جدول 1-4" : "Table 1-4",
-            color: "#10B981",
+            color: "#53B69B",
           },
           {
             metricLabel: isAr ? "مؤشر المهارات التقنية" : "Digital Skills Rate",
@@ -925,7 +925,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             nationalValue: NATIONAL_AVERAGE_METRICS.digitalSkillsPct,
             delta: skillsDelta,
             tableNote: isAr ? "جدول 1-17" : "Table 1-17",
-            color: "#A855F7",
+            color: "#AE91D9",
           },
           {
             metricLabel: isAr ? "معدل استخدام الحواسيب" : "Computer Usage",
@@ -933,7 +933,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             nationalValue: NATIONAL_AVERAGE_METRICS.computerUsagePct,
             delta: computerDelta,
             tableNote: isAr ? "جدول 1-10" : "Table 1-10",
-            color: "#F59E0B",
+            color: "#D7AC68",
           },
           {
             metricLabel: isAr ? "مؤشر الجاهزية الرقمية الكلي" : "Overall Readiness Index",
@@ -941,7 +941,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             nationalValue: NATIONAL_AVERAGE_METRICS.digitalReadinessScore,
             delta: readinessDelta,
             tableNote: isAr ? "مؤشر مركب" : "Composite",
-            color: "#14B8A6",
+            color: "#58B6CC",
             isOverallResult: true,
           },
         ],
@@ -950,19 +950,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "مؤشر الجاهزية الرقمية" : "Readiness Score",
             value: `${gov.digitalReadinessScore}%`,
             note: isAr ? "مؤشر مركب" : "Composite",
-            color: "#14B8A6",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "المعدل الوطني للعراق" : "Iraq Benchmark",
             value: `${NATIONAL_AVERAGE_METRICS.digitalReadinessScore}%`,
             note: isAr ? "إجمالي مسح 2022" : "COSIT 2022",
-            color: "#06B6D4",
+            color: "#58B6CC",
           },
           {
             label: isAr ? "الفارق عن المعدل العام" : "Benchmark Delta",
             value: `${readinessDelta > 0 ? "+" : ""}${readinessDelta}%`,
             note: readinessDelta >= 0 ? (isAr ? "متفوقة على المعدل" : "Above Benchmark") : (isAr ? "فجوة عن المعدل" : "Below Benchmark"),
-            color: readinessDelta >= 0 ? "#10B981" : "#F59E0B",
+            color: readinessDelta >= 0 ? "#53B69B" : "#D7AC68",
           },
         ],
       };

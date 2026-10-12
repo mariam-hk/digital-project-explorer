@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --background: #F8FAFC;
-    --foreground: #0F172A;
+    --background: #F4F7FB;
+    --foreground: #17243A;
   }
 
   .dark {
-    --background: #090C15;
-    --foreground: #f8fafc;
+    --background: #101827;
+    --foreground: #E8EEF7;
   }
 
   html {
@@ -47,24 +47,24 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #E2E8F0;
+  background: #EAF0F7;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #0D111D;
+  background: #101827;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #D5DFEB;
   border-radius: 4px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #344258;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #CBD9E8;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #52647B;
 }
 
 @keyframes fadeIn {

@@ -70,19 +70,19 @@ export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
 
   return (
     <>
-      <div className="rounded-2xl bg-white dark:bg-[#090D1B] border border-slate-200 dark:border-white/10 p-5 sm:p-6 shadow-sm dark:shadow-2xl space-y-4 transition-colors duration-300">
+      <div className="rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-5 sm:p-6 shadow-sm dark:shadow-none space-y-4 transition-colors duration-300">
         {/* Title */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#D5DFEB] dark:border-[#344258] pb-3">
           <div className="flex items-center gap-2.5">
-            <Database className="w-5 h-5 text-cyan-600 dark:text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-            <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight">
+            <Database className="w-5 h-5 text-[#087EAD] dark:text-[#58B6CC]" />
+            <h3 className="text-sm sm:text-base font-bold text-[#17243A] dark:text-[#E8EEF7] tracking-tight">
               {isAr
                 ? `الجداول والمسوح الإحصائية الرسمية المعتمدة لقطاع: (${topicTitle})`
                 : `Official Survey & Census Tables Grounding: (${topicTitle})`}
             </h3>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="flex items-center gap-2 text-xs font-mono text-[#16876E] dark:text-[#53B69B]">
+            <ShieldCheck className="w-4 h-4 text-[#16876E] dark:text-[#53B69B]" />
             <span>{isAr ? "بيانات حكومية موثقة 100%" : "Verified Government Telemetry"}</span>
           </div>
         </div>
@@ -104,7 +104,7 @@ export const OfficialTablesNeonList: React.FC<OfficialTablesNeonListProps> = ({
             <div
               key={idx}
               onClick={() => handleOpenTable(tbl)}
-              className="group relative p-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-cyan-400 dark:bg-white/[0.03] dark:hover:bg-white/[0.07] dark:border-white/5 dark:hover:border-cyan-400/60 shadow-sm dark:shadow-lg hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-all duration-200 cursor-pointer"
+              className="group relative p-4 rounded-xl bg-[#F4F7FB] hover:bg-[#EAF0F7] border border-[#D5DFEB] hover:border-[#087EAD] dark:bg-[#223047] dark:hover:bg-[#344258] dark:border-[#344258] dark:hover:border-[#58B6CC] shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <div className="space-y-1.5 flex-1">
