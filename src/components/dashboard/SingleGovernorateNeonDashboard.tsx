@@ -74,7 +74,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
       nameEn: "FinTech & Payments",
       val: selectedGov.fintechScore,
       natAvg: NATIONAL_AVERAGE_METRICS.overallScore,
-      color: "#58B6CC",
+      color: "#22D3EE",
       icon: "💳",
       source: "جدول 14 + جدول 1-19",
     },
@@ -84,7 +84,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
       nameEn: "Mobile Phone Usage",
       val: selectedGov.smartphoneUsagePct,
       natAvg: NATIONAL_AVERAGE_METRICS.smartphoneUsagePct,
-      color: "#53B69B",
+      color: "#34D399",
       icon: "📱",
       source: "مسح تكنولوجيا المعلومات (جدول 1-4، ص 44)",
     },
@@ -94,7 +94,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
       nameEn: "Smartphone Share",
       val: selectedGov.internetPenetrationPct,
       natAvg: NATIONAL_AVERAGE_METRICS.internetPenetrationPct,
-      color: "#7A9FE0",
+      color: "#60A5FA",
       icon: "🌐",
       source: "مسح تكنولوجيا المعلومات (جدول 1-5، ص 46)",
     },
@@ -104,7 +104,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
       nameEn: "Computer & Laptop Usage",
       val: selectedGov.computerUsagePct,
       natAvg: NATIONAL_AVERAGE_METRICS.computerUsagePct,
-      color: "#D7AC68",
+      color: "#FBBF24",
       icon: "💻",
       source: "مسح تكنولوجيا المعلومات (جدول 1-10، ص 54)",
     },
@@ -114,7 +114,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
       nameEn: "Online Purchasing",
       val: selectedGov.onlineShoppingPct,
       natAvg: NATIONAL_AVERAGE_METRICS.onlineShoppingPct,
-      color: "#D38BAD",
+      color: "#F472B6",
       icon: "🛒",
       source: "مسح تكنولوجيا المعلومات (جدول 1-18، ص 87)",
     },
@@ -124,7 +124,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
       nameEn: "Digital Skills",
       val: selectedGov.digitalSkillsPct,
       natAvg: NATIONAL_AVERAGE_METRICS.digitalSkillsPct,
-      color: "#AE91D9",
+      color: "#C084FC",
       icon: "🎓",
       source: "مسح تكنولوجيا المعلومات (جدول 1-17، ص 78)",
     },
@@ -134,12 +134,12 @@ const govDetails = breakdownConfig.getGovBreakdown(
     <div className="space-y-6">
       {/* 1. Top Governorate Banner & Dual Switcher (Only if NOT in sidebar mode) */}
       {!sidebarMode && (
-        <div className="relative rounded-2xl bg-gradient-to-r from-[#EAF0F7] via-[#F4F7FB] to-white dark:from-[#101827] dark:via-[#192436] dark:to-[#223047] border border-[#D5DFEB] dark:border-[#344258] p-6 shadow-sm dark:shadow-none flex flex-col sm:flex-row sm:items-center justify-between gap-4 z-30 transition-colors duration-300">
+        <div className="relative rounded-2xl bg-gradient-to-r from-[#E2E8F0] via-[#F1F5F9] to-white dark:from-[#0B0F19] dark:via-[#111827] dark:to-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-6 shadow-sm dark:shadow-none flex flex-col sm:flex-row sm:items-center justify-between gap-4 z-30 transition-colors duration-300">
           <div>
             <div className="flex items-center gap-2">
               <button
                 onClick={onBackToAll}
-                className="text-xs text-[#087EAD] dark:text-[#58B6CC] hover:text-[#076C94] dark:hover:text-[#4AA3B8] font-semibold hover:underline flex items-center gap-1 cursor-pointer"
+                className="text-xs text-[#0E7490] dark:text-[#22D3EE] hover:text-[#085C73] dark:hover:text-[#1FB2C9] font-semibold hover:underline flex items-center gap-1 cursor-pointer"
               >
                 {isAr ? "← العودة لمقارنة كل المحافظات" : "← Back to all governorates"}
               </button>
@@ -155,9 +155,9 @@ const govDetails = breakdownConfig.getGovBreakdown(
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1 flex items-center gap-2.5">
-              <MapPin className="w-6 h-6 text-[#087EAD] dark:text-[#58B6CC]" />
+              <MapPin className="w-6 h-6 text-[#0E7490] dark:text-[#22D3EE]" />
               <span>{isAr ? selectedGov.nameAr : selectedGov.nameEn}</span>
-              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-[#EAF0F7] text-[#087EAD] border border-[#087EAD]/30 dark:bg-[#223047] dark:text-[#58B6CC] dark:border-[#58B6CC]/30 font-bold">
+              <span className="text-xs font-mono px-2.5 py-1 rounded-full bg-[#E2E8F0] text-[#0E7490] border border-[#0E7490]/30 dark:bg-[#1E293B] dark:text-[#22D3EE] dark:border-[#22D3EE]/30 font-bold">
                 {isAr ? `الترتيب الوطني: #${selectedGov.rank}` : `Rank: #${selectedGov.rank}`}
               </span>
             </h2>
@@ -170,10 +170,10 @@ const govDetails = breakdownConfig.getGovBreakdown(
           <div className="relative self-start sm:self-center">
             <button
               onClick={() => setGovDropdownOpen(!govDropdownOpen)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-[#EAF0F7] text-[#17243A] dark:bg-[#223047] dark:hover:bg-[#344258] dark:text-[#E8EEF7] text-xs font-bold border border-[#D5DFEB] dark:border-[#344258] shadow-sm transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-[#E2E8F0] text-[#0F172A] dark:bg-[#1E293B] dark:hover:bg-[rgba(148,163,184,0.12)] dark:text-[#F1F5F9] text-xs font-bold border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-sm transition-colors cursor-pointer"
             >
               <span>{isAr ? "تغيير المحافظة" : "Switch Governorate"}</span>
-              <ChevronDown className={`w-4 h-4 text-[#087EAD] dark:text-[#58B6CC] transition-transform duration-200 ${govDropdownOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-4 h-4 text-[#0E7490] dark:text-[#22D3EE] transition-transform duration-200 ${govDropdownOpen ? "rotate-180" : ""}`} />
             </button>
 
             {govDropdownOpen && (
@@ -183,10 +183,10 @@ const govDetails = breakdownConfig.getGovBreakdown(
                   onClick={() => setGovDropdownOpen(false)}
                 ></div>
 
-                <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-72 max-h-96 overflow-y-auto rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] shadow-xl dark:shadow-none py-2 z-50 text-xs divide-y divide-slate-100 dark:divide-white/5">
+                <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-72 max-h-96 overflow-y-auto rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-xl dark:shadow-none py-2 z-50 text-xs divide-y divide-slate-100 dark:divide-white/5">
                   <div className="px-3.5 py-2 text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                    <span className="text-[#087EAD] dark:text-[#58B6CC] font-bold">{isAr ? "اختر من المحافظات الـ 18:" : "Select Governorate (18):"}</span>
-                    <span className="text-[10px] text-[#087EAD] dark:text-[#58B6CC] font-mono">
+                    <span className="text-[#0E7490] dark:text-[#22D3EE] font-bold">{isAr ? "اختر من المحافظات الـ 18:" : "Select Governorate (18):"}</span>
+                    <span className="text-[10px] text-[#0E7490] dark:text-[#22D3EE] font-mono">
                       {ALL_GOVERNORATES.length} {isAr ? "محافظة" : "govs"}
                     </span>
                   </div>
@@ -200,7 +200,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                             onSelectGov(g);
                             setGovDropdownOpen(false);
                           }}
-                          className={`w-full text-right px-3.5 py-2.5 hover:bg-[#EAF0F7] dark:hover:bg-[#223047] text-[#52647B] dark:text-[#A9B8CB] transition-colors flex justify-between items-center cursor-pointer ${
+                          className={`w-full text-right px-3.5 py-2.5 hover:bg-[#E2E8F0] dark:hover:bg-[#1E293B] text-[#334155] dark:text-[#94A3B8] transition-colors flex justify-between items-center cursor-pointer ${
                             isSelected
                               ? "font-bold text-cyan-700 dark:text-cyan-300 bg-purple-50 dark:bg-purple-600/25 border-r-4 border-cyan-500 dark:border-cyan-400"
                               : ""
@@ -216,7 +216,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                               </span>
                             )}
                           </div>
-                          <span className="text-[11px] text-[#087EAD] dark:text-[#58B6CC] font-mono font-bold">
+                          <span className="text-[11px] text-[#0E7490] dark:text-[#22D3EE] font-mono font-bold">
                             #{g.rank} ({g.overallScore}%)
                           </span>
                         </button>
@@ -232,7 +232,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
       {/* 2. Interactive Sector / Topic Navigation Pills (Only if NOT in sidebar mode) */}
       {!sidebarMode && (
-        <div className="rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-3 shadow-sm dark:shadow-none flex items-center gap-2 overflow-x-auto transition-colors duration-300">
+        <div className="rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-3 shadow-sm dark:shadow-none flex items-center gap-2 overflow-x-auto transition-colors duration-300">
           <span className="text-xs text-slate-500 dark:text-slate-400 font-bold px-2 flex-shrink-0">
             {isAr ? "القطاع المعروض:" : "Active Sector:"}
           </span>
@@ -245,7 +245,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex-shrink-0 cursor-pointer ${
                   isActive
                     ? "border shadow-md"
-                    : "bg-[#F4F7FB] border border-[#D5DFEB] text-[#52647B] hover:text-[#17243A] hover:bg-[#EAF0F7] dark:bg-[#223047] dark:border-[#344258] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7] dark:hover:bg-[#344258]"
+                    : "bg-[#F1F5F9] border border-[#CBD5E1] text-[#334155] hover:text-[#0F172A] hover:bg-[#E2E8F0] dark:bg-[#1E293B] dark:border-[rgba(148,163,184,0.12)] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9] dark:hover:bg-[rgba(148,163,184,0.12)]"
                 }`}
                 style={{
                   backgroundColor: isActive ? `${topic.neonColor}22` : undefined,
@@ -265,7 +265,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
       {/* 3. Deep Dive Section for THIS Specific Topic in THIS Governorate */}
       <div id="charts" className="space-y-4 scroll-mt-24">
         {/* Section Heading */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#D5DFEB] dark:border-[#344258] pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] pb-3">
           <div>
             <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
               <span className="text-xl">{selectedTopic.icon}</span>
@@ -286,11 +286,11 @@ const govDetails = breakdownConfig.getGovBreakdown(
               <div className="relative">
                 <button
                   onClick={() => setGovDropdownOpen(!govDropdownOpen)}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#EAF0F7] text-[#17243A] dark:bg-[#223047] dark:hover:bg-[#344258] dark:text-[#E8EEF7] text-xs font-bold border border-[#D5DFEB] dark:border-[#344258] shadow-sm transition-colors cursor-pointer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#E2E8F0] text-[#0F172A] dark:bg-[#1E293B] dark:hover:bg-[rgba(148,163,184,0.12)] dark:text-[#F1F5F9] text-xs font-bold border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-sm transition-colors cursor-pointer"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#087EAD] dark:text-[#58B6CC]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#0E7490] dark:text-[#22D3EE]" />
                   <span>{isAr ? selectedGov.nameAr : selectedGov.nameEn}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 text-[#087EAD] dark:text-[#58B6CC] transition-transform duration-200 ${govDropdownOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 text-[#0E7490] dark:text-[#22D3EE] transition-transform duration-200 ${govDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {govDropdownOpen && (
@@ -299,10 +299,10 @@ const govDetails = breakdownConfig.getGovBreakdown(
                       className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
                       onClick={() => setGovDropdownOpen(false)}
                     ></div>
-                    <div className="absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-64 max-h-80 overflow-y-auto rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] shadow-xl dark:shadow-none py-2 z-50 text-xs divide-y divide-slate-100 dark:divide-white/5">
+                    <div className="absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-64 max-h-80 overflow-y-auto rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-xl dark:shadow-none py-2 z-50 text-xs divide-y divide-slate-100 dark:divide-white/5">
                       <div className="px-3.5 py-1.5 text-[10px] font-bold text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                        <span className="text-[#087EAD] dark:text-[#58B6CC] font-bold">{isAr ? "اختر المحافظة:" : "Select Governorate:"}</span>
-                        <span className="text-[#087EAD] dark:text-[#58B6CC] font-mono">18</span>
+                        <span className="text-[#0E7490] dark:text-[#22D3EE] font-bold">{isAr ? "اختر المحافظة:" : "Select Governorate:"}</span>
+                        <span className="text-[#0E7490] dark:text-[#22D3EE] font-mono">18</span>
                       </div>
                       <div className="py-1">
                         {ALL_GOVERNORATES.map((g) => (
@@ -312,12 +312,12 @@ const govDetails = breakdownConfig.getGovBreakdown(
                               onSelectGov(g);
                               setGovDropdownOpen(false);
                             }}
-                            className={`w-full text-start px-3.5 py-2 hover:bg-[#EAF0F7] dark:hover:bg-[#223047] text-[#52647B] dark:text-[#A9B8CB] transition-colors flex justify-between items-center cursor-pointer ${
+                            className={`w-full text-start px-3.5 py-2 hover:bg-[#E2E8F0] dark:hover:bg-[#1E293B] text-[#334155] dark:text-[#94A3B8] transition-colors flex justify-between items-center cursor-pointer ${
                               selectedGov.id === g.id ? "font-bold text-cyan-700 dark:text-cyan-300 bg-purple-50 dark:bg-purple-600/25 border-l-4 rtl:border-l-0 rtl:border-r-4 border-cyan-500 dark:border-cyan-400" : ""
                             }`}
                           >
                             <span>{isAr ? g.nameAr : g.nameEn}</span>
-                            <span className="text-[10px] text-[#087EAD] dark:text-[#58B6CC] font-mono font-bold">#{g.rank}</span>
+                            <span className="text-[10px] text-[#0E7490] dark:text-[#22D3EE] font-mono font-bold">#{g.rank}</span>
                           </button>
                         ))}
                       </div>
@@ -346,7 +346,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Chart 1: National Benchmark Comparison Card OR Donut / Pie Breakdown */}
           {govDetails.benchmarkData ? (
-            <div className={`${govDetails.barData ? "lg:col-span-6" : "lg:col-span-12"} rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-5 sm:p-6 shadow-sm dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300`}>
+            <div className={`${govDetails.barData ? "lg:col-span-6" : "lg:col-span-12"} rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-5 sm:p-6 shadow-sm dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300`}>
               {(() => {
                 const pillars = govDetails.benchmarkData.filter((i) => !i.isOverallResult);
                 const overallResult = govDetails.benchmarkData.find((i) => i.isOverallResult);
@@ -387,7 +387,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     <div className={`grid grid-cols-1 ${govDetails.barData ? "" : "md:grid-cols-2"} gap-3.5 my-4`}>
                       {pillars.map((item, idx) => {
                         return (
-                          <div key={idx} className="bg-[#EAF0F7] dark:bg-[#223047] p-3 rounded-xl border border-[#D5DFEB] dark:border-[#344258] space-y-2">
+                          <div key={idx} className="bg-[#E2E8F0] dark:bg-[#1E293B] p-3 rounded-xl border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] space-y-2">
                             <div className="flex items-center justify-between text-xs">
                               <div className="flex items-center gap-1.5">
                                 <span className="text-slate-800 dark:text-slate-200 font-semibold">{item.metricLabel}</span>
@@ -398,7 +398,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                             <div className="space-y-1.5 pt-0.5">
                               <div className="flex items-center gap-2 text-[11px]">
                                 <span className="w-12 text-slate-500 dark:text-slate-400 text-[10px] truncate">{selectedGov.nameAr}</span>
-                                <div className="flex-1 bg-[#D5DFEB] dark:bg-[#192436] h-2 rounded-full overflow-hidden">
+                                <div className="flex-1 bg-[#CBD5E1] dark:bg-[#111827] h-2 rounded-full overflow-hidden">
                                   <div
                                     className="h-full rounded-full transition-all duration-500"
                                     style={{
@@ -415,7 +415,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
                               <div className="flex items-center gap-2 text-[11px]">
                                 <span className="w-12 text-slate-400 dark:text-slate-500 text-[10px] truncate">{isAr ? "العراق" : "Iraq"}</span>
-                                <div className="flex-1 bg-[#D5DFEB] dark:bg-[#192436] h-1.5 rounded-full overflow-hidden">
+                                <div className="flex-1 bg-[#CBD5E1] dark:bg-[#111827] h-1.5 rounded-full overflow-hidden">
                                   <div
                                     className="h-full bg-slate-400 dark:bg-slate-500 rounded-full transition-all duration-500"
                                     style={{ width: `${Math.min(100, item.nationalValue)}%` }}
@@ -433,10 +433,10 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
                     {/* Overall Composite Result (Bottom Highlighted Section) */}
                     {overallResult && (
-                      <div className="my-2 p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-[#EAF0F7] to-[#F4F7FB] dark:from-[#223047] dark:to-[#192436] border border-[#087EAD]/30 dark:border-[#58B6CC]/30 shadow-sm space-y-2.5">
+                      <div className="my-2 p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-[#E2E8F0] to-[#F1F5F9] dark:from-[#1E293B] dark:to-[#111827] border border-[#0E7490]/30 dark:border-[#22D3EE]/30 shadow-sm space-y-2.5">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                           <div className="flex items-center gap-2">
-                            <span className="p-1.5 rounded-lg bg-[#EAF0F7] text-[#087EAD] border border-[#087EAD]/30 dark:bg-[#192436] dark:text-[#58B6CC] dark:border-[#58B6CC]/30">
+                            <span className="p-1.5 rounded-lg bg-[#E2E8F0] text-[#0E7490] border border-[#0E7490]/30 dark:bg-[#111827] dark:text-[#22D3EE] dark:border-[#22D3EE]/30">
                               <Sparkles className="w-4 h-4" />
                             </span>
                             <div>
@@ -444,7 +444,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                                 <span className="text-slate-900 dark:text-white font-bold text-sm tracking-wide">
                                   {overallResult.metricLabel}
                                 </span>
-                                <span className="text-[10px] text-[#087EAD] dark:text-[#58B6CC] font-mono bg-[#EAF0F7] dark:bg-[#192436] px-2 py-0.5 rounded-full border border-[#087EAD]/40 dark:border-[#58B6CC]/40 font-semibold">
+                                <span className="text-[10px] text-[#0E7490] dark:text-[#22D3EE] font-mono bg-[#E2E8F0] dark:bg-[#111827] px-2 py-0.5 rounded-full border border-[#0E7490]/40 dark:border-[#22D3EE]/40 font-semibold">
                                   {isAr ? "النتيجة المركبة الإجمالية" : "Overall Composite Outcome"}
                                 </span>
                               </div>
@@ -456,7 +456,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                         <div className="space-y-1.5 pt-1">
                           <div className="flex items-center gap-3 text-xs">
                             <span className="w-16 text-cyan-700 dark:text-cyan-300 font-bold text-xs truncate">{selectedGov.nameAr}</span>
-                            <div className="flex-1 bg-[#D5DFEB] dark:bg-[#192436] h-3 rounded-full overflow-hidden">
+                            <div className="flex-1 bg-[#CBD5E1] dark:bg-[#111827] h-3 rounded-full overflow-hidden">
                               <div
                                 className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 dark:from-teal-400 dark:via-cyan-400 dark:to-blue-400"
                                 style={{
@@ -472,7 +472,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
                           <div className="flex items-center gap-3 text-xs">
                             <span className="w-16 text-slate-500 dark:text-slate-400 text-xs truncate">{isAr ? "عموم العراق" : "Iraq"}</span>
-                            <div className="flex-1 bg-[#D5DFEB] dark:bg-[#192436] h-2 rounded-full overflow-hidden">
+                            <div className="flex-1 bg-[#CBD5E1] dark:bg-[#111827] h-2 rounded-full overflow-hidden">
                               <div
                                 className="h-full bg-slate-400 dark:bg-slate-500 rounded-full transition-all duration-500"
                                 style={{ width: `${Math.min(100, overallResult.nationalValue)}%` }}
@@ -519,7 +519,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
           {/* Chart 2: Demographic / Sub-Channel Bars (6 cols) */}
           {govDetails.barData && (
-            <div className="lg:col-span-6 rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-5 shadow-sm dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300">
+            <div className="lg:col-span-6 rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-5 shadow-sm dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300">
               <div className="border-b border-slate-200 dark:border-white/5 pb-3">
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
                   <BarChart3 className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
@@ -548,7 +548,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                         {item.displayValue ?? `${item.value}%`}
                       </span>
                     </div>
-                    <div className="w-full bg-[#D5DFEB] dark:bg-[#223047] h-2.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-[#CBD5E1] dark:bg-[#1E293B] h-2.5 rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full transition-all duration-500"
                         style={{
@@ -565,7 +565,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
               {/* Stat Badges Row */}
               <div className="pt-3 border-t border-slate-200 dark:border-white/5 grid grid-cols-3 gap-2 text-center">
                 {govDetails.kpiStats.map((kpi, idx) => (
-                  <div key={idx} className="p-2 rounded-xl bg-[#EAF0F7] dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258]">
+                  <div key={idx} className="p-2 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)]">
                     <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">{kpi.label}</span>
                     <span className="text-xs sm:text-sm font-black font-mono block mt-0.5" style={{ color: kpi.color }}>
                       {kpi.value}
@@ -580,7 +580,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
 
       {/* 4. General Benchmark: 6 Core Behavioral Indicators vs National Mean */}
       <div id="behavioral-benchmark" className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        <div className="lg:col-span-7 rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-6 shadow-sm dark:shadow-none space-y-4 flex flex-col justify-between h-full transition-colors duration-300">
+        <div className="lg:col-span-7 rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-6 shadow-sm dark:shadow-none space-y-4 flex flex-col justify-between h-full transition-colors duration-300">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-3">
             <div>
               <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">
@@ -618,7 +618,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                     </div>
                   </div>
 
-                  <div className="relative w-full bg-[#D5DFEB] dark:bg-[#223047] h-2.5 rounded-full overflow-hidden">
+                  <div className="relative w-full bg-[#CBD5E1] dark:bg-[#1E293B] h-2.5 rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full relative z-10 transition-all duration-500"
                       style={{
@@ -639,7 +639,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
         </div>
 
         {/* Right Telemetry: Economic & Readiness */}
-        <div className="lg:col-span-5 rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-6 shadow-sm dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300">
+        <div className="lg:col-span-5 rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-6 shadow-sm dark:shadow-none flex flex-col justify-between h-full transition-colors duration-300">
           <div className="border-b border-slate-200 dark:border-white/5 pb-3">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
               <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
@@ -650,35 +650,35 @@ const govDetails = breakdownConfig.getGovBreakdown(
           </div>
 
           <div className="mt-3 space-y-2.5 text-xs">
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAF0F7] dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258]">
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)]">
               <span className="text-slate-600 dark:text-slate-400">{isAr ? "متوسط إنفاق الاتصالات والتقنية" : "Telecom Spending"}</span>
               <span className="font-bold text-emerald-600 dark:text-emerald-400 font-mono text-sm">
                 {selectedGov.telecomSpending} {isAr ? "ألف د.ع/شهر" : "K IQD/mo"}
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAF0F7] dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258]">
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)]">
               <span className="text-slate-600 dark:text-slate-400">{isAr ? "الدفع عند الاستلام (كاش)" : "Cash-On-Delivery"}</span>
               <span className="font-bold text-amber-600 dark:text-amber-400 font-mono text-sm">
                 {selectedGov.cashOnDeliveryPct}%
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAF0F7] dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258]">
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)]">
               <span className="text-slate-600 dark:text-slate-400">{isAr ? "إنترنت المنازل الثابت" : "Home Internet"}</span>
-              <span className="font-bold text-[#087EAD] dark:text-[#58B6CC] font-mono text-sm">
+              <span className="font-bold text-[#0E7490] dark:text-[#22D3EE] font-mono text-sm">
                 {selectedGov.homeInternetPct}%
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAF0F7] dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258]">
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)]">
               <span className="text-slate-600 dark:text-slate-400">{isAr ? "مؤشر الجاهزية الرقمية للمجتمع" : "Digital Readiness Index"}</span>
-              <span className="font-bold text-[#087EAD] dark:text-[#58B6CC] font-mono text-sm">
+              <span className="font-bold text-[#0E7490] dark:text-[#22D3EE] font-mono text-sm">
                 {selectedGov.digitalReadinessScore}%
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#EAF0F7] dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258] hover:border-violet-500/30 transition-all">
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] hover:border-violet-500/30 transition-all">
               <span className="text-slate-600 dark:text-slate-400">{isAr ? "مكاتب البطاقات والدفع الذكي" : "Smart Payment Offices"}</span>
               <span className="font-bold text-violet-600 dark:text-violet-400 font-mono text-sm">
                 {selectedGov.smartCardOffices} {isAr ? "مكتب" : "offices"}
@@ -692,28 +692,28 @@ const govDetails = breakdownConfig.getGovBreakdown(
       </div>
 
       {/* 5. Strategic Deep Insights for this Governorate: "What does this mean?" */}
-      <div id="insights" className="scroll-mt-24 rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-6 shadow-sm dark:shadow-none space-y-4 transition-colors duration-300">
-        <div className="flex items-center justify-between border-b border-[#D5DFEB] dark:border-[#344258] pb-3">
+      <div id="insights" className="scroll-mt-24 rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-6 shadow-sm dark:shadow-none space-y-4 transition-colors duration-300">
+        <div className="flex items-center justify-between border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] pb-3">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#087EAD] dark:text-[#58B6CC] animate-pulse" />
+            <Sparkles className="w-4 h-4 text-[#0E7490] dark:text-[#22D3EE] animate-pulse" />
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               {selectedGov.aiTitle || (isAr ? `ماذا تعني هذه البيانات لمشروعك في ${selectedGov.nameAr}؟` : `Market Strategic Analysis`)}
             </h3>
           </div>
-          <span className="text-[11px] text-[#8050BB] dark:text-[#AE91D9] font-mono px-2 py-0.5 rounded bg-[#EAF0F7] dark:bg-[#223047] border border-[#8050BB]/30 dark:border-[#AE91D9]/30 font-bold">
+          <span className="text-[11px] text-[#6B21A8] dark:text-[#C084FC] font-mono px-2 py-0.5 rounded bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#6B21A8]/30 dark:border-[#C084FC]/30 font-bold">
             {isAr ? "التحليل الاستراتيجي للمشروع" : "Strategic Synthesis"}
           </span>
         </div>
 
         {/* Executive Summary Paragraph */}
-        <div className="p-4 rounded-xl bg-[#EAF0F7] dark:bg-[#223047] border border-[#D5DFEB] dark:border-[#344258] text-xs leading-relaxed text-[#17243A] dark:text-[#E8EEF7]">
+        <div className="p-4 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] text-xs leading-relaxed text-[#0F172A] dark:text-[#F1F5F9]">
           <p>{selectedGov.aiSummary}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed text-slate-700 dark:text-slate-300 items-stretch">
           {/* Box 1: Recommended Business Models */}
-          <div className="bg-white dark:bg-[#101827] rounded-xl p-4 border border-[#D5DFEB] dark:border-[#344258] space-y-2 flex flex-col justify-between h-full shadow-sm dark:shadow-none">
-            <div className="flex items-center gap-1.5 font-bold text-[#087EAD] dark:text-[#58B6CC]">
+          <div className="bg-white dark:bg-[#0B0F19] rounded-xl p-4 border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] space-y-2 flex flex-col justify-between h-full shadow-sm dark:shadow-none">
+            <div className="flex items-center gap-1.5 font-bold text-[#0E7490] dark:text-[#22D3EE]">
               <Lightbulb className="w-4 h-4" />
               <span>{isAr ? "أبرز نماذج المشاريع التقنية الموصى بها:" : "Recommended Startup Models:"}</span>
             </div>
@@ -731,8 +731,8 @@ const govDetails = breakdownConfig.getGovBreakdown(
           </div>
 
           {/* Box 2: Bottlenecks & Strategic Advice */}
-          <div className="bg-white dark:bg-[#101827] rounded-xl p-4 border border-[#D5DFEB] dark:border-[#344258] space-y-2 flex flex-col justify-between h-full shadow-sm dark:shadow-none">
-            <div className="flex items-center gap-1.5 font-bold text-[#AC6816] dark:text-[#D7AC68]">
+          <div className="bg-white dark:bg-[#0B0F19] rounded-xl p-4 border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] space-y-2 flex flex-col justify-between h-full shadow-sm dark:shadow-none">
+            <div className="flex items-center gap-1.5 font-bold text-[#B45309] dark:text-[#FBBF24]">
               <AlertTriangle className="w-4 h-4" />
               <span>{isAr ? "التحدي التشغيلي وكيفية التغلب عليه:" : "Friction & Founder Strategy:"}</span>
             </div>

@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --background: #F4F7FB;
-    --foreground: #17243A;
+    --background: #F1F5F9;
+    --foreground: #0F172A;
   }
 
   .dark {
-    --background: #101827;
-    --foreground: #E8EEF7;
+    --background: #0B0F19;
+    --foreground: #F1F5F9;
   }
 
   html {
@@ -47,17 +47,17 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #EAF0F7;
+  background: #E2E8F0;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #101827;
+  background: #0B0F19;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D5DFEB;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #344258;
+  background: #1E293B;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

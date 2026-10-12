@@ -99,17 +99,17 @@ export default function App() {
   };
 
   return (
-    <div dir={isAr ? "rtl" : "ltr"} className="min-h-screen bg-[#F4F7FB] text-[#17243A] dark:bg-[#101827] dark:text-[#E8EEF7] selection:bg-[#087EAD] selection:text-white dark:selection:bg-[#58B6CC] dark:selection:text-[#101827] font-sans pb-16 transition-colors duration-300">
+    <div dir={isAr ? "rtl" : "ltr"} className="min-h-screen bg-[#F1F5F9] text-[#0F172A] dark:bg-[#0B0F19] dark:text-[#F1F5F9] selection:bg-[#0E7490] selection:text-white dark:selection:bg-[#22D3EE] dark:selection:text-[#0B0F19] font-sans pb-16 transition-colors duration-300">
       
       {/* ======================================================== */}
       {/* 1. TOP NAVIGATION BAR                                     */}
       {/* ======================================================== */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#101827]/90 border-b border-[#D5DFEB] dark:border-[#344258] shadow-sm dark:shadow-none transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#0B0F19]/90 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-sm dark:shadow-none transition-all duration-300">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-20 flex items-center justify-between">
           
           {/* Official Logo */}
           <a href="#home" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center p-0.5 border border-[#087EAD]/40 dark:border-[#58B6CC]/40 bg-white dark:bg-[#101827]">
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center p-0.5 border border-[#0E7490]/40 dark:border-[#22D3EE]/40 bg-white dark:bg-[#0B0F19]">
               <img
                 src="/techlocation_logo.jpg"
                 alt="TechLocation Logo"
@@ -118,14 +118,14 @@ export default function App() {
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="text-lg font-black tracking-tight text-[#17243A] dark:text-[#E8EEF7]">
-                  Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#087EAD] via-[#346BC1] to-[#8050BB] dark:from-[#58B6CC] dark:via-[#7A9FE0] dark:to-[#AE91D9]">Location</span>
+                <span className="text-lg font-black tracking-tight text-[#0F172A] dark:text-[#F1F5F9]">
+                  Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0E7490] via-[#1D4ED8] to-[#6B21A8] dark:from-[#22D3EE] dark:via-[#60A5FA] dark:to-[#C084FC]">Location</span>
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#EAF0F7] text-[#087EAD] border border-[#087EAD]/20 dark:bg-[#223047] dark:text-[#58B6CC] dark:border-[#58B6CC]/30 font-mono">
+                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#E2E8F0] text-[#0E7490] border border-[#0E7490]/20 dark:bg-[#1E293B] dark:text-[#22D3EE] dark:border-[#22D3EE]/30 font-mono">
                   IRAQ
                 </span>
               </div>
-              <span className="text-[9px] font-semibold tracking-wider text-[#52647B] dark:text-[#A9B8CB] uppercase">
+              <span className="text-[9px] font-semibold tracking-wider text-[#334155] dark:text-[#94A3B8] uppercase">
                 Digital Market Explorer
               </span>
             </div>
@@ -139,12 +139,12 @@ export default function App() {
                 scrollToSection("home");
               }}
               className={`transition-colors py-1 relative font-medium cursor-pointer ${
-                activeNav === "home" ? "text-[#087EAD] dark:text-[#58B6CC] font-bold" : "text-[#52647B] hover:text-[#17243A] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7]"
+                activeNav === "home" ? "text-[#0E7490] dark:text-[#22D3EE] font-bold" : "text-[#334155] hover:text-[#0F172A] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9]"
               }`}
             >
               <span>{isAr ? "الرئيسية" : "Home"}</span>
               {activeNav === "home" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#087EAD] to-[#346BC1] dark:from-[#58B6CC] dark:to-[#7A9FE0] rounded-full"></span>
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0E7490] to-[#1D4ED8] dark:from-[#22D3EE] dark:to-[#60A5FA] rounded-full"></span>
               )}
             </button>
 
@@ -157,13 +157,13 @@ export default function App() {
               }}
               className={`transition-colors py-1 relative font-medium cursor-pointer ${
                 activeNav === "map" && currentMode === "all_governorates" && viewMode === "map"
-                  ? "text-[#087EAD] dark:text-[#58B6CC] font-bold"
-                  : "text-[#52647B] hover:text-[#17243A] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7]"
+                  ? "text-[#0E7490] dark:text-[#22D3EE] font-bold"
+                  : "text-[#334155] hover:text-[#0F172A] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9]"
               }`}
             >
               <span>{isAr ? "الخريطة" : "Map"}</span>
               {activeNav === "map" && currentMode === "all_governorates" && viewMode === "map" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#087EAD] to-[#346BC1] dark:from-[#58B6CC] dark:to-[#7A9FE0] rounded-full"></span>
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0E7490] to-[#1D4ED8] dark:from-[#22D3EE] dark:to-[#60A5FA] rounded-full"></span>
               )}
             </button>
 
@@ -176,13 +176,13 @@ export default function App() {
               }}
               className={`transition-colors py-1 relative font-medium cursor-pointer ${
                 activeNav === "charts" && currentMode === "all_governorates" && viewMode === "charts"
-                  ? "text-[#087EAD] dark:text-[#58B6CC] font-bold"
-                  : "text-[#52647B] hover:text-[#17243A] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7]"
+                  ? "text-[#0E7490] dark:text-[#22D3EE] font-bold"
+                  : "text-[#334155] hover:text-[#0F172A] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9]"
               }`}
             >
               <span>{isAr ? "المخططات" : "Charts"}</span>
               {activeNav === "charts" && currentMode === "all_governorates" && viewMode === "charts" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#087EAD] to-[#346BC1] dark:from-[#58B6CC] dark:to-[#7A9FE0] rounded-full"></span>
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0E7490] to-[#1D4ED8] dark:from-[#22D3EE] dark:to-[#60A5FA] rounded-full"></span>
               )}
             </button>
 
@@ -194,13 +194,13 @@ export default function App() {
               }}
               className={`transition-colors py-1 relative font-medium cursor-pointer ${
                 activeNav === "insights" && currentMode === "single_governorate"
-                  ? "text-[#087EAD] dark:text-[#58B6CC] font-bold"
-                  : "text-[#52647B] hover:text-[#17243A] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7]"
+                  ? "text-[#0E7490] dark:text-[#22D3EE] font-bold"
+                  : "text-[#334155] hover:text-[#0F172A] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9]"
               }`}
             >
               <span>{isAr ? "الرؤى والتحليلات" : "Insights"}</span>
               {activeNav === "insights" && currentMode === "single_governorate" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#087EAD] to-[#346BC1] dark:from-[#58B6CC] dark:to-[#7A9FE0] rounded-full"></span>
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0E7490] to-[#1D4ED8] dark:from-[#22D3EE] dark:to-[#60A5FA] rounded-full"></span>
               )}
             </button>
 
@@ -210,12 +210,12 @@ export default function App() {
                 scrollToSection("sources");
               }}
               className={`transition-colors py-1 relative font-medium cursor-pointer ${
-                activeNav === "sources" ? "text-[#087EAD] dark:text-[#58B6CC] font-bold" : "text-[#52647B] hover:text-[#17243A] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7]"
+                activeNav === "sources" ? "text-[#0E7490] dark:text-[#22D3EE] font-bold" : "text-[#334155] hover:text-[#0F172A] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9]"
               }`}
             >
               <span>{isAr ? "مصادر البيانات" : "Sources"}</span>
               {activeNav === "sources" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#087EAD] to-[#346BC1] dark:from-[#58B6CC] dark:to-[#7A9FE0] rounded-full"></span>
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0E7490] to-[#1D4ED8] dark:from-[#22D3EE] dark:to-[#60A5FA] rounded-full"></span>
               )}
             </button>
           </nav>
@@ -225,7 +225,7 @@ export default function App() {
             {/* Theme Toggle Button */}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#D5DFEB] dark:border-[#344258] hover:border-[#AC6816] dark:hover:border-[#58B6CC]/50 text-xs font-bold transition-all text-[#17243A] dark:text-[#E8EEF7] bg-[#EAF0F7] hover:bg-[#D5DFEB] dark:bg-[#223047] dark:hover:bg-[#344258] cursor-pointer shadow-sm flex items-center gap-1.5"
+              className="px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] hover:border-[#B45309] dark:hover:border-[#22D3EE]/50 text-xs font-bold transition-all text-[#0F172A] dark:text-[#F1F5F9] bg-[#E2E8F0] hover:bg-[#CBD5E1] dark:bg-[#1E293B] dark:hover:bg-[rgba(148,163,184,0.12)] cursor-pointer shadow-sm flex items-center gap-1.5"
               title={theme === "dark" ? (isAr ? "التبديل إلى الوضع النهاري" : "Switch to Light Mode") : (isAr ? "التبديل إلى الوضع الليلي" : "Switch to Dark Mode")}
             >
               {theme === "dark" ? (
@@ -244,7 +244,7 @@ export default function App() {
             {/* Language Switcher */}
             <button
               onClick={() => setLang(isAr ? "en" : "ar")}
-              className="px-3.5 py-1.5 rounded-lg border border-[#D5DFEB] dark:border-[#344258] hover:border-[#087EAD]/50 text-xs font-bold font-mono transition-colors text-[#17243A] dark:text-[#E8EEF7] bg-[#EAF0F7] hover:bg-[#D5DFEB] dark:bg-[#223047] dark:hover:bg-[#344258] cursor-pointer shadow-sm"
+              className="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] hover:border-[#0E7490]/50 text-xs font-bold font-mono transition-colors text-[#0F172A] dark:text-[#F1F5F9] bg-[#E2E8F0] hover:bg-[#CBD5E1] dark:bg-[#1E293B] dark:hover:bg-[rgba(148,163,184,0.12)] cursor-pointer shadow-sm"
             >
               {isAr ? "EN" : "عربي"}
             </button>
@@ -257,7 +257,7 @@ export default function App() {
       {/* 2. HERO BANNER CARD (Exact Match to Screenshot 1)         */}
       {/* ======================================================== */}
       <section id="home" className="pt-28 pb-6 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1720px] mx-auto">
-        <div className="relative rounded-3xl p-6 sm:p-8 lg:p-12 border border-[#D5DFEB] dark:border-[#344258] bg-white dark:bg-[#192436]/95 shadow-sm dark:shadow-none backdrop-blur-xl overflow-hidden min-h-[320px] flex items-center transition-colors duration-300">
+        <div className="relative rounded-3xl p-6 sm:p-8 lg:p-12 border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] bg-white dark:bg-[#111827]/95 shadow-sm dark:shadow-none backdrop-blur-xl overflow-hidden min-h-[320px] flex items-center transition-colors duration-300">
           {/* Background 3D Iraq Map */}
           <div className="absolute inset-0 pointer-events-none select-none z-0">
             <img
@@ -266,29 +266,29 @@ export default function App() {
               className="w-full h-full object-cover object-center lg:object-[80%_35%] rtl:lg:object-[20%_35%] opacity-20 dark:opacity-65 mix-blend-multiply dark:mix-blend-normal transition-opacity duration-300"
             />
             {/* Directional & Vignette Gradients for maximum contrast on text side and clear visibility on map side */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent rtl:bg-gradient-to-l rtl:from-white/95 rtl:via-white/80 rtl:to-transparent dark:from-[#192436]/95 dark:via-[#192436]/70 dark:to-transparent rtl:dark:from-[#192436]/95 rtl:dark:via-[#192436]/70 rtl:dark:to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-white/40 dark:from-[#192436]/80 dark:via-transparent dark:to-[#192436]/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent rtl:bg-gradient-to-l rtl:from-white/95 rtl:via-white/80 rtl:to-transparent dark:from-[#111827]/95 dark:via-[#111827]/70 dark:to-transparent rtl:dark:from-[#111827]/95 rtl:dark:via-[#111827]/70 rtl:dark:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-white/40 dark:from-[#111827]/80 dark:via-transparent dark:to-[#111827]/40" />
           </div>
 
           {/* Subtle Ambient Glows */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#087EAD]/10 dark:bg-[#58B6CC]/10 rounded-full blur-3xl pointer-events-none"></div>
-          <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#8050BB]/10 dark:bg-[#AE91D9]/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#0E7490]/10 dark:bg-[#22D3EE]/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#6B21A8]/10 dark:bg-[#C084FC]/10 rounded-full blur-3xl pointer-events-none"></div>
 
           <div className="relative z-10 max-w-2xl lg:max-w-3xl space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF0F7] dark:bg-[#223047] border border-[#087EAD]/20 dark:border-[#58B6CC]/30 text-[#087EAD] dark:text-[#58B6CC] text-[11px] font-bold tracking-wider uppercase backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#087EAD] dark:bg-[#58B6CC] animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#0E7490]/20 dark:border-[#22D3EE]/30 text-[#0E7490] dark:text-[#22D3EE] text-[11px] font-bold tracking-wider uppercase backdrop-blur-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0E7490] dark:bg-[#22D3EE] animate-pulse"></span>
                 <span>{isAr ? "• بيانات رسمية • رؤى حقيقية" : "• OFFICIAL DATA • REAL INSIGHTS"}</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#17243A] dark:text-[#E8EEF7] tracking-tight leading-[1.15]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] dark:text-[#F1F5F9] tracking-tight leading-[1.15]">
                 {isAr ? "دليل السوق " : "Digital Market "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#087EAD] via-[#346BC1] to-[#8050BB] dark:from-[#58B6CC] dark:via-[#7A9FE0] dark:to-[#AE91D9]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0E7490] via-[#1D4ED8] to-[#6B21A8] dark:from-[#22D3EE] dark:via-[#60A5FA] dark:to-[#C084FC]">
                   {isAr ? "الرقمي " : "Intelligence "}
                 </span>
                 {isAr ? "لمحافظات العراق" : "for Iraq"}
               </h1>
 
-              <p className="text-sm sm:text-base text-[#52647B] dark:text-[#A9B8CB] max-w-xl font-normal leading-relaxed">
+              <p className="text-sm sm:text-base text-[#334155] dark:text-[#94A3B8] max-w-xl font-normal leading-relaxed">
                 {isAr
                   ? "بيانات ورؤى مكانية موثقة تُمكّن رواد الأعمال وصنّاع القرار من اتخاذ قرارات توسع مبنية على أرقام واقعية."
                   : "Location intelligence and official metrics empowering entrepreneurs to make data-driven expansion decisions."}
@@ -304,8 +304,8 @@ export default function App() {
                   }}
                   className={`flex items-center gap-2.5 px-5 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "all_governorates"
-                      ? "bg-[#087EAD] text-white dark:bg-[#58B6CC] dark:text-[#101827] font-black shadow-md scale-[1.02]"
-                      : "bg-[#EAF0F7] text-[#52647B] border border-[#D5DFEB] hover:bg-[#D5DFEB] hover:text-[#17243A] dark:bg-[#223047] dark:text-[#A9B8CB] dark:border-[#344258] dark:hover:bg-[#344258]"
+                      ? "bg-[#0E7490] text-white dark:bg-[#22D3EE] dark:text-[#0B0F19] font-black shadow-md scale-[1.02]"
+                      : "bg-[#E2E8F0] text-[#334155] border border-[#CBD5E1] hover:bg-[#CBD5E1] hover:text-[#0F172A] dark:bg-[#1E293B] dark:text-[#94A3B8] dark:border-[rgba(148,163,184,0.12)] dark:hover:bg-[rgba(148,163,184,0.12)]"
                   }`}
                 >
                   <MapPin className="w-4 h-4" />
@@ -321,8 +321,8 @@ export default function App() {
                   }}
                   className={`flex items-center gap-2.5 px-5 py-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "single_governorate"
-                      ? "bg-[#8050BB] text-white dark:bg-[#AE91D9] dark:text-[#101827] font-black shadow-md scale-[1.02]"
-                      : "bg-[#EAF0F7] text-[#52647B] border border-[#D5DFEB] hover:bg-[#D5DFEB] hover:text-[#17243A] dark:bg-[#223047] dark:text-[#A9B8CB] dark:border-[#344258] dark:hover:bg-[#344258]"
+                      ? "bg-[#6B21A8] text-white dark:bg-[#C084FC] dark:text-[#0B0F19] font-black shadow-md scale-[1.02]"
+                      : "bg-[#E2E8F0] text-[#334155] border border-[#CBD5E1] hover:bg-[#CBD5E1] hover:text-[#0F172A] dark:bg-[#1E293B] dark:text-[#94A3B8] dark:border-[rgba(148,163,184,0.12)] dark:hover:bg-[rgba(148,163,184,0.12)]"
                   }`}
                 >
                   <Building2 className="w-4 h-4 text-purple-400" />
@@ -404,8 +404,8 @@ export default function App() {
           <aside className="lg:col-span-3 xl:col-span-3 space-y-4 lg:sticky lg:top-24">
             
             {/* CARD 1: VIEW MODE (Map vs Charts) */}
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] shadow-sm dark:shadow-none space-y-3 transition-colors duration-300">
-              <div className="text-[11px] font-bold text-[#52647B] dark:text-[#A9B8CB] uppercase tracking-wider">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-sm dark:shadow-none space-y-3 transition-colors duration-300">
+              <div className="text-[11px] font-bold text-[#334155] dark:text-[#94A3B8] uppercase tracking-wider">
                 {isAr ? "نمط العرض" : "VIEW MODE"}
               </div>
               <div className="grid grid-cols-2 gap-2">
@@ -417,8 +417,8 @@ export default function App() {
                   }}
                   className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "all_governorates" && viewMode === "map"
-                      ? "bg-[#087EAD] text-white dark:bg-[#58B6CC] dark:text-[#101827] font-black shadow-sm"
-                      : "bg-[#EAF0F7] text-[#52647B] hover:bg-[#D5DFEB] hover:text-[#17243A] dark:bg-[#223047] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7] dark:hover:bg-[#344258]"
+                      ? "bg-[#0E7490] text-white dark:bg-[#22D3EE] dark:text-[#0B0F19] font-black shadow-sm"
+                      : "bg-[#E2E8F0] text-[#334155] hover:bg-[#CBD5E1] hover:text-[#0F172A] dark:bg-[#1E293B] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9] dark:hover:bg-[rgba(148,163,184,0.12)]"
                   }`}
                 >
                   <MapIcon className="w-3.5 h-3.5" />
@@ -433,8 +433,8 @@ export default function App() {
                   }}
                   className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     currentMode === "all_governorates" && viewMode === "charts"
-                      ? "bg-[#087EAD] text-white dark:bg-[#58B6CC] dark:text-[#101827] font-black shadow-sm"
-                      : "bg-[#EAF0F7] text-[#52647B] hover:bg-[#D5DFEB] hover:text-[#17243A] dark:bg-[#223047] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7] dark:hover:bg-[#344258]"
+                      ? "bg-[#0E7490] text-white dark:bg-[#22D3EE] dark:text-[#0B0F19] font-black shadow-sm"
+                      : "bg-[#E2E8F0] text-[#334155] hover:bg-[#CBD5E1] hover:text-[#0F172A] dark:bg-[#1E293B] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9] dark:hover:bg-[rgba(148,163,184,0.12)]"
                   }`}
                 >
                   <BarChart3 className="w-3.5 h-3.5" />
@@ -483,12 +483,12 @@ export default function App() {
             */}
 
             {/* CARD 3: SELECT INDICATOR (Vertical Topic List with Glow) */}
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] shadow-sm dark:shadow-none space-y-3 transition-colors duration-300">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-sm dark:shadow-none space-y-3 transition-colors duration-300">
               <div className="flex items-center justify-between">
-                <div className="text-[11px] font-bold text-[#52647B] dark:text-[#A9B8CB] uppercase tracking-wider">
+                <div className="text-[11px] font-bold text-[#334155] dark:text-[#94A3B8] uppercase tracking-wider">
                   {isAr ? "اختيار المؤشر" : "SELECT INDICATOR"}
                 </div>
-                <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#EAF0F7] dark:bg-[#223047] text-[#52647B] dark:text-[#A9B8CB]">
+                <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#E2E8F0] dark:bg-[#1E293B] text-[#334155] dark:text-[#94A3B8]">
                   {TOPICS.length}
                 </span>
               </div>
@@ -502,8 +502,8 @@ export default function App() {
                       onClick={() => setSelectedTopic(topic)}
                       className={`w-full text-start p-3 rounded-xl text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
                         isSelected
-                          ? "bg-[#EAF0F7] border-2 border-[#087EAD] text-[#087EAD] dark:bg-[#223047] dark:border-[#58B6CC] dark:text-[#58B6CC] font-bold shadow-sm"
-                          : "bg-white border border-[#D5DFEB] text-[#52647B] hover:bg-[#EAF0F7] hover:text-[#17243A] dark:bg-[#192436] dark:border-[#344258] dark:text-[#A9B8CB] dark:hover:text-[#E8EEF7] dark:hover:bg-[#223047]"
+                          ? "bg-[#E2E8F0] border-2 border-[#0E7490] text-[#0E7490] dark:bg-[#1E293B] dark:border-[#22D3EE] dark:text-[#22D3EE] font-bold shadow-sm"
+                          : "bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#E2E8F0] hover:text-[#0F172A] dark:bg-[#111827] dark:border-[rgba(148,163,184,0.12)] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9] dark:hover:bg-[#1E293B]"
                       }`}
                     >
                       <span className="text-base">{topic.icon}</span>
@@ -662,7 +662,7 @@ export default function App() {
         {/* ======================================================== */}
         {/* 4. FOOTER                                                */}
         {/* ======================================================== */}
-        <footer id="sources" className="mt-16 pt-8 border-t border-[#D5DFEB] dark:border-[#344258] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52647B] dark:text-[#A9B8CB] font-medium">
+        <footer id="sources" className="mt-16 pt-8 border-t border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#334155] dark:text-[#94A3B8] font-medium">
           <div>
             <span>
               {isAr
@@ -670,8 +670,8 @@ export default function App() {
                 : "Source: COSIT Telecom & Postal 2024 & ICT Household Survey 2022 Reports"}
             </span>
           </div>
-          <div className="flex items-center gap-2 text-[#087EAD] dark:text-[#58B6CC] font-mono text-[11px]">
-            <span className="w-2 h-2 rounded-full bg-[#087EAD] dark:bg-[#58B6CC] animate-pulse"></span>
+          <div className="flex items-center gap-2 text-[#0E7490] dark:text-[#22D3EE] font-mono text-[11px]">
+            <span className="w-2 h-2 rounded-full bg-[#0E7490] dark:bg-[#22D3EE] animate-pulse"></span>
             <span>{isAr ? "بيانات حقيقية موثقة لـ 18 محافظة" : "Verified Telemetry for 18 Governorates"}</span>
           </div>
         </footer>

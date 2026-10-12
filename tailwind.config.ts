@@ -12,42 +12,42 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // Dark Mode: Soft Tech Navy
-        navy: {
-          deep: "#101827",      // Soft Deep Navy (Page Background)
-          card: "#192436",      // Elevated Navy (Dashboard Cards)
-          well: "#223047",      // Muted Slate Navy (Inner Wells/Fields)
-          border: "#344258",    // Soft Slate Border (Borders)
-          text: "#E8EEF7",      // Soft Ice White (Primary Text)
-          muted: "#A9B8CB",     // Muted Silver Blue (Secondary Text)
-          map: "#2B4057",       // Muted Steel Navy (Map Base Fill)
-          hover: "#58B6CC",     // Soft Cyan Blue (Map Hover Fill)
+                // Dark Mode: Soft Dark Cyber
+        cyberDark: {
+          bg: "#0B0F19",       // Main Page Background
+          card: "#111827",     // Dashboard Cards & Containers
+          well: "#1E293B",     // Inner Wells & Fields
+          border: "rgba(148, 163, 184, 0.12)", // Borders & Dividers
+          text: "#F1F5F9",     // Primary Text
+          muted: "#94A3B8",    // Secondary Text
+          map: "#1E293B",      // Map Base Fill
+          hover: "#38BDF8",    // Map Hover / Glow
         },
-        // Light Mode: Refined Clean Slate
-        slateClean: {
-          bg: "#F4F7FB",        // Soft Cloud White (Page Background)
-          card: "#FFFFFF",      // Pure Clean White (Dashboard Cards)
-          well: "#EAF0F7",      // Pale Blue Pearl (Inner Wells/Fields)
-          border: "#D5DFEB",    // Defined Slate Border (Borders)
-          text: "#17243A",      // Deep Slate Ink (Primary Text)
-          muted: "#52647B",     // Balanced Slate Blue (Secondary Text)
-          map: "#CBD9E8",       // Soft Steel Blue (Map Base Fill)
-          hover: "#087EAD",     // Rich Ocean Blue (Map Hover Fill)
+        // Light Mode: High-Clarity Slate Light
+        slateLight: {
+          bg: "#F1F5F9",       // Main Page Background
+          card: "#FFFFFF",     // Dashboard Cards
+          well: "#E2E8F0",     // Inner Wells & Fields
+          border: "#CBD5E1",   // Borders & Dividers
+          text: "#0F172A",     // Primary Text
+          muted: "#334155",    // Secondary Text
+          map: "#E2E8F0",      // Map Base Fill
+          hover: "#0284C7",    // Map Focus / Hover
         },
-        // Balanced Tech Accents (Data Visualization)
+        // Calibrated Data Accents
         accent: {
-          cyanSoft: "#58B6CC",
-          cyanDeep: "#087EAD",
-          emeraldSoft: "#53B69B",
-          emeraldDeep: "#16876E",
-          blueSoft: "#7A9FE0",
-          blueDeep: "#346BC1",
-          amberSoft: "#D7AC68",
-          amberDeep: "#AC6816",
-          pinkSoft: "#D38BAD",
-          pinkDeep: "#BD397B",
-          purpleSoft: "#AE91D9",
-          purpleDeep: "#8050BB",
+          fintechDark: "#22D3EE",
+          fintechLight: "#0E7490",
+          smartphonesDark: "#34D399",
+          smartphonesLight: "#047857",
+          telecomDark: "#60A5FA",
+          telecomLight: "#1D4ED8",
+          cashDark: "#FBBF24",
+          cashLight: "#B45309",
+          ecommerceDark: "#F472B6",
+          ecommerceLight: "#BE185D",
+          aiDark: "#C084FC",
+          aiLight: "#6B21A8",
         },
       },
       fontFamily: {

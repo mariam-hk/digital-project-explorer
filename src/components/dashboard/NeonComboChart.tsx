@@ -83,11 +83,11 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
   const splinePath = getSplinePath();
 
   return (
-    <div className="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-[#192436] border border-[#D5DFEB] dark:border-[#344258] p-4 sm:p-6 shadow-sm dark:shadow-none transition-colors duration-300">
+    <div className="relative w-full overflow-hidden rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-4 sm:p-6 shadow-sm dark:shadow-none transition-colors duration-300">
       {/* Chart Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-[#D5DFEB] dark:border-[#344258]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)]">
         <div className="flex items-center gap-2">
-          <span className="text-xs sm:text-sm font-bold text-[#17243A] dark:text-[#E8EEF7] tracking-wide">
+          <span className="text-xs sm:text-sm font-bold text-[#0F172A] dark:text-[#F1F5F9] tracking-wide">
             {isAr
               ? "مخطط الأعمدة والمنحنى التوافقي (Combo Bar + Spline Trend)"
               : "Governorate Distribution (Combo Bar + Spline Trend)"}
@@ -96,11 +96,11 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
         <div className="flex items-center gap-4 text-xs font-mono">
           <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded-sm" style={{ backgroundColor: neonColor }}></span>
-            <span className="text-[#52647B] dark:text-[#A9B8CB]">{isAr ? "قيمة المؤشر" : "Metric Value"}</span>
+            <span className="text-[#334155] dark:text-[#94A3B8]">{isAr ? "قيمة المؤشر" : "Metric Value"}</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-5 h-0.5 bg-[#087EAD] dark:bg-[#58B6CC]"></span>
-            <span className="text-[#087EAD] dark:text-[#58B6CC]">{isAr ? "منحنى السلوك الرقمي" : "Digital Behavior Trend"}</span>
+            <span className="w-5 h-0.5 bg-[#0E7490] dark:bg-[#22D3EE]"></span>
+            <span className="text-[#0E7490] dark:text-[#22D3EE]">{isAr ? "منحنى السلوك الرقمي" : "Digital Behavior Trend"}</span>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   y1={y}
                   x2={width - paddingX}
                   y2={y}
-                  stroke={isLight ? "rgba(82, 100, 123, 0.15)" : "rgba(169, 184, 203, 0.10)"}
+                  stroke={isLight ? "rgba(51, 65, 85, 0.12)" : "rgba(148, 163, 184, 0.10)"}
                   strokeDasharray="4 4"
                   strokeWidth="1"
                 />
@@ -155,7 +155,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={paddingX - 10}
                   y={y + 4}
                   textAnchor="end"
-                  fill={isLight ? "#52647B" : "#A9B8CB"}
+                  fill={isLight ? "#334155" : "#94A3B8"}
                   fontSize="10"
                   fontFamily="monospace"
                 >
@@ -171,7 +171,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
             y1={paddingTop + chartHeight}
             x2={width - paddingX}
             y2={paddingTop + chartHeight}
-            stroke={isLight ? "#D5DFEB" : "#344258"}
+            stroke={isLight ? "#CBD5E1" : "rgba(148, 163, 184, 0.2)"}
             strokeWidth="1.5"
           />
 
@@ -223,7 +223,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={pt.x}
                   y={pt.y - 8}
                   textAnchor="middle"
-                  fill={isHovered ? (isLight ? "#17243A" : "#FFFFFF") : isLight ? "#087EAD" : "#58B6CC"}
+                  fill={isHovered ? (isLight ? "#0F172A" : "#FFFFFF") : isLight ? "#0E7490" : "#22D3EE"}
                   fontSize={isHovered ? "12" : "11"}
                   fontWeight="bold"
                   fontFamily="monospace"
@@ -239,7 +239,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={pt.x}
                   y={paddingTop + chartHeight + 22}
                   textAnchor="middle"
-                  fill={isHovered ? (isLight ? "#087EAD" : "#58B6CC") : isLight ? "#52647B" : "#A9B8CB"}
+                  fill={isHovered ? (isLight ? "#0E7490" : "#22D3EE") : isLight ? "#334155" : "#94A3B8"}
                   fontSize={isHovered ? "12" : "11"}
                   fontWeight={isHovered ? "bold" : "medium"}
                   transform={
@@ -256,7 +256,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   x={pt.x}
                   y={paddingTop + chartHeight + 42}
                   textAnchor="middle"
-                  fill={isLight ? "#52647B" : "#A9B8CB"}
+                  fill={isLight ? "#334155" : "#94A3B8"}
                   fontSize="9"
                   fontFamily="monospace"
                 >
@@ -270,7 +270,7 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
           <path
             d={splinePath}
             fill="none"
-            stroke={isLight ? "#087EAD" : "#58B6CC"}
+            stroke={isLight ? "#0E7490" : "#22D3EE"}
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -287,8 +287,8 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
                   cx={pt.x}
                   cy={pt.y}
                   r={isHovered ? "6" : "4"}
-                  fill={isLight ? "#FFFFFF" : "#192436"}
-                  stroke={isLight ? "#087EAD" : "#58B6CC"}
+                  fill={isLight ? "#FFFFFF" : "#111827"}
+                  stroke={isLight ? "#0E7490" : "#22D3EE"}
                   strokeWidth="2.5"
                   style={{
                     filter: isLight ? "drop-shadow(0 0 4px rgba(8, 126, 173, 0.5))" : "drop-shadow(0 0 6px rgba(88, 182, 204, 0.8))",
@@ -302,23 +302,23 @@ export const NeonComboChart: React.FC<NeonComboChartProps> = ({
 
       {/* Interactive Tooltip Card at the bottom of chart */}
       {hoveredIdx !== null && points[hoveredIdx] && (
-        <div className="mt-3 p-3 rounded-xl bg-[#EAF0F7] border border-[#D5DFEB] dark:bg-[#223047] dark:border-[#344258] flex items-center justify-between text-xs animate-fadeIn">
+        <div className="mt-3 p-3 rounded-xl bg-[#E2E8F0] border border-[#CBD5E1] dark:bg-[#1E293B] dark:border-[rgba(148,163,184,0.12)] flex items-center justify-between text-xs animate-fadeIn">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-cyan-800 dark:text-[#087EAD] dark:text-[#58B6CC] text-sm">
+            <span className="font-bold text-cyan-800 dark:text-[#0E7490] dark:text-[#22D3EE] text-sm">
               {isAr ? points[hoveredIdx].gov.nameAr : points[hoveredIdx].gov.nameEn}
             </span>
-            <span className="text-[#52647B] dark:text-[#A9B8CB]">
+            <span className="text-[#334155] dark:text-[#94A3B8]">
               ({isAr ? points[hoveredIdx].gov.regionAr : points[hoveredIdx].gov.regionEn})
             </span>
-            <span className="px-2 py-0.5 rounded bg-[#D5DFEB] text-[#087EAD] dark:bg-[#344258] dark:text-[#58B6CC] font-mono text-[10px]">
+            <span className="px-2 py-0.5 rounded bg-[#CBD5E1] text-[#0E7490] dark:bg-[rgba(148,163,184,0.12)] dark:text-[#22D3EE] font-mono text-[10px]">
               {points[hoveredIdx].gov.marketTier}
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[#17243A] dark:text-[#E8EEF7] font-mono font-bold text-sm">
+            <span className="text-[#0F172A] dark:text-[#F1F5F9] font-mono font-bold text-sm">
               {points[hoveredIdx].val} {unit}
             </span>
-            <span className="text-[11px] text-[#087EAD] dark:text-[#58B6CC] underline cursor-pointer">
+            <span className="text-[11px] text-[#0E7490] dark:text-[#22D3EE] underline cursor-pointer">
               {isAr ? "انقر لعرض الداشبورد التفصيلي للمحافظة ←" : "Click for deep dive →"}
             </span>
           </div>
