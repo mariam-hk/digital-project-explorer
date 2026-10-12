@@ -527,7 +527,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           },
           {
             label: isAr ? "الجهاز الأكثر انتشاراً" : "Dominant Device",
-            value: isAr ? `اللابتوب (${laptop}%)` : `Laptop (${laptop}%)`,
+            value: isAr ? `المحمول (${laptop}%)` : `Laptop (${laptop}%)`,
             note: isAr ? "جدول 1-10" : "Table 1-10",
             color: "#3B82F6",
           },
