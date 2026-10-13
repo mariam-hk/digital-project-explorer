@@ -43,11 +43,11 @@ export default function PreviewPage() {
   }, [lang, isAr, isDark]);
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 font-sans ${isDark ? "bg-[#050814] text-slate-100" : "bg-[#F8FAFC] text-slate-900"}`}>
+    <div className={`min-h-screen transition-colors duration-300 font-sans ${isDark ? "bg-[#0B0F19] text-slate-100" : "bg-[#F1F5F9] text-slate-900"}`}>
       
       {/* 1. TOP NAVIGATION BAR */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl border-b ${
-        isDark ? "bg-[#060913]/85 border-white/10" : "bg-white/85 border-slate-200 shadow-sm"
+        isDark ? "bg-[#0B0F19]/85 border-white/10" : "bg-white/85 border-slate-200 shadow-sm"
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           
@@ -226,7 +226,7 @@ export default function PreviewPage() {
                   className="w-full h-full object-cover rounded-2xl"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050814]/70 via-transparent to-transparent pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19]/70 via-transparent to-transparent pointer-events-none"></div>
 
                 {/* Telemetric Badges */}
                 <div className="absolute top-[48%] left-[54%] transform -translate-x-1/2 -translate-y-1/2 px-3 py-2 rounded-xl flex items-center gap-2.5 bg-[#0D152A]/90 backdrop-blur-md border border-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.4)] animate-pulse">
@@ -503,7 +503,7 @@ export default function PreviewPage() {
 
       {/* 5. METHODOLOGY SECTION */}
       <section id="methodology" className={`py-20 border-t ${
-        isDark ? "border-white/5 bg-[#050814]" : "border-slate-200 bg-white"
+        isDark ? "border-white/5 bg-[#0B0F19]" : "border-slate-200 bg-white"
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
@@ -602,7 +602,7 @@ export default function PreviewPage() {
 
       {/* 7. FOOTER */}
       <footer className={`py-10 border-t ${
-        isDark ? "border-white/10 bg-[#060913]" : "border-slate-200 bg-white"
+        isDark ? "border-white/10 bg-[#0B0F19]" : "border-slate-200 bg-white"
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex items-center gap-3">

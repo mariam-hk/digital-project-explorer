@@ -89,7 +89,7 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
       {/* Top Banner & Highlights (Hidden upon user request)
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         // Leading Governorate Card
-        <div className="relative overflow-hidden rounded-2xl bg-[#0E1424] border border-cyan-500/30 p-5 shadow-[0_0_20px_rgba(6,182,212,0.15)] flex flex-col justify-between">
+        <div className="relative overflow-hidden rounded-2xl bg-[#1E293B] border border-cyan-500/30 p-5 shadow-[0_0_20px_rgba(6,182,212,0.15)] flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
               {isAr ? "المحافظة المتصدرة في هذا المؤشر" : "Leading Governorate"}
@@ -113,7 +113,7 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
         </div>
 
         // Average Card
-        <div className="relative overflow-hidden rounded-2xl bg-[#0E1424] border border-purple-500/30 p-5 shadow-[0_0_20px_rgba(168,85,247,0.15)] flex flex-col justify-between">
+        <div className="relative overflow-hidden rounded-2xl bg-[#1E293B] border border-purple-500/30 p-5 shadow-[0_0_20px_rgba(168,85,247,0.15)] flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-purple-400 uppercase tracking-wider">
               {isAr
@@ -143,7 +143,7 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
         </div>
 
         // Scope Selector Card
-        <div className="relative overflow-hidden rounded-2xl bg-[#0E1424] border border-amber-500/30 p-5 shadow-[0_0_20px_rgba(245,158,11,0.15)] flex flex-col justify-between">
+        <div className="relative overflow-hidden rounded-2xl bg-[#1E293B] border border-amber-500/30 p-5 shadow-[0_0_20px_rgba(245,158,11,0.15)] flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider">
               {isAr ? "نطاق المحافظات المعروضة" : "Dataset Scope"}
@@ -182,7 +182,7 @@ export const AllGovernoratesNeonDashboard: React.FC<AllGovernoratesNeonDashboard
       */}
 
       {/* View Switcher: Interactive Map vs Combo Chart vs Both (Commented out upon user request)
-      <div className="flex flex-wrap items-center justify-between gap-3 p-2 rounded-2xl bg-[#090E1D] border border-white/10 shadow-lg">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-2 rounded-2xl bg-[#111827] border border-white/10 shadow-lg">
         <div className="flex items-center gap-1.5">
           <span className="text-xs text-slate-400 font-bold px-2">
             {isAr ? "طريقة العرض:" : "View Mode:"}
