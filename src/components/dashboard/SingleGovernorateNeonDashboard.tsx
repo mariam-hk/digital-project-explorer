@@ -721,11 +721,6 @@ const govDetails = breakdownConfig.getGovBreakdown(
           </span>
         </div>
 
-        {/* Executive Summary Paragraph */}
-        <div className="p-4 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] text-xs leading-relaxed text-[#0F172A] dark:text-[#F1F5F9]">
-          <p>{selectedGov.aiSummary}</p>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs leading-relaxed text-slate-700 dark:text-slate-300 items-stretch">
           {/* Box 1: Recommended Business Models */}
           <div className="bg-white dark:bg-[#0B0F19] rounded-xl p-4 border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] space-y-2 flex flex-col justify-between h-full shadow-sm dark:shadow-none">
