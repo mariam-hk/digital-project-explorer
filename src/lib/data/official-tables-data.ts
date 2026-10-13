@@ -46,8 +46,8 @@ export const OFFICIAL_TABLES_STORE: Record<string, OfficialTableData> = {
       { govAr: "ذي قار", cashOnDelivery: 100.0, eWallet: 0.0, creditCard: 0.0, total: 100 },
       { govAr: "ميسان", cashOnDelivery: 100.0, eWallet: 0.0, creditCard: 0.0, total: 100 },
       { govAr: "أربيل", cashOnDelivery: 100.0, eWallet: 0.0, creditCard: 0.0, total: 100 },
-      { govAr: "السليمانية", cashOnDelivery: 99.7, eWallet: 0.3, creditCard: 0.0, total: 100 },
-      { govAr: "دهوك", cashOnDelivery: 100.0, eWallet: 0.0, creditCard: 0.0, total: 100 },
+      { govAr: "السليمانية", cashOnDelivery: 98.3, eWallet: 1.3, creditCard: 0.4, total: 100 },
+      { govAr: "دهوك", cashOnDelivery: 98.9, eWallet: 0.8, creditCard: 0.3, total: 100 },
     ]
   },
 

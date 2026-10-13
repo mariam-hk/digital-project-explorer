@@ -243,7 +243,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
       const electronics = row1_18?.electronics ?? 11.0;
       const other = Math.max(4.0, Number((100 - (clothes + food + electronics)).toFixed(1)));
 
-      const cod = row1_19?.cashOnDelivery ?? gov.cashOnDeliveryPct;
+      const cod = gov.cashOnDeliveryPct ?? row1_19?.cashOnDelivery;
       const eWallet = row1_19?.eWallet ?? 0.2;
       const card = row1_19?.creditCard ?? 0.1;
       const shoppingRate = row1_18?.totalShopping ?? gov.onlineShoppingPct;
@@ -355,7 +355,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
       const row14 = getTableRow("تقرير 2024 - جدول (14)", gov.nameAr);
       const row2_5 = getTableRow("جدول (2-5)", gov.nameAr);
 
-      const cod = row1_19?.cashOnDelivery ?? gov.cashOnDeliveryPct;
+      const cod = gov.cashOnDeliveryPct ?? row1_19?.cashOnDelivery;
       const digitalShare = Number((100 - cod).toFixed(1));
       const smartOffices = row14?.smartCardOffices ?? gov.smartCardOffices;
       const telecomSpend = row2_5?.totalSpend ?? gov.telecomSpending;
