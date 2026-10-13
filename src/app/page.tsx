@@ -110,15 +110,10 @@ export default function App() {
           {/* Official Logo (Text Only) */}
           <a href="#home" className="flex items-center group">
             <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0F172A] dark:text-[#F1F5F9]">
-                  Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0E7490] via-[#1D4ED8] to-[#6B21A8] dark:from-[#22D3EE] dark:via-[#60A5FA] dark:to-[#C084FC]">Location</span>
-                </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#E2E8F0] text-[#0E7490] border border-[#0E7490]/20 dark:bg-[#1E293B] dark:text-[#22D3EE] dark:border-[#22D3EE]/30 font-mono">
-                  IRAQ
-                </span>
-              </div>
-              <span className="text-[9px] font-semibold tracking-wider text-[#334155] dark:text-[#94A3B8] uppercase">
+              <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0F172A] dark:text-[#F1F5F9] leading-tight">
+                Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0E7490] via-[#1D4ED8] to-[#6B21A8] dark:from-[#22D3EE] dark:via-[#60A5FA] dark:to-[#C084FC]">Location</span>
+              </span>
+              <span className="text-[9px] font-semibold tracking-wider text-[#334155] dark:text-[#94A3B8] uppercase mt-0.5">
                 Digital Market Explorer
               </span>
             </div>
