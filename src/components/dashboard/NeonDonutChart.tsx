@@ -77,6 +77,7 @@ export const NeonDonutChart: React.FC<NeonDonutChartProps> = ({
 
             {/* Glowing Slices */}
             {slices.map((slice) => {
+              if (slice.fraction <= 0) return null;
               const isHovered = hoveredIdx === slice.idx;
               return (
                 <circle

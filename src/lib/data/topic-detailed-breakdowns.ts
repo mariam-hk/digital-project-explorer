@@ -222,7 +222,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
         titleAr: "نسبة الأفراد الذين قاموا بشراء السلع أو الخدمات عبر الإنترنت خلال (3) الأشهر الأخيرة حسب قنوات الدفع والفئات العمرية والحالة التعليمية والمحافظة لسنة 2022 (%)",
         titleEn: "Payment channels used for online purchases (Cash on Delivery vs Digital) 2022",
         source: "مسح استخدام تكنولوجيا المعلومات 2022 - ص 90",
-        keyFindingAr: "الدفع عند الاستلام (كاش) يبلغ 99.7% كخيار أول بين المتسوقين العراقيين."
+        keyFindingAr: "الدفع عند الاستلام (كاش) يبلغ 99.7% كمعدل وطني لعموم العراق (جدول 1-19)، ويصل إلى 100.0% في بغداد ومعظم المحافظات."
       },
       {
         tableNumber: "جدول (1-20)",
@@ -375,7 +375,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           },
           {
             label: isAr ? "دفع الكتروني" : "Digital Payments",
-            value: digitalShare > 0 ? digitalShare : 0.3,
+            value: digitalShare,
             color: "#22D3EE",
           },
         ],
@@ -394,11 +394,6 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             label: isAr ? "مؤشر الجاهزية الرقمية" : "Digital Readiness Score",
             value: gov.digitalReadinessScore,
             color: "#34D399",
-          },
-          {
-            label: isAr ? "حجم القدرة على الإنفاق التقني" : "ICT Spend Capacity Index",
-            value: Math.min(100, Math.round((telecomSpend / 500) * 100)),
-            color: "#60A5FA",
           },
         ],
         kpiStats: [
