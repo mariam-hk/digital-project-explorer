@@ -294,21 +294,21 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                   top: `${mousePos.y - 12}px`,
                 }}
               >
-                <div className="bg-white/95 text-slate-900 dark:bg-[#090E20]/95 dark:text-white backdrop-blur-md border border-slate-300 dark:border-cyan-400/80 rounded-xl px-4 py-2.5 shadow-xl dark:shadow-[0_0_25px_rgba(6,182,212,0.6)] text-center min-w-[150px] whitespace-nowrap">
+                <div className="bg-white/95 text-[#0F172A] dark:bg-[#111827]/95 dark:text-[#F1F5F9] backdrop-blur-md border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.25)] rounded-xl px-4 py-2.5 shadow-xl text-center min-w-[150px] whitespace-nowrap">
                   {/* Governorate Name */}
-                  <span className="text-xs font-black text-slate-900 dark:text-white block">
+                  <span className="text-xs font-black text-[#0F172A] dark:text-[#F1F5F9] block">
                     {isAr ? `محافظة ${hoveredGov.nameAr}` : hoveredGov.nameEn}
                   </span>
 
                   {/* Percentage Value */}
-                  <div className="flex items-center justify-center gap-1.5 mt-1">
-                    <span className="text-lg font-black text-cyan-600 dark:text-[#0E7490] dark:text-[#22D3EE] font-mono drop-shadow-[0_0_10px_rgba(6,182,212,0.9)]">
+                  <div className="flex items-center justify-center gap-1.5 mt-1" dir="ltr">
+                    <span className="text-lg font-black text-[#0E7490] dark:text-[#22D3EE] font-mono">
                       {hoveredGov[selectedTopic.metricKey]}
                       <span className="text-xs text-[#334155] dark:text-[#94A3B8] font-sans ml-0.5">
                         {selectedTopic.unit}
                       </span>
                     </span>
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#E2E8F0] text-[#0E7490] dark:bg-[#1E293B] dark:text-[#22D3EE] font-bold border border-[#0E7490]/30 dark:border-[#22D3EE]/30 whitespace-nowrap">
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#E2E8F0] text-[#0E7490] dark:bg-[#1E293B] dark:text-[#22D3EE] font-bold border border-[#0E7490]/30 dark:border-[#22D3EE]/30 whitespace-nowrap">
                       #{hoveredGov.rank}
                     </span>
                   </div>
@@ -329,7 +329,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                 ? "💡 مرّر الماوس فوق أي محافظة لتضيء وتظهر نسبتها فوراً"
                 : "💡 Hover over any governorate to view percentage"}
             </span>
-            <span className="font-mono text-[#0E7490] dark:text-[#22D3EE] font-bold">
+            <span className="font-mono text-[#0E7490] dark:text-[#22D3EE] font-bold" dir="ltr">
               {activeGov ? (isAr ? activeGov.nameAr : activeGov.nameEn) : ""}:{" "}
               {activeGov ? activeGov[selectedTopic.metricKey] : ""}{selectedTopic.unit}
             </span>
@@ -339,29 +339,33 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
         {/* Selected Governorate Full Strategic Intelligence Card (4 Cols) */}
         {activeGov && (
           <div className="lg:col-span-4 rounded-2xl bg-white dark:bg-[#111827] border-2 border-[#0E7490]/40 dark:border-[#22D3EE]/50 p-5 shadow-sm dark:shadow-none space-y-4 transition-colors duration-300">
-            {/* Header info */}
-            <div className="border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] pb-3 flex items-start justify-between gap-2 sm:gap-3">
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#E2E8F0] text-[#0E7490] dark:bg-[#1E293B] dark:text-[#22D3EE] border border-[#0E7490]/40 dark:border-[#22D3EE]/40 whitespace-nowrap inline-flex items-center">
-                    #{activeGov.rank} {isAr ? "في عموم العراق" : "Nationwide"}
-                  </span>
-                </div>
-                <h4 className="text-xl sm:text-2xl font-black text-[#0F172A] dark:text-[#F1F5F9] flex items-center gap-1.5 sm:gap-2 mt-1 truncate">
-                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#0E7490] dark:text-[#22D3EE] animate-bounce shrink-0" />
+            {/* Header info: Governorate Name & Big Metric with clean separation */}
+            <div className="border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] pb-4 flex items-start justify-between gap-3">
+              {/* Right Side in RTL: Governorate Name & Nationwide Rank Badge */}
+              <div className="min-w-0 flex-1 space-y-1">
+                <h4 className="text-xl sm:text-2xl font-black text-[#0F172A] dark:text-[#F1F5F9] flex items-center gap-1.5 truncate">
+                  <MapPin className="w-5 h-5 text-[#0E7490] dark:text-[#22D3EE] shrink-0" />
                   <span className="truncate">{isAr ? activeGov.nameAr : activeGov.nameEn}</span>
                 </h4>
+                <div className="flex items-center gap-1.5 pt-0.5">
+                  <span className="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-[#E2E8F0] text-[#0E7490] dark:bg-[#1E293B] dark:text-[#22D3EE] border border-[#0E7490]/30 dark:border-[#22D3EE]/30 whitespace-nowrap inline-flex items-center gap-1">
+                    <span className="font-mono font-bold">#{activeGov.rank}</span>
+                    <span>{isAr ? "في عموم العراق" : "Nationwide"}</span>
+                  </span>
+                </div>
               </div>
 
-              {/* Big Metric Display */}
-              <div className="text-left rtl:text-right shrink-0">
-                <span className="text-2xl sm:text-3xl font-black text-cyan-600 dark:text-[#0E7490] dark:text-[#22D3EE] font-mono drop-shadow-[0_0_12px_rgba(6,182,212,0.9)] whitespace-nowrap block">
-                  {activeGov[selectedTopic.metricKey]}
-                  <span className="text-base sm:text-lg text-[#334155] dark:text-[#94A3B8] font-sans ml-1">
+              {/* Left Side in RTL: Big Metric Display */}
+              <div className="shrink-0 flex flex-col items-end rtl:items-start text-right rtl:text-left">
+                <div className="flex items-baseline gap-0.5 font-mono leading-none" dir="ltr">
+                  <span className="text-2xl sm:text-3xl font-black text-[#0E7490] dark:text-[#22D3EE]">
+                    {activeGov[selectedTopic.metricKey]}
+                  </span>
+                  <span className="text-sm sm:text-base font-bold text-[#334155] dark:text-[#94A3B8]">
                     {selectedTopic.unit}
                   </span>
-                </span>
-                <span className="block text-[10px] text-[#334155] dark:text-[#94A3B8] font-medium mt-0.5 whitespace-nowrap">
+                </div>
+                <span className="block text-[10px] text-[#334155] dark:text-[#94A3B8] font-medium mt-1 whitespace-nowrap">
                   {isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
                 </span>
               </div>
