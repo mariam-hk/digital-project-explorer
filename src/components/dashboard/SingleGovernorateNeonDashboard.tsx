@@ -11,6 +11,7 @@ import {
 import { TOPIC_BREAKDOWNS } from "../../lib/data/topic-detailed-breakdowns";
 import { NeonDonutChart } from "./NeonDonutChart";
 import { OfficialTablesNeonList } from "./OfficialTablesNeonList";
+import { TopicIcon } from "./TopicIcon";
 import {
   MapPin,
   Smartphone,
@@ -254,7 +255,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
                   boxShadow: isActive ? `0 0 15px ${topic.neonGlow}` : undefined,
                 }}
               >
-                <span className="text-sm">{topic.icon}</span>
+                <TopicIcon topicId={topic.id} className="w-4 h-4 shrink-0" />
                 <span>{isAr ? topic.titleAr : topic.titleEn}</span>
               </button>
             );
@@ -267,8 +268,14 @@ const govDetails = breakdownConfig.getGovBreakdown(
         {/* Section Heading */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] pb-3">
           <div>
-            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <span className="text-xl">{selectedTopic.icon}</span>
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white flex items-center gap-2.5">
+              <span className="p-1.5 rounded-lg flex items-center justify-center shrink-0" style={{
+                color: selectedTopic.neonColor,
+                backgroundColor: `${selectedTopic.neonColor}18`,
+                border: `1px solid ${selectedTopic.neonColor}30`,
+              }}>
+                <TopicIcon topicId={selectedTopic.id} className="w-5 h-5" />
+              </span>
               <span>
                 {isAr
                   ? `تفاصيل قطاع (${selectedTopic.titleAr}) في ${selectedGov.nameAr}`
@@ -606,7 +613,16 @@ const govDetails = breakdownConfig.getGovBreakdown(
                 <div key={ind.key} className="space-y-1">
                   <div className="flex items-center justify-between text-xs py-0.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm">{ind.icon}</span>
+                      <span
+                        className="p-1 rounded-md flex items-center justify-center shrink-0"
+                        style={{
+                          color: ind.color,
+                          backgroundColor: `${ind.color}18`,
+                          border: `1px solid ${ind.color}30`,
+                        }}
+                      >
+                        <TopicIcon topicId={ind.key} className="w-3.5 h-3.5" />
+                      </span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
                         {isAr ? ind.nameAr : ind.nameEn}
                       </span>

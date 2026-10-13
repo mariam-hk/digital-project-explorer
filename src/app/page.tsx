@@ -11,6 +11,7 @@ import {
 import { IraqInteractiveMap } from "../components/dashboard/IraqInteractiveMap";
 import { NeonComboChart } from "../components/dashboard/NeonComboChart";
 import { SingleGovernorateNeonDashboard } from "../components/dashboard/SingleGovernorateNeonDashboard";
+import { TopicIcon } from "../components/dashboard/TopicIcon";
 import {
   ArrowRight,
   Database,
@@ -488,13 +489,22 @@ export default function App() {
                     <button
                       key={topic.id}
                       onClick={() => setSelectedTopic(topic)}
-                      className={`w-full text-start p-3 rounded-xl text-xs font-semibold flex items-center gap-3 transition-all cursor-pointer ${
+                      className={`w-full text-start p-2.5 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all cursor-pointer ${
                         isSelected
                           ? "bg-[#E2E8F0] border-2 border-[#0E7490] text-[#0E7490] dark:bg-[#1E293B] dark:border-[#22D3EE] dark:text-[#22D3EE] font-bold shadow-sm"
                           : "bg-white border border-[#CBD5E1] text-[#334155] hover:bg-[#E2E8F0] hover:text-[#0F172A] dark:bg-[#111827] dark:border-[rgba(148,163,184,0.12)] dark:text-[#94A3B8] dark:hover:text-[#F1F5F9] dark:hover:bg-[#1E293B]"
                       }`}
                     >
-                      <span className="text-base">{topic.icon}</span>
+                      <span
+                        className="p-1.5 rounded-lg flex items-center justify-center shrink-0 transition-colors"
+                        style={{
+                          color: topic.neonColor,
+                          backgroundColor: `${topic.neonColor}18`,
+                          border: `1px solid ${topic.neonColor}30`,
+                        }}
+                      >
+                        <TopicIcon topicId={topic.id} className="w-4 h-4" />
+                      </span>
                       <span className="truncate">{isAr ? topic.titleAr : topic.titleEn}</span>
                     </button>
                   );

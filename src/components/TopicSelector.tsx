@@ -4,6 +4,8 @@ import React from "react";
 import { TOPICS } from "../lib/data/iraq-digital-data";
 import { TopicId } from "../lib/types";
 
+import { TopicIcon } from "./dashboard/TopicIcon";
+
 interface TopicSelectorProps {
   selectedTopic: TopicId;
   onSelectTopic: (topic: TopicId) => void;
@@ -35,7 +37,7 @@ export const TopicSelector: React.FC<TopicSelectorProps> = ({
 
         {/* Current Active Badge */}
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 self-start sm:self-auto">
-          <span>{currentTopic.icon}</span>
+          <TopicIcon topicId={currentTopic.id} className="w-4 h-4 text-indigo-600" />
           <span className="font-semibold">{isAr ? currentTopic.nameAr : currentTopic.nameEn}</span>
         </div>
       </div>
@@ -54,7 +56,7 @@ export const TopicSelector: React.FC<TopicSelectorProps> = ({
                   : "bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/70 hover:border-slate-300"
               }`}
             >
-              <span className="text-base">{topic.icon}</span>
+              <TopicIcon topicId={topic.id} className="w-4 h-4 shrink-0" />
               <span>{isAr ? topic.nameAr : topic.nameEn}</span>
             </button>
           );
