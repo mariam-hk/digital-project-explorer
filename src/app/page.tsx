@@ -107,18 +107,11 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#0B0F19]/90 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-sm dark:shadow-none transition-all duration-300">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-20 flex items-center justify-between">
           
-          {/* Official Logo */}
-          <a href="#home" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center p-0.5 border border-[#0E7490]/40 dark:border-[#22D3EE]/40 bg-white dark:bg-[#0B0F19]">
-              <img
-                src="/techlocation_logo.jpg"
-                alt="TechLocation Logo"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* Official Logo (Text Only) */}
+          <a href="#home" className="flex items-center group">
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-lg font-black tracking-tight text-[#0F172A] dark:text-[#F1F5F9]">
+              <div className="flex items-center gap-2">
+                <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0F172A] dark:text-[#F1F5F9]">
                   Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0E7490] via-[#1D4ED8] to-[#6B21A8] dark:from-[#22D3EE] dark:via-[#60A5FA] dark:to-[#C084FC]">Location</span>
                 </span>
                 <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#E2E8F0] text-[#0E7490] border border-[#0E7490]/20 dark:bg-[#1E293B] dark:text-[#22D3EE] dark:border-[#22D3EE]/30 font-mono">
