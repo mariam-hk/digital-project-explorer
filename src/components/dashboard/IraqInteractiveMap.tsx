@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { GovernorateMetric, TopicConfig } from "../../lib/data/iraq-dashboard-data";
 import { IRAQ_GOV_SVG_PATHS } from "../../lib/data/iraq-svg-paths";
 import {
@@ -9,6 +9,7 @@ import {
   ArrowRight,
   ArrowLeft,
   MousePointerClick,
+  Palette,
 } from "lucide-react";
 
 interface IraqInteractiveMapProps {
@@ -35,6 +36,26 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
   const [hoveredGovId, setHoveredGovId] = useState<string | null>(null);
   const [selectedGovId, setSelectedGovId] = useState<string>(governorates[0]?.id || "baghdad");
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+  const [colorByValue, setColorByValue] = useState<boolean>(true);
+
+  // Min, max, and avg metric values across current active governorates
+  const { minVal, maxVal, avgVal } = useMemo(() => {
+    const activeGovs = scope === "federal"
+      ? governorates.filter((g) => !KURDISTAN_IDS.includes(g.id))
+      : governorates;
+    const vals = activeGovs
+      .map((g) => Number(g[selectedTopic.metricKey]))
+      .filter((v) => !isNaN(v));
+    if (vals.length === 0) return { minVal: 0, maxVal: 100, avgVal: 50 };
+    const min = Math.min(...vals);
+    const max = Math.max(...vals);
+    const avg = Number((vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1));
+    return {
+      minVal: min,
+      maxVal: max,
+      avgVal: avg,
+    };
+  }, [governorates, scope, selectedTopic.metricKey]);
 
   // If scope switches to federal and selected was in Kurdistan, reset selection to Baghdad
   useEffect(() => {
@@ -73,7 +94,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
       />
 
       {/* Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] pb-4 relative z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] pb-4 relative z-10">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-[#E2E8F0] border border-[#0E7490]/30 text-[#0E7490] dark:bg-[#1E293B] dark:border-[#22D3EE]/30 dark:text-[#22D3EE] shadow-[0_0_15px_rgba(6,182,212,0.3)]">
             <MapPin className="w-5 h-5" />
@@ -105,12 +126,46 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
             </p>
           </div>
         </div>
+
+        {/* Color by Value Toggle Button (Matching Image 1) */}
+        <div className="flex items-center gap-3 shrink-0 self-start sm:self-auto">
+          <button
+            type="button"
+            onClick={() => setColorByValue((prev) => !prev)}
+            className={`flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl border transition-all cursor-pointer ${
+              colorByValue
+                ? "bg-[#0E7490]/15 dark:bg-[#06B6D4]/15 border-[#0E7490] dark:border-[#22D3EE] text-[#0E7490] dark:text-[#22D3EE] shadow-[0_0_15px_rgba(6,182,212,0.25)]"
+                : "bg-white dark:bg-[#1E293B] border-[#CBD5E1] dark:border-[rgba(148,163,184,0.2)] text-slate-600 dark:text-slate-400 hover:border-[#0E7490]/40 dark:hover:border-[#22D3EE]/40"
+            }`}
+            title={isAr ? "تفعيل/تعطيل التلوين التدرجي حسب القيمة" : "Toggle color by value"}
+          >
+            {/* Switch Capsule */}
+            <div
+              dir="ltr"
+              className={`w-9 h-5 rounded-full transition-colors duration-200 p-0.5 flex items-center ${
+                colorByValue
+                  ? "bg-[#0E7490] dark:bg-[#06B6D4] justify-start"
+                  : "bg-slate-300 dark:bg-slate-700 justify-end"
+              }`}
+            >
+              <div className="w-4 h-4 rounded-full bg-white shadow-md transform transition-all duration-200" />
+            </div>
+
+            {/* Label */}
+            <span className="text-xs font-bold whitespace-nowrap">
+              {isAr ? "تلوين حسب القيمة" : "Color by Value"}
+            </span>
+
+            {/* Palette Icon */}
+            <Palette className="w-4 h-4 shrink-0" />
+          </button>
+        </div>
       </div>
 
       {/* Main Map Body: Interactive SVG Map (8 Cols) + Details Card (4 Cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start relative z-10">
         {/* SVG Interactive Map Area (8 Cols) */}
-        <div className="lg:col-span-8 relative flex flex-col items-center justify-center rounded-2xl bg-[#F1F5F9] dark:bg-[#0B0F19] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-2 sm:p-4 min-h-[500px] transition-colors duration-300">
+        <div className="lg:col-span-8 relative flex flex-col items-center justify-center rounded-2xl bg-[#F1F5F9] dark:bg-[#0B0F19] bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] dark:bg-[radial-gradient(rgba(148,163,184,0.12)_1px,transparent_1px)] [background-size:22px_22px] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-2 sm:p-4 min-h-[500px] transition-colors duration-300">
           {/* Quick-Select Governorate Pills Bar (Top of Map) */}
           <div className="w-full flex items-center gap-1.5 overflow-x-auto pb-2 mb-2 scrollbar-none text-[11px]">
             <span className="text-[#334155] dark:text-[#94A3B8] font-bold whitespace-nowrap pl-1 text-[10px]">
@@ -164,24 +219,46 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                 const isExcluded = scope === "federal" && isKurdistan;
                 const gov = governorates.find((g) => g.id === region.id);
                 const val = gov ? Number(gov[selectedTopic.metricKey]) || 0 : 0;
-
-                // STRICT USER RULES:
-                // 1. ALL governorates (including Kurdistan, Baghdad, Basra) share the EXACT SAME base color!
-                // 2. Kurdistan has NO names when in federal mode (scope === "federal").
-                // 3. ONLY the governorate being hovered over changes color to cyan and shows the percentage!
                 const isHovered = hoveredGovId === region.id && !isExcluded;
 
-                let fillColor = isLight ? "#E2E8F0" : "#1E293B";
-                let strokeColor = isLight ? "#CBD5E1" : "rgba(148, 163, 184, 0.25)";
-                let strokeWidth = "1.2";
+                const range = maxVal - minVal;
+                const ratio = range > 0 ? Math.max(0, Math.min(1, (val - minVal) / range)) : 0.5;
 
-                if (isHovered) {
+                let fillColor = isLight ? "#E2E8F0" : "#1E293B";
+                let strokeColor = isLight ? "rgba(148, 163, 184, 0.45)" : "rgba(148, 163, 184, 0.22)";
+                let strokeWidth = "0.75";
+
+                if (isExcluded) {
+                  fillColor = isLight ? "#F1F5F9" : "#0F172A";
+                  strokeColor = isLight ? "#E2E8F0" : "rgba(148, 163, 184, 0.08)";
+                } else if (isHovered) {
                   fillColor = isLight ? "#0284C7" : "#38BDF8";
-                  strokeColor = isLight ? "#0284C7" : "#F1F5F9";
-                  strokeWidth = "2.5";
+                  strokeColor = isLight ? "#0284C7" : "#FFFFFF";
+                  strokeWidth = "2";
+                } else if (colorByValue) {
+                  // Color gradient from lowest to highest matching Image
+                  if (isLight) {
+                    // Soft sky blue (#E0F2FE) to deep vibrant ocean cyan (#0E7490)
+                    const r = Math.round(224 + (14 - 224) * ratio);
+                    const g = Math.round(242 + (116 - 242) * ratio);
+                    const b = Math.round(254 + (144 - 254) * ratio);
+                    fillColor = `rgb(${r}, ${g}, ${b})`;
+                    strokeColor = "rgba(148, 163, 184, 0.45)";
+                    strokeWidth = "0.75";
+                  } else {
+                    // Dark navy (30, 55, 78) to radiant neon cyan (103, 232, 249)
+                    const r = Math.round(30 + (103 - 30) * ratio);
+                    const g = Math.round(55 + (232 - 55) * ratio);
+                    const b = Math.round(78 + (249 - 78) * ratio);
+                    fillColor = `rgb(${r}, ${g}, ${b})`;
+                    strokeColor = "rgba(90, 120, 150, 0.35)";
+                    strokeWidth = "0.75";
+                  }
                 }
 
                 const isSmallGov = ["baghdad", "babylon", "kerbela"].includes(region.id);
+                // When colorByValue is active and background is very bright (e.g. Baghdad), use dark text
+                const isBrightBg = colorByValue && ratio > 0.75 && !isHovered && !isLight;
 
                 return (
                   <g
@@ -220,11 +297,48 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                       }}
                     />
 
-                    {/* Governorate Name Text: OMITTED for Kurdistan when in federal mode */}
+                    {/* Governorate Name & Value Text: OMITTED for Kurdistan when in federal mode */}
                     {!isExcluded && (
                       <g pointerEvents="none" className="select-none">
-                        {/* If Hovered: Name moves slightly up, and the Percentage appears below it! */}
-                        {isHovered ? (
+                        {colorByValue ? (
+                          /* When colorByValue is ON: Every governorate displays Name + Value (Matching Image 2) */
+                          <>
+                            {/* Governorate Name */}
+                            <text
+                              x={region.cx}
+                              y={region.cy - 7}
+                              textAnchor="middle"
+                              dominantBaseline="central"
+                              fill={isBrightBg ? "#060A14" : (isLight ? (ratio > 0.6 ? "#FFFFFF" : "#0F172A") : "#FFFFFF")}
+                              stroke={isBrightBg ? "none" : (isLight ? (ratio > 0.6 ? "#0E7490" : "#FFFFFF") : "#090E1D")}
+                              strokeWidth={isBrightBg ? "0" : "2"}
+                              paintOrder="stroke fill"
+                              fontSize={region.id === "baghdad" ? "8.5" : isSmallGov ? "9.5" : "11"}
+                              fontWeight="900"
+                              fontFamily="sans-serif"
+                            >
+                              {isAr ? region.nameAr : region.nameEn}
+                            </text>
+
+                            {/* Governorate Value Number */}
+                            <text
+                              x={region.cx}
+                              y={region.cy + 8}
+                              textAnchor="middle"
+                              dominantBaseline="central"
+                              fill={isBrightBg ? "#060A14" : (isLight ? (ratio > 0.6 ? "#FFFFFF" : "#0F172A") : "#FFFFFF")}
+                              stroke={isBrightBg ? "none" : (isLight ? (ratio > 0.6 ? "#0E7490" : "#FFFFFF") : "#090E1D")}
+                              strokeWidth={isBrightBg ? "0" : "2"}
+                              paintOrder="stroke fill"
+                              fontSize={region.id === "baghdad" ? "9" : isSmallGov ? "10" : "11.5"}
+                              fontWeight="900"
+                              fontFamily="monospace"
+                            >
+                              {val}
+                            </text>
+                          </>
+                        ) : isHovered ? (
+                          /* When colorByValue is OFF and hovered: Show Name + Value with unit */
                           <>
                             {/* Governorate Name */}
                             <text
@@ -261,7 +375,7 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                             </text>
                           </>
                         ) : (
-                          /* When NOT hovered: ONLY the governorate name is displayed */
+                          /* When NOT hovered and colorByValue is OFF: ONLY the governorate name is displayed */
                           <text
                             x={region.cx}
                             y={region.cy}
@@ -370,6 +484,69 @@ export const IraqInteractiveMap: React.FC<IraqInteractiveMapProps> = ({
                 </span>
               </div>
             </div>
+
+            {/* POSITION ACROSS GOVERNORATES GAUGE (Matching media_1792001036152_cd3aa635.png) */}
+            {(() => {
+              const currentVal = Number(activeGov[selectedTopic.metricKey]) || 0;
+              const diffFromAvg = Number((currentVal - avgVal).toFixed(1));
+              const valRange = maxVal - minVal;
+              const currentRatio = valRange > 0 ? Math.max(0, Math.min(1, (currentVal - minVal) / valRange)) : 0.5;
+              const avgRatio = valRange > 0 ? Math.max(0, Math.min(1, (avgVal - minVal) / valRange)) : 0.5;
+
+              return (
+                <div className="p-3.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B]/60 border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] space-y-2.5">
+                  <div className="flex items-center justify-between text-xs font-bold">
+                    <span className="text-slate-700 dark:text-slate-300">
+                      {isAr ? "الموقع بين المحافظات" : "Position Across Governorates"}
+                    </span>
+                    <span
+                      className={`flex items-center gap-1 font-mono text-xs font-black ${
+                        diffFromAvg >= 0
+                          ? "text-emerald-600 dark:text-emerald-400"
+                          : "text-amber-600 dark:text-amber-400"
+                      }`}
+                    >
+                      <span className="text-sm">{diffFromAvg >= 0 ? "↗" : "↘"}</span>
+                      <span>{diffFromAvg >= 0 ? `+${diffFromAvg}` : diffFromAvg}</span>
+                      <span className="font-sans font-medium text-[10px] text-slate-500 dark:text-slate-400">
+                        {isAr ? "عن متوسط المحافظات" : "vs govs avg"}
+                      </span>
+                    </span>
+                  </div>
+
+                  {/* Slider / Gauge Track */}
+                  <div className="relative h-2 w-full rounded-full bg-slate-300/70 dark:bg-[#0E2838] border border-slate-300 dark:border-[rgba(148,163,184,0.15)] my-2">
+                    {/* White Tick for Average */}
+                    <div
+                      className="absolute top-1/2 w-0.5 h-3.5 bg-slate-900 dark:bg-white rounded-full z-10 shadow-sm"
+                      style={{
+                        [isAr ? "right" : "left"]: `${avgRatio * 100}%`,
+                        transform: isAr ? "translate(50%, -50%)" : "translate(-50%, -50%)",
+                      }}
+                      title={isAr ? `متوسط المحافظات: ${avgVal}` : `Average: ${avgVal}`}
+                    />
+
+                    {/* Circular Knob for Active Governorate */}
+                    <div
+                      className="absolute top-1/2 w-3.5 h-3.5 rounded-full bg-[#0E7490] dark:bg-[#22D3EE] border-2 border-white dark:border-[#090E1D] shadow-[0_0_8px_#22D3EE] z-20 transition-all duration-200"
+                      style={{
+                        [isAr ? "right" : "left"]: `${currentRatio * 100}%`,
+                        transform: isAr ? "translate(50%, -50%)" : "translate(-50%, -50%)",
+                      }}
+                    />
+                  </div>
+
+                  {/* Min, Average, Max Labels (In RTL: Right=Min, Center=Avg, Left=Max) */}
+                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-slate-400 pt-0.5">
+                    <span>{minVal}</span>
+                    <span className="font-semibold text-slate-600 dark:text-slate-300 font-sans">
+                      {isAr ? `متوسط المحافظات: ${avgVal}` : `Govs Avg: ${avgVal}`}
+                    </span>
+                    <span>{maxVal}</span>
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Metrics Grid */}
             <div className="space-y-2.5 text-xs sm:text-[13px]">

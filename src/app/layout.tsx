@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TechLocation AI — Digital Market Explorer",
-  description: "Explore citizens' digital behavior and technology readiness across locations.",
+  title: "IRAQ TechLoc — Digital Market Explorer",
+  description: "Explore citizens' digital behavior and technology readiness across Iraq's governorates.",
 };
 
 export default function RootLayout({

@@ -81,10 +81,10 @@ export const TOPICS: TopicConfig[] = [
     unit: "%",
     neonColor: "#22D3EE",
     neonGlow: "rgba(88, 182, 204, 0.4)",
-    descriptionAr: "مؤشر جاهزية التحول المالي الرقمي اعتماداً على النشاط التجاري، انتشار الهواتف، والقدرة الإنفاقية للأسر.",
-    descriptionEn: "FinTech conversion readiness index based on e-commerce activity, smartphone adoption, and household spending power.",
-    sourceAr: "مؤشر مركب: مسح تكنولوجيا المعلومات (جدول 1-18 + جدول 1-4 + جدول 2-5)",
-    sourceEn: "Composite index: ICT Survey (Table 1-18, Table 1-4, Table 2-5)"
+    descriptionAr: "مؤشر من 0 إلى 100 لفرصة المدفوعات الرقمية يجمع: إنفاق الأسرة على الاتصالات، ونسبة الشراء الإلكتروني، وانتشار الهواتف الذكية - في سوق يُدفع فيه 99.7% من المشتريات الإلكترونية نقداً عند الاستلام.",
+    descriptionEn: "FinTech conversion readiness score combining household telecom spend, e-commerce purchases, and smartphone adoption — in a market where 99.7% of purchases are cash on delivery.",
+    sourceAr: "محسوب في المشروع من مسح 2022 (جدول 2-5 + جدول 1-18 + جدول 1-4)",
+    sourceEn: "Calculated in project from COSIT 2022 (Table 2-5, Table 1-18, Table 1-4)"
   },
   {
     id: "smartphones",

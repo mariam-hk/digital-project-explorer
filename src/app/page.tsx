@@ -26,6 +26,7 @@ import {
   CheckCircle,
   Sun,
   Moon,
+  BookOpen,
 } from "lucide-react";
 
 export default function App() {
@@ -81,6 +82,7 @@ export default function App() {
   }, [targetDataset, selectedTopic]);
 
   const topGov = sortedGovs[0] || targetDataset[0];
+  const bottomGov = sortedGovs[sortedGovs.length - 1] || targetDataset[targetDataset.length - 1];
 
   const avgValue = useMemo(() => {
     const sum = targetDataset.reduce((acc, g) => acc + (Number(g[selectedTopic.metricKey]) || 0), 0);
@@ -108,16 +110,39 @@ export default function App() {
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#0B0F19]/90 border-b border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] shadow-sm dark:shadow-none transition-all duration-300">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-20 flex items-center justify-between">
           
-          {/* Official Logo (Text Only) */}
-          <a href="#home" className="flex items-center group">
-            <div className="flex flex-col">
-              <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0F172A] dark:text-[#F1F5F9] leading-tight">
-                Tech<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0E7490] via-[#1D4ED8] to-[#6B21A8] dark:from-[#22D3EE] dark:via-[#60A5FA] dark:to-[#C084FC]">Location</span>
-              </span>
-              <span className="text-[9px] font-semibold tracking-wider text-[#334155] dark:text-[#94A3B8] uppercase mt-0.5">
-                Digital Market Explorer
+          {/* Official Logo: IRAQ TechLoc — DIGITAL MARKET EXPLORER (Exact match to uploaded design) */}
+          <a href="#home" className="flex items-center gap-3 group cursor-pointer" dir="ltr">
+            {/* Text Branding */}
+            <div className="flex flex-col items-start select-none">
+              {/* Row 1: [ IRAQ ] badge + TechLoc */}
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                {/* [ IRAQ ] Badge */}
+                <div className="px-2 sm:px-2.5 py-0.5 rounded-lg bg-[#0E1F38] border-2 border-[#1E4E8C] dark:border-[#2563EB]/80 shadow-[0_0_10px_rgba(37,99,235,0.2)] flex items-center justify-center">
+                  <span className="text-[#38BDF8] font-black text-xs sm:text-sm tracking-wider font-mono leading-none">
+                    IRAQ
+                  </span>
+                </div>
+
+                {/* TechLoc Text */}
+                <div className="text-xl sm:text-2xl font-black tracking-tight leading-none flex items-center">
+                  <span className="text-[#0F172A] dark:text-white">Tech</span>
+                  <span className="text-[#38BDF8]">L</span>
+                  <span className="text-[#818CF8]">oc</span>
+                </div>
+              </div>
+
+              {/* Row 2: DIGITAL MARKET EXPLORER */}
+              <span className="text-[9px] sm:text-[10.5px] font-extrabold tracking-[0.19em] text-[#64748B] dark:text-[#94A3B8] uppercase mt-1 leading-none">
+                DIGITAL MARKET EXPLORER
               </span>
             </div>
+
+            {/* 3D Squircle App Icon on the right */}
+            <img
+              src="/techloc_icon.png"
+              alt="IRAQ TechLoc"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl shadow-[0_0_18px_rgba(56,189,248,0.25)] border border-[#2563EB]/40 object-cover shrink-0 group-hover:scale-105 transition-transform duration-200"
+            />
           </a>
 
           {/* Navigation Links */}
@@ -524,88 +549,78 @@ export default function App() {
             {currentMode === "all_governorates" ? (
               <div className="space-y-6">
                 
-                {/* 3 TOP KPI CARDS (Hidden upon user request)
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  
-                  // Card 1: Leading Governorate
-                  <div className="rounded-2xl bg-[#090E1D] border border-cyan-500/30 p-5 shadow-lg flex flex-col justify-between">
-                    <div className="flex items-center justify-between text-xs font-bold text-cyan-400 uppercase tracking-wider">
-                      <span>{isAr ? "المحافظة المتصدرة" : "LEADING GOVERNORATE"}</span>
-                      <Trophy className="w-4 h-4 text-cyan-400" />
-                    </div>
-                    <div className="mt-2 flex items-baseline justify-between">
-                      <span className="text-2xl font-black text-white">
-                        {isAr ? topGov.nameAr : topGov.nameEn}
-                      </span>
-                      <span className="text-2xl font-extrabold text-cyan-400 font-mono drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]">
-                        {topGov[selectedTopic.metricKey]}
-                        {selectedTopic.unit}
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-slate-400 mt-1">
-                      {isAr
-                        ? `الإنفاق: ${topGov.telecomSpending} ألف د.ع • الأنسب: ${topGov.bestFitModel}`
-                        : `Spend: ${topGov.telecomSpending}K IQD · Best: ${topGov.bestFitModel}`}
-                    </p>
-                  </div>
+                {/* TOP TOPIC HERO BANNER (Without 18 vs 15 toggle) */}
+                <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-[#111827] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] p-4 sm:p-5 shadow-sm dark:shadow-none transition-colors duration-300">
+                  <div
+                    className="absolute top-0 right-1/4 w-80 h-80 rounded-full blur-[130px] pointer-events-none opacity-15"
+                    style={{ background: selectedTopic.neonColor }}
+                  />
 
-                  // Card 2: National Average
-                  <div className="rounded-2xl bg-[#090E1D] border border-purple-500/30 p-5 shadow-lg flex flex-col justify-between">
-                    <div className="flex items-center justify-between text-xs font-bold text-purple-400 uppercase tracking-wider">
-                      <span>{isAr ? "المعدل الوطني" : "NATIONAL AVG"}</span>
-                      <TrendingUp className="w-4 h-4 text-purple-400" />
-                    </div>
-                    <div className="mt-2 flex items-baseline justify-between">
-                      <span className="text-2xl font-black text-white">
-                        {isAr ? "المعدل العام" : "Baseline"}
-                      </span>
-                      <span className="text-2xl font-extrabold text-purple-400 font-mono drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]">
-                        {avgValue}
-                        {selectedTopic.unit}
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-slate-400 mt-1">
-                      {isAr
-                        ? `متوسط إنفاق الأسرة: ${avgSpending} ألف د.ع • الكاش: 99.7%`
-                        : `Avg Spend: ${avgSpending}K IQD · Cash: 99.7%`}
-                    </p>
-                  </div>
+                  <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                    {/* Right Side: Topic Title, Description, Source (in RTL) */}
+                    <div className="space-y-2 flex-1 min-w-0">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className="p-1.5 sm:p-2 rounded-xl flex items-center justify-center shrink-0 transition-colors"
+                          style={{
+                            color: selectedTopic.neonColor,
+                            backgroundColor: `${selectedTopic.neonColor}18`,
+                            border: `1px solid ${selectedTopic.neonColor}30`,
+                          }}
+                        >
+                          <TopicIcon topicId={selectedTopic.id} className="w-5 h-5" />
+                        </span>
+                        <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white tracking-wide">
+                          {isAr ? selectedTopic.titleAr : selectedTopic.titleEn}
+                        </h2>
+                      </div>
 
-                  // Card 3: Dataset Scope
-                  <div className="rounded-2xl bg-[#090E1D] border border-amber-500/30 p-5 shadow-lg flex flex-col justify-between">
-                    <div className="flex items-center justify-between text-xs font-bold text-amber-400 uppercase tracking-wider">
-                      <span>{isAr ? "نطاق البيانات" : "DATASET SCOPE"}</span>
-                      <Filter className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div className="mt-2 flex items-center gap-2">
-                      <button
-                        onClick={() => setScope("all")}
-                        className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                          scope === "all"
-                            ? "bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_10px_rgba(245,158,11,0.3)]"
-                            : "bg-white/5 text-slate-400 hover:text-white"
-                        }`}
-                      >
-                        {isAr ? "كل الـ 18" : "All 18"}
-                      </button>
-                      <button
-                        onClick={() => setScope("federal")}
-                        className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                          scope === "federal"
-                            ? "bg-amber-500/20 text-amber-300 border border-amber-400/50 shadow-[0_0_10px_rgba(245,158,11,0.3)]"
-                            : "bg-white/5 text-slate-400 hover:text-white"
-                        }`}
-                      >
-                        {isAr ? "15 اتحادية" : "15 Federal"}
-                      </button>
-                    </div>
-                    <p className="text-[10px] text-slate-400 mt-1">
-                      COSIT 2022 + 2024 telemetry
-                    </p>
-                  </div>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
+                        {isAr ? selectedTopic.descriptionAr : selectedTopic.descriptionEn}
+                      </p>
 
+                      <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 font-mono pt-0.5">
+                        <BookOpen className="w-3.5 h-3.5 text-[#0E7490] dark:text-[#22D3EE] shrink-0" />
+                        <span>{isAr ? selectedTopic.sourceAr : selectedTopic.sourceEn}</span>
+                      </div>
+                    </div>
+
+                    {/* Left Side: 3 Stat Boxes (متوسط المحافظات, الأعلى, الأدنى) */}
+                    <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 shrink-0">
+                      {/* Box 1: متوسط المحافظات */}
+                      <div className="flex-1 sm:flex-none sm:w-[130px] h-[72px] flex flex-col items-center justify-center px-3.5 py-2 rounded-2xl bg-[#F1F5F9] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.14)] text-center shadow-sm">
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold leading-tight">
+                          {isAr ? "متوسط المحافظات" : "Governorates Avg"}
+                        </span>
+                        <span className="text-sm sm:text-base font-black text-slate-900 dark:text-white font-mono mt-1 leading-tight">
+                          {avgValue}{selectedTopic.unit}
+                        </span>
+                      </div>
+
+                      {/* Box 2: الأعلى */}
+                      <div className="flex-1 sm:flex-none sm:w-[130px] h-[72px] flex flex-col items-center justify-center px-3.5 py-2 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/30 text-center shadow-sm">
+                        <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold leading-tight">
+                          {isAr ? "الأعلى" : "Highest"}
+                        </span>
+                        <div className="text-sm sm:text-base font-black text-emerald-800 dark:text-emerald-300 mt-1 leading-tight flex items-baseline justify-center gap-1 font-mono">
+                          <span className="font-sans text-xs sm:text-sm font-bold">{isAr ? topGov.nameAr : topGov.nameEn}</span>
+                          <span>{topGov[selectedTopic.metricKey]}{selectedTopic.unit}</span>
+                        </div>
+                      </div>
+
+                      {/* Box 3: الأدنى */}
+                      <div className="flex-1 sm:flex-none sm:w-[130px] h-[72px] flex flex-col items-center justify-center px-3.5 py-2 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-500/30 text-center shadow-sm">
+                        <span className="text-[11px] text-amber-700 dark:text-amber-400 font-bold leading-tight">
+                          {isAr ? "الأدنى" : "Lowest"}
+                        </span>
+                        <div className="text-sm sm:text-base font-black text-amber-800 dark:text-amber-300 mt-1 leading-tight flex items-baseline justify-center gap-1 font-mono">
+                          <span className="font-sans text-xs sm:text-sm font-bold">{isAr ? bottomGov.nameAr : bottomGov.nameEn}</span>
+                          <span>{bottomGov[selectedTopic.metricKey]}{selectedTopic.unit}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                */}
 
                 {/* VIEW DISPLAY: Interactive Map vs Combo Chart */}
                 {viewMode === "map" ? (
@@ -660,7 +675,13 @@ export default function App() {
         {/* ======================================================== */}
         {/* 4. FOOTER                                                */}
         {/* ======================================================== */}
-        <footer id="sources" className="mt-16 pt-8 border-t border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#334155] dark:text-[#94A3B8] font-medium">
+        <footer id="sources" className="mt-16 pt-8 border-t border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#334155] dark:text-[#94A3B8] font-medium">
+          <div className="flex items-center gap-2.5" dir="ltr">
+            <img src="/techloc_icon.png" alt="TechLoc" className="w-6 h-6 rounded-lg border border-cyan-500/30 object-cover" />
+            <span className="font-bold text-slate-800 dark:text-slate-200">
+              IRAQ TechLoc <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">· Digital Market Explorer</span>
+            </span>
+          </div>
           <div>
             <span>
               {isAr
