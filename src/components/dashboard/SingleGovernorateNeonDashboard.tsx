@@ -451,9 +451,6 @@ const govDetails = breakdownConfig.getGovBreakdown(
                                 <span className="text-slate-900 dark:text-white font-bold text-sm tracking-wide">
                                   {overallResult.metricLabel}
                                 </span>
-                                <span className="text-[10px] text-[#0E7490] dark:text-[#22D3EE] font-mono bg-[#E2E8F0] dark:bg-[#111827] px-2 py-0.5 rounded-full border border-[#0E7490]/40 dark:border-[#22D3EE]/40 font-semibold">
-                                  {isAr ? "النتيجة المركبة الإجمالية" : "Overall Composite Outcome"}
-                                </span>
                               </div>
                             </div>
                           </div>
