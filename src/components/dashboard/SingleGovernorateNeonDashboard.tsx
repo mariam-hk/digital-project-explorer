@@ -74,10 +74,10 @@ const govDetails = breakdownConfig.getGovBreakdown(
       nameAr: "الدفع الإلكتروني والفنتك",
       nameEn: "FinTech & Payments",
       val: selectedGov.fintechScore,
-      natAvg: NATIONAL_AVERAGE_METRICS.overallScore,
+      natAvg: NATIONAL_AVERAGE_METRICS.fintechScore ?? 67.0,
       color: "#22D3EE",
       icon: "💳",
-      source: "جدول 14 + جدول 1-19",
+      source: "مؤشر مركب (جدول 1-18 + 1-4 + 2-5)",
     },
     {
       key: "smartphones",
@@ -695,9 +695,9 @@ const govDetails = breakdownConfig.getGovBreakdown(
             </div>
 
             <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)] hover:border-violet-500/30 transition-all">
-              <span className="text-slate-600 dark:text-slate-400">{isAr ? "مكاتب البطاقات والدفع الذكي" : "Smart Payment Offices"}</span>
+              <span className="text-slate-600 dark:text-slate-400">{isAr ? "مؤشر الفنتك والتحول المالي" : "FinTech & Financial Score"}</span>
               <span className="font-bold text-violet-600 dark:text-violet-400 font-mono text-sm">
-                {selectedGov.smartCardOffices} {isAr ? "مكتب" : "offices"}
+                {selectedGov.fintechScore}%
               </span>
             </div>
           </div>

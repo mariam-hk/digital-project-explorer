@@ -81,10 +81,10 @@ export const TOPICS: TopicConfig[] = [
     unit: "%",
     neonColor: "#22D3EE",
     neonGlow: "rgba(88, 182, 204, 0.4)",
-    descriptionAr: "مؤشر فرصة التحول من الكاش (99.7%) نحو المحافظ وبوابات الدفع الإلكتروني.",
-    descriptionEn: "Opportunity index for cash-to-digital payments and wallet adoption.",
-    sourceAr: "إحصاءات الاتصالات 2024 (جدول 14، ص 24) + مسح 2022 (جدول 1-19، ص 93)",
-    sourceEn: "COSIT Telecom 2024 (Table 14) & ICT Survey 2022 (Table 1-19)"
+    descriptionAr: "مؤشر جاهزية التحول المالي الرقمي اعتماداً على النشاط التجاري، انتشار الهواتف، والقدرة الإنفاقية للأسر.",
+    descriptionEn: "FinTech conversion readiness index based on e-commerce activity, smartphone adoption, and household spending power.",
+    sourceAr: "مؤشر مركب: مسح تكنولوجيا المعلومات (جدول 1-18 + جدول 1-4 + جدول 2-5)",
+    sourceEn: "Composite index: ICT Survey (Table 1-18, Table 1-4, Table 2-5)"
   },
   {
     id: "smartphones",
@@ -174,6 +174,24 @@ export const TOPICS: TopicConfig[] = [
   */
 ];
 
+/**
+ * FinTech & Digital Financial Transformation Score
+ * Based strictly on 3 official pillars:
+ * 1. Commercial Activity & E-Commerce Shopping (Table 1-18) - 40% weight
+ * 2. Smartphone Penetration (Table 1-4) - 30% weight
+ * 3. Household ICT Spending Capacity (Table 2-5) - 30% weight
+ */
+export function calculateFintechScore(
+  onlineShoppingPct: number,
+  smartphoneUsagePct: number,
+  telecomSpending: number
+): number {
+  const shoppingScore = (onlineShoppingPct / 65.0) * 100;
+  const phoneScore = smartphoneUsagePct;
+  const spendScore = (telecomSpending / 500.2) * 100;
+  return Number(((0.40 * shoppingScore) + (0.30 * phoneScore) + (0.30 * spendScore)).toFixed(1));
+}
+
 export const ALL_GOVERNORATES: GovernorateMetric[] = [
   {
     id: "baghdad",
@@ -190,29 +208,29 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 58.6,
     onlineShoppingPct: 64.4,
     telecomSpending: 500.2,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.7,
     smartCardOffices: 63,
     ftthSubscribers: 26260,
     digitalReadinessScore: 71.5,
     digitalTalentScore: 38.6,
     eCommerceScore: 80.1,
-    fintechScore: 89.7,
+    fintechScore: 88.7,
     saasScore: 33.5,
     consumerAppsScore: 87.4,
     overallScore: 69.0,
     rank: 1,
     marketTier: "Tier 1: Prime Market (سوق ذو أولوية قصوى)",
     bestFitModel: "FinTech & Payments",
-    keyStrengths: "معدل شراء إلكتروني مرتفع (>50%) | قدرة إنفاق شهرية مرتفعة على التكنولوجيا | مهارات رقمية متقدمة بين الأفراد | شبكة مكاتب بطاقات ذكية ودفع إلكتروني واسعة",
+    keyStrengths: "معدل شراء إلكتروني قياسي (>64%) | قدرة إنفاق شهرية هائلة للأسرة على التكنولوجيا (500 ألف د.ع) | مهارات رقمية متقدمة بين الأفراد",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش)",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في بغداد؟",
-    aiSummary: "تعتبر بغداد السوق الرقمي الأكبر والأكثر نضجاً في العراق بنتيجة 69.0%. تسجل المحافظة أعلى استخدام للهواتف (96.8%) وهواتف ذكية (98.0%) وأعلى إنفاق شهري للأسر على التكنولوجيا (500.2 ألف دينار)، مع توافر شبكة متماسكة من 63 مكتباً لبطاقات الدفع الذكي (كي كارد)، مما يجعلها السوق الأساسي لأي توسع رقمي فوري.",
+    aiSummary: "تعتبر بغداد السوق الرقمي الأكبر والأكثر نضجاً في العراق بنتيجة 69.0%. تسجل المحافظة أعلى استخدام للهواتف (96.8%) وهواتف ذكية (98.0%) وأعلى إنفاق شهري للأسر على التكنولوجيا (500.2 ألف دينار)، مما يجعلها السوق الأساسي لأي توسع رقمي فوري.",
     recommendedModels: [
       "منصات التجارة السريعة (Quick-Commerce) والتوصيل فائق السرعة",
       "بوابات الدفع الإلكتروني والمحافظ الرقمية لدعم التجارة",
       "حلول إدارة المتاجر ونقاط البيع السحابية (Cloud POS) للشركات وتجار التجزئة"
     ],
-    strategicAdvice: "رغم الشراء المرتفع، فإن 100% من الدفع يتم نقداً عند الاستلام بحسب جدول 1-19. التوصية: وفر الدفع عند الاستلام كخيار أساسي، مع تقديم خصم تحفيزي (3-5%) أو نقاط مكافآت لمن يدفع إلكترونياً لكسر حاجز الخوف.",
+    strategicAdvice: "رغم الشراء المرتفع، فإن 99.7% من الدفع يتم نقداً عند الاستلام بحسب جدول 1-19. التوصية: وفر الدفع عند الاستلام كخيار أساسي، مع تقديم خصم تحفيزي (3-5%) أو نقاط مكافآت لمن يدفع إلكترونياً لكسر حاجز الخوف.",
     groundTruth: {
       "Mobile_Usage": "96.8% (جدول 1-4، صفحة 44)",
       "Smartphone_Ownership": "98.0% (جدول 1-5، صفحة 46)",
@@ -221,7 +239,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "58.6% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "64.4% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "500.2 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.7% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "63 مكتب (تقرير الاتصالات 2024، جدول 14، ص 24)"
     }
   },
@@ -240,13 +258,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 54.6,
     onlineShoppingPct: 46.2,
     telecomSpending: 203.4,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.6,
     smartCardOffices: 0,
     ftthSubscribers: 180000,
     digitalReadinessScore: 73.2,
     digitalTalentScore: 58.8,
     eCommerceScore: 43.3,
-    fintechScore: 18.8,
+    fintechScore: 67.2,
     saasScore: 61.1,
     consumerAppsScore: 84.0,
     overallScore: 52.1,
@@ -254,7 +272,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     marketTier: "Tier 2: High Growth (سوق نمو سريع)",
     bestFitModel: "Consumer Apps",
     keyStrengths: "مهارات رقمية متقدمة بين الأفراد | انتشار واسع للحواسيب واللابتوبات",
-    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | قلة مكاتب الدفع الإلكتروني ونقاط الشحن",
+    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | فجوة تحويل التجارة إلى المحافظ الرقمية",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في أربيل؟",
     aiSummary: "تتصدر أربيل محافظات العراق في مؤشر الكفاءات والمواهب التقنية بنتيجة 61.1%. يسجل الأفراد أعلى استخدام للحواسيب واللابتوبات في البلاد (48.0%) واستخدام الهواتف (88.7%) مع أوسع انتشار لشبكات الألياف الضوئية (FTTH)، مما يجعلها العاصمة البرمجية والمركز الأفضل لتأسيس فرق التطوير.",
     recommendedModels: [
@@ -271,7 +289,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "54.6% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "46.2% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "203.4 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.6% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "0 مكتب (إقليم كردستان)"
     }
   },
@@ -296,14 +314,14 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalReadinessScore: 65.6,
     digitalTalentScore: 25.7,
     eCommerceScore: 54.9,
-    fintechScore: 40.7,
+    fintechScore: 77.6,
     saasScore: 21.1,
     consumerAppsScore: 83.9,
     overallScore: 48.6,
     rank: 3,
     marketTier: "Tier 2: High Growth (سوق نمو سريع)",
     bestFitModel: "Consumer Apps",
-    keyStrengths: "معدل شراء إلكتروني مرتفع (>50%) | قدرة إنفاق شهرية مرتفعة على التكنولوجيا | مهارات رقمية متقدمة بين الأفراد | شبكة مكاتب بطاقات ذكية ودفع إلكتروني واسعة",
+    keyStrengths: "معدل شراء إلكتروني مرتفع (>50%) | قدرة إنفاق شهرية مرتفعة على التكنولوجيا | مهارات رقمية متقدمة بين الأفراد",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | انخفاض استخدام الحواسيب والاعتماد شبه الحصري على الهواتف",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في البصرة؟",
     aiSummary: "تعد البصرة ثاني أكبر سوق اقتصادي ورقمي في العراق بنتيجة 48.6%. تتميز بجاهزية قياسية لإنترنت المنازل (98.1%) ومعدل استخدام للهواتف (92.9%) ومعدل شراء إلكتروني قوي (52.8%) وإنفاق شهري للأسر قدره (286.7 ألف دينار)، ما يجعلها وجهة مثالية للتجارة والخدمات اللوجستية.",
@@ -340,13 +358,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 44.8,
     onlineShoppingPct: 41.0,
     telecomSpending: 314.9,
-    cashOnDeliveryPct: 99.5,
+    cashOnDeliveryPct: 99.8,
     smartCardOffices: 13,
     ftthSubscribers: 20000,
     digitalReadinessScore: 71.2,
     digitalTalentScore: 38.8,
     eCommerceScore: 41.9,
-    fintechScore: 24.5,
+    fintechScore: 65.7,
     saasScore: 36.2,
     consumerAppsScore: 83.3,
     overallScore: 47.1,
@@ -371,7 +389,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "44.8% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "41.0% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "314.9 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "99.5% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.8% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "13 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -390,13 +408,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 42.0,
     onlineShoppingPct: 47.5,
     telecomSpending: 291.1,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.6,
     smartCardOffices: 9,
     ftthSubscribers: 30000,
     digitalReadinessScore: 62.2,
     digitalTalentScore: 26.9,
     eCommerceScore: 51.5,
-    fintechScore: 35.0,
+    fintechScore: 74.7,
     saasScore: 23.3,
     consumerAppsScore: 79.4,
     overallScore: 45.9,
@@ -404,7 +422,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     marketTier: "Tier 2: High Growth (سوق نمو سريع)",
     bestFitModel: "Consumer Apps",
     keyStrengths: "استخدام قياسي للهواتف المحمولة (93.5%) | قدرة إنفاق شهرية مرتفعة (291.1 ألف د.ع)",
-    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | قلة مكاتب الدفع الإلكتروني ونقاط الشحن",
+    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | فجوة التوعية ببدائل الدفع الرقمي",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في النجف؟",
     aiSummary: "تتمتع النجف بمعدل استخدام مرتفع جداً للهواتف المحمولة يبلغ (93.5% - جدول 1-4) وهواتف ذكية (90.9% - جدول 1-5). يسجل إنفاق الأسر الشهري على التكنولوجيا (291.1 ألف دينار - جدول 2-5)، ما يجعلها من أكثر المحافظات جاهزية لتطبيقات المستهلكين والتجارة.",
     recommendedModels: [
@@ -412,7 +430,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "منصات أتمتة الطلبات لمتاجر السوشيال ميديا والتجارة التفاعلية",
       "حلول تحويل الأموال وتسهيل الدفع المحلي في الأسواق التراثية"
     ],
-    strategicAdvice: "استخدام الهواتف يتجاوز 93.5% بينما الدفع عند الاستلام يسجل 100.0%. التوصية: التركيز على بساطة تجربة المستخدم وتوفير الدفع عند الاستلام مع حوافز نقدية للدفع الإلكتروني.",
+    strategicAdvice: "استخدام الهواتف يتجاوز 93.5% بينما الدفع عند الاستلام يسجل 99.6%. التوصية: التركيز على بساطة تجربة المستخدم وتوفير الدفع عند الاستلام مع حوافز نقدية للدفع الإلكتروني.",
     groundTruth: {
       "Mobile_Usage": "93.5% (جدول 1-4، صفحة 44)",
       "Smartphone_Ownership": "90.9% (جدول 1-5، صفحة 46)",
@@ -421,7 +439,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "42.0% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "47.5% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "291.1 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.6% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "9 مكاتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -440,13 +458,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 43.5,
     onlineShoppingPct: 46.2,
     telecomSpending: 225.3,
-    cashOnDeliveryPct: 98.3,
+    cashOnDeliveryPct: 99.7,
     smartCardOffices: 15,
     ftthSubscribers: 21000,
     digitalReadinessScore: 63.7,
     digitalTalentScore: 28.3,
     eCommerceScore: 48.9,
-    fintechScore: 34.1,
+    fintechScore: 69.6,
     saasScore: 24.4,
     consumerAppsScore: 79.1,
     overallScore: 45.8,
@@ -456,7 +474,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     keyStrengths: "استخدام مرتفع للهواتف (92.2%) | انتشار ممتاز لإنترنت المنازل (90.7%)",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش)",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في كركوك؟",
-    aiSummary: "محافظة كركوك تسجل استخدام هواتف بنسبة 92.2% (جدول 1-4) وهواتف ذكية 89.4% (جدول 1-5)، مع إنفاق شهري للأسر قدره 225.3 ألف دينار (جدول 2-5) و15 مكتباً للبطاقات الذكية.",
+    aiSummary: "محافظة كركوك تسجل استخدام هواتف بنسبة 92.2% (جدول 1-4) وهواتف ذكية 89.4% (جدول 1-5)، مع إنفاق شهري للأسر قدره 225.3 ألف دينار (جدول 2-5).",
     recommendedModels: [
       "تطبيقات الخدمات المحلية وتوصيل الطلبات الأساسية عبر الهواتف",
       "منصات التوزيع التجاري والمتاجر متعددة اللغات",
@@ -471,7 +489,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "43.5% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "46.2% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "225.3 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "98.3% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.7% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "15 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -490,13 +508,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 46.2,
     onlineShoppingPct: 43.1,
     telecomSpending: 191.4,
-    cashOnDeliveryPct: 99.7,
+    cashOnDeliveryPct: 99.8,
     smartCardOffices: 17,
     ftthSubscribers: 25000,
     digitalReadinessScore: 65.3,
     digitalTalentScore: 35.9,
     eCommerceScore: 43.0,
-    fintechScore: 27.1,
+    fintechScore: 61.0,
     saasScore: 32.8,
     consumerAppsScore: 79.6,
     overallScore: 45.4,
@@ -521,7 +539,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "46.2% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "43.1% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "191.4 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "99.7% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.8% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "17 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -540,13 +558,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 44.0,
     onlineShoppingPct: 41.5,
     telecomSpending: 132.4,
-    cashOnDeliveryPct: 98.9,
+    cashOnDeliveryPct: 99.8,
     smartCardOffices: 0,
     ftthSubscribers: 65000,
     digitalReadinessScore: 69.6,
     digitalTalentScore: 39.0,
     eCommerceScore: 40.4,
-    fintechScore: 16.1,
+    fintechScore: 58.2,
     saasScore: 37.6,
     consumerAppsScore: 84.4,
     overallScore: 44.8,
@@ -554,7 +572,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     marketTier: "Tier 3: Emerging (سوق ناشئ)",
     bestFitModel: "Consumer Apps",
     keyStrengths: "نسبة هواتف ذكية فائقة (94.3%) | انتشار واسع لإنترنت المنازل (92.8%)",
-    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | قلة مكاتب الدفع الإلكتروني ونقاط الشحن",
+    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | ضعف الاعتماد على حلول الدفع الرقمي",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في دهوك؟",
     aiSummary: "تسجل محافظة دهوك نسبة هواتف ذكية تصل إلى (94.3% - جدول 1-5) ونسبة إنترنت منزلي تبلغ (92.8% - جدول 2-2) واستخدام حواسيب (37.4% - جدول 1-10).",
     recommendedModels: [
@@ -571,7 +589,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "44.0% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "41.5% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "132.4 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "98.9% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.8% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "0 مكتب (إقليم كردستان)"
     }
   },
@@ -590,13 +608,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 41.6,
     onlineShoppingPct: 48.0,
     telecomSpending: 202.0,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.7,
     smartCardOffices: 5,
     ftthSubscribers: 35496,
     digitalReadinessScore: 60.7,
     digitalTalentScore: 25.5,
     eCommerceScore: 49.7,
-    fintechScore: 30.0,
+    fintechScore: 65.4,
     saasScore: 21.9,
     consumerAppsScore: 79.4,
     overallScore: 43.8,
@@ -604,7 +622,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     marketTier: "Tier 3: Emerging (سوق ناشئ)",
     bestFitModel: "Consumer Apps",
     keyStrengths: "شراء إلكتروني مرتفع (48.0%) | انتشار هواتف ذكية ممتاز (91.9%)",
-    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | قلة مكاتب الدفع الإلكتروني ونقاط الشحن",
+    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | الحاجة لتعزيز الاعتماد على المحافظ الرقمية",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في كربلاء؟",
     aiSummary: "تتمتع كربلاء بحركة تجارية وتسوق رقمي قوي (48.0% - جدول 1-18) مع نسبة هواتف ذكية (91.9% - جدول 1-5) وإنفاق أسري للاتصالات قدره (202.0 ألف دينار - جدول 2-5).",
     recommendedModels: [
@@ -612,7 +630,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "منصات أتمتة الطلبات لمتاجر السوشيال ميديا والتجارة التفاعلية",
       "حلول تحويل الأموال وتسهيل الدفع المحلي في الأسواق التراثية"
     ],
-    strategicAdvice: "مكاتب البطاقات الذكية 5 مكاتب فقط. التوصية: التوسع عبر وكلاء الدفع الرقمي ونقاط البيع الميدانية الخاصة.",
+    strategicAdvice: "الاعتماد على الكاش يسجل 99.7%. التوصية: التوسع عبر وكلاء الدفع الرقمي ونقاط البيع والمحافظ الإلكترونية لتشجيع التحول المالي.",
     groundTruth: {
       "Mobile_Usage": "79.3% (جدول 1-4، صفحة 44)",
       "Smartphone_Ownership": "91.9% (جدول 1-5، صفحة 46)",
@@ -621,7 +639,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "41.6% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "48.0% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "202.0 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.7% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "5 مكاتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -640,13 +658,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 48.2,
     onlineShoppingPct: 43.8,
     telecomSpending: 142.1,
-    cashOnDeliveryPct: 98.3,
+    cashOnDeliveryPct: 99.7,
     smartCardOffices: 0,
     ftthSubscribers: 140000,
     digitalReadinessScore: 60.2,
     digitalTalentScore: 41.2,
     eCommerceScore: 39.7,
-    fintechScore: 16.1,
+    fintechScore: 62.5,
     saasScore: 41.1,
     consumerAppsScore: 75.1,
     overallScore: 42.3,
@@ -671,7 +689,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "48.2% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "43.8% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "142.1 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "98.3% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.7% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "0 مكتب (إقليم كردستان)"
     }
   },
@@ -690,20 +708,20 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 40.8,
     onlineShoppingPct: 41.2,
     telecomSpending: 182.8,
-    cashOnDeliveryPct: 99.7,
+    cashOnDeliveryPct: 99.8,
     smartCardOffices: 16,
     ftthSubscribers: 30000,
     digitalReadinessScore: 60.0,
     digitalTalentScore: 24.9,
     eCommerceScore: 42.6,
-    fintechScore: 27.8,
+    fintechScore: 58.4,
     saasScore: 21.2,
     consumerAppsScore: 76.3,
     overallScore: 41.1,
     rank: 11,
     marketTier: "Tier 3: Emerging (سوق ناشئ)",
     bestFitModel: "Consumer Apps",
-    keyStrengths: "إنترنت منازل قوي (88.6%) | شبكة مكاتب بطاقات ذكية تضم 16 مكتباً",
+    keyStrengths: "إنترنت منازل قوي (88.6%) | انتشار واسع للهواتف الذكية (87.1%)",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش)",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في الأنبار؟",
     aiSummary: "محافظة الأنبار تسجل نسبة إنترنت منزلي تبلغ 88.6% (جدول 2-2) وهواتف ذكية 87.1% (جدول 1-5)، مع إنفاق شهري للأسر قدره 182.8 ألف دينار (جدول 2-5).",
@@ -712,7 +730,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "منصات التجارة الإلكترونية لمواد البناء والأجهزة المنزلية",
       "تطبيقات الخدمات الزراعية واللوجستية"
     ],
-    strategicAdvice: "المحافظة مترامية الأطراف. التوصية: الاستثمار في شبكات التوصيل المحلية والتكامل مع مكاتب البريد والكي كارد لتسهيل الدفع والتسليم.",
+    strategicAdvice: "المحافظة مترامية الأطراف. التوصية: الاستثمار في شبكات التوصيل المحلية والتكامل مع نقاط ومحافظ الدفع الإلكتروني لتسهيل الدفع والتسليم.",
     groundTruth: {
       "Mobile_Usage": "73.7% (جدول 1-4، صفحة 44)",
       "Smartphone_Ownership": "87.1% (جدول 1-5، صفحة 46)",
@@ -721,7 +739,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "40.8% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "41.2% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "182.8 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "99.7% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.8% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "16 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -740,13 +758,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 39.0,
     onlineShoppingPct: 38.0,
     telecomSpending: 229.0,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.9,
     smartCardOffices: 19,
     ftthSubscribers: 25000,
     digitalReadinessScore: 62.0,
     digitalTalentScore: 28.9,
     eCommerceScore: 38.8,
-    fintechScore: 24.1,
+    fintechScore: 62.2,
     saasScore: 26.0,
     consumerAppsScore: 78.1,
     overallScore: 41.0,
@@ -756,7 +774,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     keyStrengths: "استخدام هواتف مرتفع (83.7%) | استخدام جيد للحواسيب (27.1%) | إنفاق أسري (229.0 ألف د.ع)",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش)",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في القادسية؟",
-    aiSummary: "تسجل القادسية استخدام هواتف بنسبة 83.7% (جدول 1-4) وهواتف ذكية 88.9% (جدول 1-5)، مع إنفاق شهري للأسر قدره 229.0 ألف دينار (جدول 2-5) و19 مكتباً للبطاقات الذكية.",
+    aiSummary: "تسجل القادسية استخدام هواتف بنسبة 83.7% (جدول 1-4) وهواتف ذكية 88.9% (جدول 1-5)، مع إنفاق شهري للأسر قدره 229.0 ألف دينار (جدول 2-5).",
     recommendedModels: [
       "تطبيقات الخدمات المحلية وتوصيل الطلبات",
       "منصات التوزيع الزراعي ودعم المشاريع الناشئة",
@@ -771,7 +789,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "39.0% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "38.0% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "229.0 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.9% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "19 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -790,23 +808,23 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 38.4,
     onlineShoppingPct: 42.0,
     telecomSpending: 295.6,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.8,
     smartCardOffices: 20,
     ftthSubscribers: 30355,
     digitalReadinessScore: 57.2,
     digitalTalentScore: 21.1,
     eCommerceScore: 44.7,
-    fintechScore: 31.4,
+    fintechScore: 68.8,
     saasScore: 17.3,
     consumerAppsScore: 76.8,
     overallScore: 40.5,
     rank: 13,
     marketTier: "Tier 3: Emerging (سوق ناشئ)",
     bestFitModel: "Consumer Apps",
-    keyStrengths: "إنفاق أسري قياسي على التكنولوجيا (295.6 ألف د.ع - رابع أعلى إنفاق) | 20 مكتباً للبطاقات الذكية",
+    keyStrengths: "إنفاق أسري قياسي على التكنولوجيا (295.6 ألف د.ع - رابع أعلى إنفاق) | تسوق إلكتروني متنامي (42%)",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | انخفاض استخدام الحواسيب (7.2%)",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في بابل؟",
-    aiSummary: "تتميز بابل بقدرة إنفاق شهرية مرتفعة للأسر على خدمات الاتصالات تبلغ (295.6 ألف دينار - جدول 2-5) وهي أعلى من البصرة والنجف، مع استخدام هواتف بنسبة 84.1% (جدول 1-4) وشبكة تضم 20 مكتباً للبطاقات الذكية.",
+    aiSummary: "تتميز بابل بقدرة إنفاق شهرية مرتفعة للأسر على خدمات الاتصالات تبلغ (295.6 ألف دينار - جدول 2-5) وهي أعلى من البصرة والنجف، مع استخدام هواتف بنسبة 84.1% (جدول 1-4).",
     recommendedModels: [
       "تطبيقات التجارة الإلكترونية وتوصيل السلع الاستهلاكية",
       "خدمات الدفع المالي الرقمي وشحن المحافظ للمواطنين",
@@ -821,7 +839,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "38.4% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "42.0% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "295.6 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.8% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "20 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -840,13 +858,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 37.0,
     onlineShoppingPct: 37.4,
     telecomSpending: 224.7,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.8,
     smartCardOffices: 12,
     ftthSubscribers: 20000,
     digitalReadinessScore: 64.0,
     digitalTalentScore: 28.4,
     eCommerceScore: 37.9,
-    fintechScore: 19.4,
+    fintechScore: 62.6,
     saasScore: 25.7,
     consumerAppsScore: 81.2,
     overallScore: 40.4,
@@ -871,7 +889,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "37.0% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "37.4% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "224.7 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.8% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "12 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -890,23 +908,23 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 42.1,
     onlineShoppingPct: 44.5,
     telecomSpending: 165.8,
-    cashOnDeliveryPct: 99.6,
+    cashOnDeliveryPct: 99.9,
     smartCardOffices: 23,
     ftthSubscribers: 45000,
     digitalReadinessScore: 60.4,
     digitalTalentScore: 25.4,
     eCommerceScore: 39.1,
-    fintechScore: 21.3,
+    fintechScore: 60.5,
     saasScore: 21.9,
     consumerAppsScore: 78.9,
     overallScore: 39.2,
     rank: 15,
     marketTier: "Tier 3: Emerging (سوق ناشئ)",
     bestFitModel: "Consumer Apps",
-    keyStrengths: "شبكة واسعة من مكاتب البطاقات الذكية (23 مكتباً) | كثافة سكانية ضخمة | انتشار هواتف ذكية (91.3%)",
+    keyStrengths: "كثافة سكانية ضخمة وسوق استهلاكي واعد | انتشار هواتف ذكية (91.3%) | إقبال على التسوق الإلكتروني (44.5%)",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | انخفاض استخدام الحواسيب (10.3%)",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في نينوى؟",
-    aiSummary: "تعد نينوى ثاني أكبر محافظة من حيث عدد السكان، وتسجل نسبة إنترنت منزلي تبلغ 88.6% (جدول 2-2) وهواتف ذكية 91.3% (جدول 1-5)، مع 23 مكتباً للبطاقات الذكية كي كارد.",
+    aiSummary: "تعد نينوى ثاني أكبر محافظة من حيث عدد السكان، وتسجل نسبة إنترنت منزلي تبلغ 88.6% (جدول 2-2) وهواتف ذكية 91.3% (جدول 1-5)، مع إقبال متصاعد على التجارة الرقمية.",
     recommendedModels: [
       "تطبيقات الخدمات المحلية وتوصيل الطلبات داخل الموصل وأقضيتها",
       "منصات التجارة الإلكترونية الاستهلاكية للأزياء والإلكترونيات",
@@ -921,7 +939,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "42.1% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "44.5% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "165.8 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "99.6% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.9% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "23 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -940,23 +958,23 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 36.5,
     onlineShoppingPct: 38.6,
     telecomSpending: 370.1,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.9,
     smartCardOffices: 23,
     ftthSubscribers: 40000,
     digitalReadinessScore: 58.7,
     digitalTalentScore: 23.1,
     eCommerceScore: 39.3,
-    fintechScore: 26.8,
+    fintechScore: 69.1,
     saasScore: 20.2,
     consumerAppsScore: 75.0,
     overallScore: 39.1,
     rank: 16,
     marketTier: "Tier 3: Emerging (سوق ناشئ)",
     bestFitModel: "Consumer Apps",
-    keyStrengths: "إنفاق أسري قياسي على التكنولوجيا (370.1 ألف د.ع - ثاني أعلى إنفاق في العراق بعد بغداد) | 23 مكتب بطاقات ذكية",
+    keyStrengths: "إنفاق أسري قياسي على التكنولوجيا (370.1 ألف د.ع - ثاني أعلى إنفاق في العراق بعد بغداد) | نسبة اتصال منزلي عالية (89.7%)",
     keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش)",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في ديالى؟",
-    aiSummary: "تسجل ديالى ثاني أعلى إنفاق شهري للأسر على التكنولوجيا في العراق بمبلغ (370.1 ألف دينار - جدول 2-5)، مع نسبة إنترنت منزلي تبلغ 89.7% (جدول 2-2) وتوافر 23 مكتباً للبطاقات الذكية.",
+    aiSummary: "تسجل ديالى ثاني أعلى إنفاق شهري للأسر على التكنولوجيا في العراق بمبلغ (370.1 ألف دينار - جدول 2-5)، مع نسبة إنترنت منزلي تبلغ 89.7% (جدول 2-2).",
     recommendedModels: [
       "منصات التجارة الإلكترونية عالية القيمة وسوق الأجهزة والمنتجات الاستهلاكية",
       "تطبيقات التوصيل والخدمات اللوجستية للمدن والمناطق الريفية",
@@ -971,7 +989,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "36.5% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "38.6% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "370.1 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.9% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "23 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -990,13 +1008,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 33.2,
     onlineShoppingPct: 39.5,
     telecomSpending: 293.7,
-    cashOnDeliveryPct: 100.0,
+    cashOnDeliveryPct: 99.9,
     smartCardOffices: 17,
     ftthSubscribers: 20000,
     digitalReadinessScore: 52.3,
     digitalTalentScore: 16.2,
     eCommerceScore: 40.0,
-    fintechScore: 24.0,
+    fintechScore: 65.6,
     saasScore: 12.4,
     consumerAppsScore: 75.0,
     overallScore: 35.2,
@@ -1021,7 +1039,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "33.2% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "39.5% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "293.7 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "100.0% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.9% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "17 مكتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   },
@@ -1040,13 +1058,13 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     digitalSkillsPct: 32.8,
     onlineShoppingPct: 33.5,
     telecomSpending: 256.1,
-    cashOnDeliveryPct: 97.5,
+    cashOnDeliveryPct: 99.9,
     smartCardOffices: 3,
     ftthSubscribers: 20000,
     digitalReadinessScore: 55.0,
     digitalTalentScore: 20.4,
     eCommerceScore: 33.4,
-    fintechScore: 13.2,
+    fintechScore: 58.7,
     saasScore: 17.3,
     consumerAppsScore: 72.6,
     overallScore: 33.4,
@@ -1054,7 +1072,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
     marketTier: "Tier 3: Emerging (سوق ناشئ)",
     bestFitModel: "Consumer Apps",
     keyStrengths: "إنفاق أسري شهري متميز (256.1 ألف د.ع - جدول 2-5)",
-    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | قلة مكاتب الدفع الإلكتروني (3 مكاتب)",
+    keyBottlenecks: "اعتماد كلي شبه تام على الدفع عند الاستلام (كاش) | ضعف ثقافة المدفوعات الرقمية",
     aiTitle: "ماذا تعني هذه البيانات لمشروعك في المثنى؟",
     aiSummary: "تسجل محافظة المثنى إنفاقاً شهرياً للأسر يبلغ (256.1 ألف دينار - جدول 2-5)، واستخدام هواتف (75.6% - جدول 1-4) وهواتف ذكية (84.4% - جدول 1-5).",
     recommendedModels: [
@@ -1062,7 +1080,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "منصات التوزيع والتجارة المحلية الخفيفة",
       "تطبيقات التعليم والخدمات الحكومية الرقمية للمواطنين"
     ],
-    strategicAdvice: "مكاتب البطاقات الذكية 3 فقط والإنفاق الشهري 256.1 ألف دينار. التوصية: توفير بدائل دفع بسيطة والاعتماد على الدفع عند الاستلام كركيزة أولى.",
+    strategicAdvice: "الإنفاق الشهري يبلغ 256.1 ألف دينار مع هيمنة الكاش. التوصية: توفير بدائل دفع رقمية مبسطة وعروض شحن محافظ مع الحفاظ على الدفع عند الاستلام كركيزة أساسية.",
     groundTruth: {
       "Mobile_Usage": "75.6% (جدول 1-4، صفحة 44)",
       "Smartphone_Ownership": "84.4% (جدول 1-5، صفحة 46)",
@@ -1071,7 +1089,7 @@ export const ALL_GOVERNORATES: GovernorateMetric[] = [
       "Digital_Skills": "32.8% (جدول 1-17، صفحة 78)",
       "Online_Purchase": "33.5% (جدول 1-18، صفحة 87)",
       "Telecom_Spending": "256.1 ألف دينار (جدول 2-5، صفحة 112)",
-      "Cash_On_Delivery": "97.5% (جدول 1-19، صفحة 93)",
+      "Cash_On_Delivery": "99.9% (جدول 1-19، صفحة 93)",
       "Smart_Card_Offices": "3 مكاتب (تقرير الاتصالات 2024، جدول 14، صفحة 24)"
     }
   }
@@ -1092,5 +1110,6 @@ export const NATIONAL_AVERAGE_METRICS = {
   cashOnDeliveryPct: 99.7,    // Table 1-19 Grand Total (Page 93)
   digitalReadinessScore: 63.8,
   digitalTalentScore: 31.5,
+  fintechScore: 67.0,         // Composite index (Shopping 40% + Smartphones 30% + Spend 30%)
   overallScore: 46.2
 };

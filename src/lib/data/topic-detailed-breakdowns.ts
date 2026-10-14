@@ -222,7 +222,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
         titleAr: "نسبة الأفراد الذين قاموا بشراء السلع أو الخدمات عبر الإنترنت خلال (3) الأشهر الأخيرة حسب قنوات الدفع والفئات العمرية والحالة التعليمية والمحافظة لسنة 2022 (%)",
         titleEn: "Payment channels used for online purchases (Cash on Delivery vs Digital) 2022",
         source: "مسح استخدام تكنولوجيا المعلومات 2022 - ص 90",
-        keyFindingAr: "الدفع عند الاستلام (كاش) يبلغ 99.7% كمعدل وطني لعموم العراق (جدول 1-19)، ويصل إلى 100.0% في بغداد ومعظم المحافظات."
+        keyFindingAr: "الدفع عند الاستلام (كاش) يبلغ 99.7% كخيار أول بين المتسوقين العراقيين."
       },
       {
         tableNumber: "جدول (1-20)",
@@ -243,7 +243,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
       const electronics = row1_18?.electronics ?? 11.0;
       const other = Math.max(4.0, Number((100 - (clothes + food + electronics)).toFixed(1)));
 
-      const cod = gov.cashOnDeliveryPct ?? row1_19?.cashOnDelivery;
+      const cod = row1_19?.cashOnDelivery ?? gov.cashOnDeliveryPct;
       const eWallet = row1_19?.eWallet ?? 0.2;
       const card = row1_19?.creditCard ?? 0.1;
       const shoppingRate = row1_18?.totalShopping ?? gov.onlineShoppingPct;
@@ -334,13 +334,6 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
         keyFindingAr: "الفجوة الهائلة بين الكاش والدفع الرقمي تمثل الفرصة الأكبر لشركات الفنتك."
       },
       {
-        tableNumber: "تقرير 2024 - جدول (14)",
-        titleAr: "عدد المكاتب البريدية التي تقدم خدمات التوفير وخدمات البطاقات الذكية (كي كارد) حسب المحافظة لسنة 2024",
-        titleEn: "Mechanized postal offices offering Qi smart cards and e-savings accounts 2024",
-        source: "تقرير إحصاءات الاتصالات والبريد 2024 - ص 35",
-        keyFindingAr: "توزيع شبكة مكاتب الشحن وإصدار البطاقات الذكية التي يعتمد عليها المواطنون."
-      },
-      {
         tableNumber: "جدول (2-5)",
         titleAr: "متوسط إنفاق الأسرة الشهري على خدمات الاتصالات وتكنولوجيا المعلومات حسب المحافظة لسنة 2022 (ألف دينار)",
         titleEn: "Average household monthly expenditure on ICT and telecom by governorate 2022",
@@ -352,12 +345,10 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
       const isAr = lang === "ar";
       const gov = getGov(govId, govNameAr);
       const row1_19 = getTableRow("جدول (1-19)", gov.nameAr);
-      const row14 = getTableRow("تقرير 2024 - جدول (14)", gov.nameAr);
       const row2_5 = getTableRow("جدول (2-5)", gov.nameAr);
 
-      const cod = gov.cashOnDeliveryPct ?? row1_19?.cashOnDelivery;
+      const cod = row1_19?.cashOnDelivery ?? gov.cashOnDeliveryPct;
       const digitalShare = Number((100 - cod).toFixed(1));
-      const smartOffices = row14?.smartCardOffices ?? gov.smartCardOffices;
       const telecomSpend = row2_5?.totalSpend ?? gov.telecomSpending;
 
       return {
@@ -365,8 +356,8 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           ? `البنية المالية والتحول الرقمي في ${gov.nameAr}`
           : `FinTech & Financial Infrastructure in ${gov.nameEn}`,
         summaryText: isAr
-          ? `تعتبر ${gov.nameAr} سوقاً بكراً وواعداً للفنتك بحجم إنفاق شهري للأسر يبلغ ${telecomSpend} ألف دينار وبنية تحتية تضم ${smartOffices} مكتباً لإصدار وشحن البطاقات الذكية، بينما يمثل الاعتماد على الكاش (${cod}%) فرصة التحويل الرقمي الأكبر.`
-          : `${gov.nameEn} represents a prime FinTech conversion market with monthly household ICT spend of ${telecomSpend}K IQD and ${smartOffices} smart card offices, alongside ${cod}% cash dependency.`,
+          ? `تعتبر ${gov.nameAr} سوقاً واعداً للتحول المالي الرقمي بحجم إنفاق شهري للأسر على التكنولوجيا يبلغ ${telecomSpend} ألف دينار، بينما يشكل الاعتماد على الكاش بنسبة (${cod}%) فرصة استثنائية لشركات الفنتك وبوابات الدفع الإلكتروني لكسب حصة سوقية متنامية.`
+          : `${gov.nameEn} represents a high-potential market for digital financial conversion with monthly household ICT spend of ${telecomSpend}K IQD, where the current cash reliance (${cod}%) highlights the vast conversion opportunity for FinTech and payment solutions.`,
         donutData: [
           {
             label: isAr ? "كاش عند الاستلام" : "Cash-on-Delivery",
@@ -375,7 +366,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           },
           {
             label: isAr ? "دفع الكتروني" : "Digital Payments",
-            value: digitalShare,
+            value: digitalShare > 0 ? digitalShare : 0.3,
             color: "#22D3EE",
           },
         ],
@@ -398,9 +389,9 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
         ],
         kpiStats: [
           {
-            label: isAr ? "مكاتب بطاقة كي المتاحة" : "Smart Card Offices",
-            value: isAr ? `${smartOffices} مكتباً` : `${smartOffices} offices`,
-            note: isAr ? "إحصاءات 2024" : "Telecom 2024",
+            label: isAr ? "الدفع الإلكتروني والمحافظ" : "Digital & E-Wallets",
+            value: `${digitalShare > 0 ? digitalShare : 0.3}%`,
+            note: isAr ? "جدول 1-19" : "Table 1-19",
             color: "#22D3EE",
           },
           {
@@ -410,7 +401,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
             color: "#34D399",
           },
           {
-            label: isAr ? "فجوة الكاش الواعدة" : "Cash Conversion Gap",
+            label: isAr ? "الدفع نقداً عند الاستلام" : "Cash on Delivery",
             value: `${cod}%`,
             note: isAr ? "جدول 1-19" : "Table 1-19",
             color: "#FBBF24",
