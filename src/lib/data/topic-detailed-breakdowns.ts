@@ -389,7 +389,7 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
         ],
         kpiStats: [
           {
-            label: isAr ? "الدفع الإلكتروني والمحافظ" : "Digital & E-Wallets",
+            label: isAr ? "الدفع الإلكتروني" : "Digital Payments",
             value: `${digitalShare > 0 ? digitalShare : 0.3}%`,
             note: isAr ? "جدول 1-19" : "Table 1-19",
             color: "#22D3EE",
