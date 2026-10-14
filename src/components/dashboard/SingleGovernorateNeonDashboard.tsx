@@ -674,7 +674,7 @@ const govDetails = breakdownConfig.getGovBreakdown(
             </div>
 
             <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#E2E8F0] dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[rgba(148,163,184,0.12)]">
-              <span className="text-slate-600 dark:text-slate-400">{isAr ? "الدفع عند الاستلام (كاش)" : "Cash-On-Delivery"}</span>
+              <span className="text-slate-600 dark:text-slate-400">{isAr ? "الدفع نقداً عند الاستلام" : "Cash on Delivery"}</span>
               <span className="font-bold text-amber-600 dark:text-amber-400 font-mono text-sm">
                 {selectedGov.cashOnDeliveryPct}%
               </span>

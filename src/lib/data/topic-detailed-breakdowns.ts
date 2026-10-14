@@ -360,19 +360,19 @@ export const TOPIC_BREAKDOWNS: Record<string, TopicBreakdownConfig> = {
           : `${gov.nameEn} represents a high-potential market for digital financial conversion with monthly household ICT spend of ${telecomSpend}K IQD, where the current cash reliance (${cod}%) highlights the vast conversion opportunity for FinTech and payment solutions.`,
         donutData: [
           {
-            label: isAr ? "كاش عند الاستلام" : "Cash-on-Delivery",
+            label: isAr ? "الدفع نقداً عند الاستلام" : "Cash-on-Delivery",
             value: cod,
             color: "#FBBF24",
           },
           {
-            label: isAr ? "دفع الكتروني" : "Digital Payments",
+            label: isAr ? "الدفع الإلكتروني" : "Digital Payments",
             value: digitalShare > 0 ? digitalShare : 0.3,
             color: "#22D3EE",
           },
         ],
         barData: [
           {
-            label: isAr ? "الاعتماد على الكاش عند الاستلام" : "Cash Dependency Rate",
+            label: isAr ? "الدفع نقداً عند الاستلام" : "Cash-on-Delivery Rate",
             value: cod,
             color: "#FBBF24",
           },
